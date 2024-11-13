@@ -7,6 +7,7 @@ import Class from '../components/Class';
 import CharacterAligment from '../components/CharacterAligment';
 import Attributes from '../components/Attributes';
 import Skills from '../components/Skills';
+import CreationSummary from '../components/CreationSummary';
 
 type Section = 'gender' | 'portrait' | 'race' | 'class' | 'character' | 'stats' | 'skills';
 
@@ -50,8 +51,9 @@ const CharacterCreation: React.FC = () => {
         <button onClick={() => setActiveSection('skills')}>Umiejętności</button>
       </div>
 
-      <div>
+      <div className='flex flex-row'>
         {renderContent()}
+        <CreationSummary/>
       </div>
     </div>
   );
