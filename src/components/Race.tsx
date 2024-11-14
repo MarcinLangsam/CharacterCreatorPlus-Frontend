@@ -14,16 +14,15 @@ const Race: React.FC = () => {
 
 
     return(
-    <div>
-        <h2>Choose Race</h2>
-        <button onClick={() => handleRaceChange('Human')}>Human</button>
-        <button onClick={() => handleRaceChange('Elf')}>Elf</button>
-        <button onClick={() => handleRaceChange('Half-Elf')}>Half-Elf</button>
-        <button onClick={() => handleRaceChange('Gnome')}>Gnome</button>
-        <button onClick={() => handleRaceChange('Halfling')}>Halfling</button>
-        <button onClick={() => handleRaceChange('Dwarf')}>Dwarf</button>
-        <button onClick={() => handleRaceChange('Half-Orc')}>Half-Orc</button>
-        <p>Selected Race: {characterData.race}</p>
+    <div className="flex flex-col">
+        <h2>Wybierz Rasę</h2>
+        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Człowiek')}>Człowiek</button>
+        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Elf')}>Elf</button>
+        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Pół-Elf')}>Pół-Elf</button>
+        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Gnome')}>Gnome</button>
+        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Niziołek')}>Niziołek</button>
+        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Krasnolud')}>Krasnolud</button>
+        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Pół-Ork')}>Pół-Ork</button>
     </div>
     )
 }

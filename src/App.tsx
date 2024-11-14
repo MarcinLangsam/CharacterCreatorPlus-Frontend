@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import MainMenu from '../pages/MainMenu';
-import CharacterCreation from '../pages/CharacterCreation';
-import Navbar from './Navbar';
-import { CharacterProvider } from '../context/CharacterContext';
+import MainMenu from './pages/MainMenu';
+import CharacterCreation from './pages/CharacterCreation';
+import Navbar from './components/Navbar';
+import { CharacterProvider } from './context/CharacterContext';
 
 const App: React.FC = () => {
   return (

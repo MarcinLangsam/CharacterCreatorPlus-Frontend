@@ -13,10 +13,9 @@ const Gender: React.FC = () => {
      
     return(
     <div>
-        <h2>Choose Gender</h2>
-        <button onClick={() => handleGenderChange('Male')}>Male</button>
-        <button onClick={() => handleGenderChange('Female')}>Female</button>
-        <p>Selected Gender: {characterData.gender}</p>
+        <h2>Wybierz Płeć</h2>
+        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleGenderChange('Mężczyzna')}>Mężczyzna</button>
+        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleGenderChange('Kobieta')}>Kobieta</button>
     </div>
     )
 }

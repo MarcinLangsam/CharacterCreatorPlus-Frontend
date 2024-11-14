@@ -39,6 +39,7 @@ export interface CharacterData {
   portrait?: string;
   race?: string;
   classes?: string;
+  subclasses?: string;
   character?: string;
   attributes: CharacterAttributes;
   skills: WeaponProficiencys;

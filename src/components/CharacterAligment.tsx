@@ -13,19 +13,24 @@ const CharacterAligment: React.FC = () => {
     
     return(
     <div>
-        <h2>Choose Character</h2>
-        <button onClick={() => handleCharacterAligmentChange('Lawful Good')}>Lawful Good</button>
-        <button onClick={() => handleCharacterAligmentChange('Neutral Good')}>Neutral Good</button>
-        <button onClick={() => handleCharacterAligmentChange('Chaotic Good')}>Chaotic Good</button>
+        <h2>Wybierz Charakter</h2>
+        <div className="flex flex-row">
+            <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleCharacterAligmentChange('Prawożądny Dobry')}>Prawożądny Dobry</button>
+            <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleCharacterAligmentChange('Nautralny Dobry')}>Nautralny Dobry</button>
+            <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleCharacterAligmentChange('Chaotyczny Dobry')}>Chaotyczny Dobry</button>
+        </div>
 
-        <button onClick={() => handleCharacterAligmentChange('Lawful Neutral')}>Lawful Neutral</button>
-        <button onClick={() => handleCharacterAligmentChange('Neutral Neutral')}>Neutral Neutral</button>
-        <button onClick={() => handleCharacterAligmentChange('Chaotic Neutral')}>Chaotic Neutral</button>
+        <div className="flex flex-row">
+            <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleCharacterAligmentChange('Prawożądny Nautralny')}>Prawożądny Nautralny</button>
+            <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleCharacterAligmentChange('Nautralny')}>Nautralny</button>
+            <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleCharacterAligmentChange('Chaotyczny Nautralny')}>Chaotyczny Nautralny</button>
+        </div>
 
-        <button onClick={() => handleCharacterAligmentChange('Lawful Evil')}>Lawful Evil</button>
-        <button onClick={() => handleCharacterAligmentChange('Neutral Evil')}>Neutral Evil</button>
-        <button onClick={() => handleCharacterAligmentChange('Chaotic Evil')}>Chaotic Evil</button>
-        <p>Selected Character: {characterData.character}</p>
+        <div className="flex flex-row">
+            <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleCharacterAligmentChange('Prawożądny Zły')}>Prawożądny Zły</button>
+            <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleCharacterAligmentChange('Nautralny Zły')}>Nautralny Zły</button>
+            <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleCharacterAligmentChange('Chaotyczny Zły')}>Chaotyczny Zły</button>
+        </div>
     </div>
     )
 }

@@ -24,7 +24,7 @@
   },
   "contributors": [],
   "scripts": {
-    "start": "webpack server --open --config webpack.config.cjs tailwindcss -i ./src/input.css -o ./src/output.css --watch"
+    "start": "webpack server --open --config webpack.config.cjs"
   },
   "dependencies": {
     "@types/react-router-dom": "^5.3.3",
@@ -41,6 +41,7 @@
     "babel-loader": "^9.2.1",
     "css-loader": "^7.1.2",
     "html-webpack-plugin": "^5.6.3",
+    "postcss": "8.1",
     "style-loader": "^4.0.0",
     "tailwindcss": "^3.4.14",
     "typescript": "^5.6.3",

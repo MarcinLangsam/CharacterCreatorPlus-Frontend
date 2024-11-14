@@ -40,20 +40,20 @@ const CharacterCreation: React.FC = () => {
 
   return (
     <div>
-      <h1>Tworzenie Postaci</h1>
+      <h1 className='font-bold underline'>Tworzenie Postaci</h1>
       <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
-        <button onClick={() => setActiveSection('gender')}>Płeć</button>
-        <button onClick={() => setActiveSection('portrait')}>Portret</button>
-        <button onClick={() => setActiveSection('race')}>Rasa</button>
-        <button onClick={() => setActiveSection('class')}>Klasa</button>
-        <button onClick={() => setActiveSection('character')}>Charakter</button>
-        <button onClick={() => setActiveSection('stats')}>Współczynniki</button>
-        <button onClick={() => setActiveSection('skills')}>Umiejętności</button>
+        <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('gender')}>Płeć</button>
+        <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('portrait')}>Portret</button>
+        <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('race')}>Rasa</button>
+        <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('class')}>Klasa</button>
+        <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('character')}>Charakter</button>
+        <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('stats')}>Współczynniki</button>
+        <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('skills')}>Umiejętności</button>
       </div>
 
       <div className='flex flex-row'>
-        {renderContent()}
-        <CreationSummary/>
+        <div className='m-5'>{renderContent()}</div>
+        <div className='m-5'><CreationSummary/></div>
       </div>
     </div>
   );

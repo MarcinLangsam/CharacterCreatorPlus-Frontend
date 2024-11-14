@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useCharacterContext } from '../context/CharacterContext';
 import StatControl from './AttributesControl';
 import { CharacterAttributes } from '../types/CharacterData';
@@ -6,19 +6,50 @@ import { CharacterAttributes } from '../types/CharacterData';
 const Stats: React.FC = () => {
   const { characterData, setCharacterData } = useCharacterContext();
 
-  const updateAttribute = (attribute: keyof CharacterAttributes, delta: number) => {
+  const randomizeAttributes = () => {
+    const getRandomValue = () => Math.floor(Math.random() * 18) + 1;
+    
     setCharacterData((prevData) => ({
       ...prevData,
       attributes: {
-        ...prevData.attributes,
-        [attribute]: prevData.attributes[attribute] + delta,
+        strength: getRandomValue(),
+        agility: getRandomValue(),
+        constitution: getRandomValue(),
+        intelligence: getRandomValue(),
+        wisdom: getRandomValue(),
+        charisma: getRandomValue(),
       },
     }));
   };
 
+  useEffect(() => {
+    randomizeAttributes();
+  }, []);
+
+  const updateAttribute = (attribute: keyof CharacterAttributes, delta: number) => {
+    setCharacterData((prevData) => {
+      const newValue = prevData.attributes[attribute] + delta;
+      const clampedValue = Math.max(1, Math.min(18, newValue));
+
+      return {
+        ...prevData,
+        attributes: {
+          ...prevData.attributes,
+          [attribute]: clampedValue,
+        },
+      };
+    });
+  };
+
+
   return (
     <div>
-      <h2>Set Attributes</h2>
+      <h2>Rozdaj Atrybuty</h2>
+
+      <button onClick={randomizeAttributes} className="border border-black m-2 bg-gray-800 p-2 text-white">
+        Powtórz rzut
+      </button>
+
       <StatControl
         statName="Strength"
         statValue={characterData.attributes.strength}
