@@ -43,7 +43,7 @@ const CharacterCreation: React.FC = () => {
       <h1 className='font-bold underline'>Tworzenie Postaci</h1>
       <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
         <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('gender')}>Płeć</button>
-        <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('portrait')}>Portret</button>
+        {/* <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('portrait')}>Portret</button> */}
         <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('race')}>Rasa</button>
         <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('class')}>Klasa</button>
         <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('character')}>Charakter</button>

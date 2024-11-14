@@ -24,33 +24,33 @@ const Skills: React.FC = () => {
 
   return (
     <div>
-      <h2>Set Proficiencys</h2>
+      <h2>Wybierz Biegłóści</h2>
       <StatControl
-        statName="BastardSword"
+        statName="Miecze Półtoraręczne"
         statValue={characterData.skills.BastardSword}
         onIncrement={() => updateAttribute('BastardSword', 1)}
         onDecrement={() => updateAttribute('BastardSword', -1)}
       />
       <StatControl
-        statName="LongSword"
+        statName="Miecze Długie"
         statValue={characterData.skills.LongSword}
         onIncrement={() => updateAttribute('LongSword', 1)}
         onDecrement={() => updateAttribute('LongSword', -1)}
       />
       <StatControl
-        statName="ShortSword"
+        statName="Miecze Krutkie"
         statValue={characterData.skills.ShortSword}
         onIncrement={() => updateAttribute('ShortSword', 1)}
         onDecrement={() => updateAttribute('ShortSword', -1)}
       />
       <StatControl
-        statName="Axe"
+        statName="Topory"
         statValue={characterData.skills.Axe}
         onIncrement={() => updateAttribute('Axe', 1)}
         onDecrement={() => updateAttribute('Axe', -1)}
       />
       <StatControl
-        statName="TwoHandedSword"
+        statName="Miecze Dwóręczne"
         statValue={characterData.skills.TwoHandedSword}
         onIncrement={() => updateAttribute('TwoHandedSword', 1)}
         onDecrement={() => updateAttribute('TwoHandedSword', -1)}
@@ -68,103 +68,103 @@ const Skills: React.FC = () => {
         onDecrement={() => updateAttribute('Scimtar', -1)}
       />
       <StatControl
-        statName="Dagger"
+        statName="Sztylety"
         statValue={characterData.skills.Dagger}
         onIncrement={() => updateAttribute('Dagger', 1)}
         onDecrement={() => updateAttribute('Dagger', -1)}
       />
       <StatControl
-        statName="WarHammer"
+        statName="Młoty Wojenne"
         statValue={characterData.skills.WarHammer}
         onIncrement={() => updateAttribute('WarHammer', 1)}
         onDecrement={() => updateAttribute('WarHammer', -1)}
       />
       <StatControl
-        statName="Club"
+        statName="Maczugi"
         statValue={characterData.skills.Club}
         onIncrement={() => updateAttribute('Club', 1)}
         onDecrement={() => updateAttribute('Club', -1)}
       />
       <StatControl
-        statName="Spear"
+        statName="Włócznie"
         statValue={characterData.skills.Spear}
         onIncrement={() => updateAttribute('Spear', 1)}
         onDecrement={() => updateAttribute('Spear', -1)}
       />
       <StatControl
-        statName="Halberd"
+        statName="Halabarda"
         statValue={characterData.skills.Halberd}
         onIncrement={() => updateAttribute('Halberd', 1)}
         onDecrement={() => updateAttribute('Halberd', -1)}
       />
       <StatControl
-        statName="Flail"
+        statName="Korbacze"
         statValue={characterData.skills.Flail}
         onIncrement={() => updateAttribute('Flail', 1)}
         onDecrement={() => updateAttribute('Flail', -1)}
       />
       <StatControl
-        statName="Mace"
+        statName="Wiekiery"
         statValue={characterData.skills.Mace}
         onIncrement={() => updateAttribute('Mace', 1)}
         onDecrement={() => updateAttribute('Mace', -1)}
       />
       <StatControl
-        statName="QuarterStaff"
+        statName="Kije bojowe"
         statValue={characterData.skills.QuarterStaff}
         onIncrement={() => updateAttribute('QuarterStaff', 1)}
         onDecrement={() => updateAttribute('QuarterStaff', -1)}
       />
       <StatControl
-        statName="Crossbow"
+        statName="Kusze"
         statValue={characterData.skills.Crossbow}
         onIncrement={() => updateAttribute('Crossbow', 1)}
         onDecrement={() => updateAttribute('Crossbow', -1)}
       />
       <StatControl
-        statName="LongBow"
+        statName="Długie Łuki"
         statValue={characterData.skills.LongBow}
         onIncrement={() => updateAttribute('LongBow', 1)}
         onDecrement={() => updateAttribute('LongBow', -1)}
       />
       <StatControl
-        statName="ShortBow"
+        statName="Krótkie Łuki"
         statValue={characterData.skills.ShortBow}
         onIncrement={() => updateAttribute('ShortBow', 1)}
         onDecrement={() => updateAttribute('ShortBow', -1)}
       />
       <StatControl
-        statName="Dart"
+        statName="Strzałki"
         statValue={characterData.skills.Dart}
         onIncrement={() => updateAttribute('Dart', 1)}
         onDecrement={() => updateAttribute('Dart', -1)}
       />
       <StatControl
-        statName="Sling"
+        statName="Proce"
         statValue={characterData.skills.Sling}
         onIncrement={() => updateAttribute('Sling', 1)}
         onDecrement={() => updateAttribute('Sling', -1)}
       />
       <StatControl
-        statName="TwoHandedWeaponStyle"
+        statName="Styl Broni Dwóręcznych"
         statValue={characterData.skills.TwoHandedWeaponStyle}
         onIncrement={() => updateAttribute('TwoHandedWeaponStyle', 1)}
         onDecrement={() => updateAttribute('TwoHandedWeaponStyle', -1)}
       />
       <StatControl
-        statName="SwordandShieldStyle"
+        statName="Styl Miecza i Tarczy"
         statValue={characterData.skills.SwordandShieldStyle}
         onIncrement={() => updateAttribute('SwordandShieldStyle', 1)}
         onDecrement={() => updateAttribute('SwordandShieldStyle', -1)}
       />
       <StatControl
-        statName="SingleWeaponStyle"
+        statName="Styl Miecza Jednoręcznego"
         statValue={characterData.skills.SingleWeaponStyle}
         onIncrement={() => updateAttribute('SingleWeaponStyle', 1)}
         onDecrement={() => updateAttribute('SingleWeaponStyle', -1)}
       />
       <StatControl
-        statName="TwoWeaponStyle"
+        statName="Styl Podwójnych Broni"
         statValue={characterData.skills.TwoWeaponStyle}
         onIncrement={() => updateAttribute('TwoWeaponStyle', 1)}
         onDecrement={() => updateAttribute('TwoWeaponStyle', -1)}
