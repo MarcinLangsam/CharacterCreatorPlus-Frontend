@@ -38,7 +38,7 @@ const Skills: React.FC = () => {
         onDecrement={() => updateAttribute('LongSword', -1)}
       />
       <StatControl
-        statName="Miecze Krutkie"
+        statName="Miecze Krótkie"
         statValue={characterData.skills.ShortSword}
         onIncrement={() => updateAttribute('ShortSword', 1)}
         onDecrement={() => updateAttribute('ShortSword', -1)}

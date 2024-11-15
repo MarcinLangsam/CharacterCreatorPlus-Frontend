@@ -1,25 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCharacterContext } from '../context/CharacterContext';
 import StatControl from './AttributesControl';
 import { CharacterAttributes } from '../types/CharacterData';
 
 const Stats: React.FC = () => {
   const { characterData, setCharacterData } = useCharacterContext();
+  const [availablePoints, setAvailablePoints] = useState(0);
+  const [totalRolledPoints, setTotalRolledPoints] = useState(0);
 
   const randomizeAttributes = () => {
     const getRandomValue = () => Math.floor(Math.random() * 18) + 1;
     
+    const newAttributes = {
+      strength: getRandomValue(),
+      agility: getRandomValue(),
+      constitution: getRandomValue(),
+      intelligence: getRandomValue(),
+      wisdom: getRandomValue(),
+      charisma: getRandomValue(),
+    };
+
+    const sumPoints = Object.values(newAttributes).reduce((sum, value) => sum + value, 0);
+
     setCharacterData((prevData) => ({
       ...prevData,
-      attributes: {
-        strength: getRandomValue(),
-        agility: getRandomValue(),
-        constitution: getRandomValue(),
-        intelligence: getRandomValue(),
-        wisdom: getRandomValue(),
-        charisma: getRandomValue(),
-      },
+      attributes: newAttributes,
+
     }));
+
+    setTotalRolledPoints(sumPoints);
+    setAvailablePoints(0);
+
   };
 
   useEffect(() => {
@@ -28,8 +39,19 @@ const Stats: React.FC = () => {
 
   const updateAttribute = (attribute: keyof CharacterAttributes, delta: number) => {
     setCharacterData((prevData) => {
-      const newValue = prevData.attributes[attribute] + delta;
+      const currentValue = prevData.attributes[attribute];
+      const newValue = currentValue + delta;
+
+      if (delta > 0 && availablePoints <= 0) return prevData;
+      if (delta < 0 && currentValue <= 1) return prevData;
+
       const clampedValue = Math.max(1, Math.min(18, newValue));
+
+      if (delta > 0 && clampedValue !== currentValue) {
+        setAvailablePoints((points) => points - 1);
+      } else if (delta < 0 && clampedValue !== currentValue) {
+        setAvailablePoints((points) => points + 1);
+      }
 
       return {
         ...prevData,
@@ -49,6 +71,9 @@ const Stats: React.FC = () => {
       <button onClick={randomizeAttributes} className="border border-black m-2 bg-gray-800 p-2 text-white">
         Powtórz rzut
       </button>
+
+      <p className="mt-2">Suma Wylosowanych Punktów: {totalRolledPoints}</p>
+      <p>Punkty Do Wydania: {availablePoints}</p>
 
       <StatControl
         statName="Strength"
