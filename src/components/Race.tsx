@@ -18,11 +18,11 @@ const Race: React.FC = () => {
         <h2>Wybierz Rasę</h2>
         <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Człowiek')}>Człowiek</button>
         <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Elf')}>Elf</button>
-        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Pół-Elf')}>Pół-Elf</button>
-        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Gnome')}>Gnome</button>
+        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Pół_Elf')}>Pół-Elf</button>
+        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Gnom')}>Gnom</button>
         <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Niziołek')}>Niziołek</button>
         <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Krasnolud')}>Krasnolud</button>
-        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Pół-Ork')}>Pół-Ork</button>
+        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Pół_Ork')}>Pół-Ork</button>
     </div>
     )
 }

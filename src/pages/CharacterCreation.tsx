@@ -4,7 +4,7 @@ import Gender from '../components/Gender';
 import Portrait from '../components/Portrait';
 import Race from '../components/Race';
 import Class from '../components/Class';
-import CharacterAligment from '../components/CharacterAligment';
+import CharacterAlignment from '../components/CharacterAlignment';
 import Attributes from '../components/Attributes';
 import Skills from '../components/Skills';
 import CreationSummary from '../components/CreationSummary';
@@ -26,7 +26,7 @@ const CharacterCreation: React.FC = () => {
       case 'class':
         return <Class />;
       case 'character':
-        return <CharacterAligment />;
+        return <CharacterAlignment />;
       case 'stats':
         return <Attributes />;
       case 'skills':

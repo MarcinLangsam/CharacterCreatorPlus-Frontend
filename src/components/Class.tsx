@@ -2,6 +2,16 @@ import React from "react";
 import { useCharacterContext } from "../context/CharacterContext";
 import SubclassSelector from "./SubclassSelector";
 
+const classesOptions: { [key: string]: string[] } = {
+    Człowiek: ['Wojownik', 'Łowca', 'Paladyn', 'Kapłan', 'Druid', 'Mag', 'Łotrzyk', 'Bard', 'Czarodziej', 'Monk', 'Szaman'],
+    Pół_Elf: ['Wojownik', 'Łowca', 'Kapłan', 'Druid', 'Mag', 'Łotrzyk', 'Bard', 'Czarodziej', 'Szaman'],
+    Elf: ['Wojownik', 'Łowca', 'Kapłan', 'Mag', 'Łotrzyk', 'Czarodziej'],
+    Krasnolud: ['Wojownik', 'Kapłan', 'Łotrzyk'],
+    Niziołek: ['Wojownik', 'Kapłan', 'Łotrzyk'],
+    Gnom: ['Wojownik', 'Kapłan', 'Mag', 'Łotrzyk'],
+    Pół_Ork: ['Wojownik', 'Kapłan', 'Łotrzyk', 'Szaman'],
+  };
+
 const classes: React.FC = () => {
     const {characterData, setCharacterData} = useCharacterContext();
 
@@ -12,22 +22,27 @@ const classes: React.FC = () => {
             subclasses: subclasses
         }));
     };
+
+    const availableClasses = () => {
+        const selectedClass = characterData.classes;
+        const selectedRace = characterData.race;
     
+        if (!selectedRace) return [];
+    
+        const classes = classesOptions[selectedRace] || [];
+    
+        return classes;
+      }; 
+
     return(
     <div className="flex flex-row">
         <div className="flex flex-col">
             <h2>Wybierz Klasę</h2>
-            <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleClassesChange('Wojownik','')}>Wojownik</button>
-            <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleClassesChange('Łowca','')}>Łowca</button>
-            <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleClassesChange('Paladyn','')}>Paladyn</button>
-            <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleClassesChange('Kleryk','')}>Kleryk</button>
-            <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleClassesChange('Druid','')}>Druid</button>
-            <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleClassesChange('Mag','')}>Mag</button>
-            <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleClassesChange('Łotrzyk','')}>Łotrzyk</button>
-            <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleClassesChange('Bard','')}>Bard</button>
-            <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleClassesChange('Czarodziej','')}>Czarodziej</button>
-            <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleClassesChange('Monk','')}>Monk</button>
-            <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleClassesChange('Shaman','')}>Shaman</button>
+            {availableClasses().map((classes) => (
+                <button key={classes} className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleClassesChange(classes,'')}>
+                {classes}
+            </button>
+            ))}
         </div>
         <SubclassSelector />
     </div>
