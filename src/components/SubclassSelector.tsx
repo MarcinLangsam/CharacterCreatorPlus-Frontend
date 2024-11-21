@@ -2,16 +2,16 @@ import React from 'react';
 import { useCharacterContext } from '../context/CharacterContext';
 
 const subclassOptions: { [key: string]: string[] } = {
-  Wojownik: ['Berserker', 'Zabójca_Magów', 'Kensai', 'Krasnoludzki_Obrońca', 'Barbarzyńca'],
-  Łowca: ['Łucznik', 'Prześladowca', 'Władca_Zwierząt'],
-  Paladyn: ['Kawalerzysta', 'Inkwizytor', 'Łowca_Nieumarłych', 'Czarny_Strażnik'],
-  Kleryk: ['Kapłan_Talosa', 'Kapłan_Helma', 'Kapłan_Lathandera', 'Kapłan_Tyra', 'Kapłan_Tempusa'],
-  Druid: ['Totemiczny_Druid', 'Zmiennokształtny', 'Mściciel'],
-  Mag: ['Mag_Specjalista', 'Dziki_Mag'],
-  Łotrzyk: ['Asasyn', 'Łowca_Głów', 'Zawadiaka', 'Tancerz_Cienia'],
-  Bard: ['Bard_Ostrzy', 'Błazen', 'Skald'],
+  Wojownik: ['Wojownik', 'Berserker', 'Zabójca_Magów', 'Kensai', 'Krasnoludzki_Obrońca', 'Barbarzyńca'],
+  Łowca: ['Łowca','Łucznik', 'Prześladowca', 'Władca_Zwierząt'],
+  Paladyn: ['Paladyn','Kawalerzysta', 'Inkwizytor', 'Łowca_Nieumarłych', 'Czarny_Strażnik'],
+  Kapłan: ['Kapłan','Kapłan_Talosa', 'Kapłan_Helma', 'Kapłan_Lathandera', 'Kapłan_Tyra', 'Kapłan_Tempusa'],
+  Druid: ['Druid','Totemiczny_Druid', 'Zmiennokształtny', 'Mściciel'],
+  Mag: ['Mag','Mag_Specjalista', 'Dziki_Mag'],
+  Łotrzyk: ['Łotrzyk','Asasyn', 'Łowca_Głów', 'Zawadiaka', 'Tancerz_Cienia'],
+  Bard: ['Bard','Bard_Ostrzy', 'Błazen', 'Skald'],
   Czarodziej: ['Czarodziej', 'Uczeń_Smoka'],
-  Monk: ['Monk_Mrocznego_Księżyca', 'Monk_Słonecznej_Duszy'],
+  Monk: ['Monk','Monk_Mrocznego_Księżyca', 'Monk_Słonecznej_Duszy'],
   Shaman: ['Szaman'],
 };
 

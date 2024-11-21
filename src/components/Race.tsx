@@ -5,10 +5,12 @@ const Race: React.FC = () => {
 
     const {characterData, setCharacterData} = useCharacterContext();
 
-    const handleRaceChange = (race: string) => {
+    const handleRaceChange = (race: string, classes: string, subclasses: string) => {
         setCharacterData((prevData) => ({
             ...prevData,
             race: race,
+            classes: classes,
+            subclasses: subclasses,
         }));
     };
 
@@ -16,13 +18,13 @@ const Race: React.FC = () => {
     return(
     <div className="flex flex-col">
         <h2>Wybierz Rasę</h2>
-        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Człowiek')}>Człowiek</button>
-        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Elf')}>Elf</button>
-        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Pół_Elf')}>Pół-Elf</button>
-        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Gnom')}>Gnom</button>
-        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Niziołek')}>Niziołek</button>
-        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Krasnolud')}>Krasnolud</button>
-        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Pół_Ork')}>Pół-Ork</button>
+        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Człowiek','','')}>Człowiek</button>
+        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Elf','','')}>Elf</button>
+        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Pół_Elf','','')}>Pół-Elf</button>
+        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Gnom','','')}>Gnom</button>
+        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Niziołek','','')}>Niziołek</button>
+        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Krasnolud','','')}>Krasnolud</button>
+        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleRaceChange('Pół_Ork','','')}>Pół-Ork</button>
     </div>
     )
 }

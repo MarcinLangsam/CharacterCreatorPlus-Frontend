@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { CharacterData, CharacterAttributes, WeaponProficiencys } from '../types/CharacterData';
+import { CharacterData, CharacterAttributes, WeaponProficiencys, ThievingAbilities } from '../types/CharacterData';
 
 interface CharacterContextType {
   characterData: CharacterData;
@@ -7,35 +7,46 @@ interface CharacterContextType {
 }
 
 const defaultProficiencys: WeaponProficiencys = {
-  BastardSword: 0,
-  LongSword: 0,
-  ShortSword: 0,
-  Axe: 0,
-  TwoHandedSword: 0,
-  Katana: 0,
-  Scimtar: 0,
-  Dagger: 0,
-  WarHammer: 0,
-  Club: 0,
-  Spear: 0,
-  Halberd: 0,
-  Flail: 0,
-  Mace: 0,
-  QuarterStaff: 0,
-  Crossbow: 0,
-  LongBow: 0,
-  ShortBow: 0,
-  Dart: 0,
-  Sling: 0,
-  TwoHandedWeaponStyle: 0,
-  SwordandShieldStyle: 0,
-  SingleWeaponStyle: 0,
-  TwoWeaponStyle: 0,
+  MieczePółtoraręczne: -1,
+  MieczeDługie: -1,
+  MieczeKrótkie: -1,
+  Topory: -1,
+  MieczeDwóręczne: -1,
+  Katana: -1,
+  Scimtar: -1,
+  Sztylety: -1,
+  MłotyWojenne: -1,
+  Maczugi: -1,
+  Włócznie: -1,
+  Halabarda: -1,
+  Korbacze: -1,
+  Wiekiery: -1,
+  KijeBojowe: -1,
+  Kusze: -1,
+  DługieŁuki: -1,
+  KrótkieŁuki: -1,
+  Strzałki: -1,
+  Proce: -1,
+  StylBroniDwóręcznych: -1,
+  StylMieczaITarczy: -1,
+  StylMieczaJednoręcznego: -1,
+  StylDwóchBroni: -1,
+};
+
+const defaultThievingAbilities: ThievingAbilities = {
+  Otwieranie_Zamków: -1,
+  Kradzież_Kieszonkowa: -1,
+  Ciche_Poruszanie: -1,
+  Krycie_W_Cieniu: -1,
+  Znajdywanie_Pułapek: -1,
+  Wykrywanie_Iluzji: -1,
+  Rozstawianie_Pułapek: -1,
 };
 
 
 const defaultAttributes: CharacterAttributes = {
   strength: 0,
+  strenghtModifier : 0,
   agility: 0,
   constitution: 0,
   intelligence: 0,
@@ -46,6 +57,7 @@ const defaultAttributes: CharacterAttributes = {
 const defaultCharacterData: CharacterData = {
   attributes: defaultAttributes,
   skills: defaultProficiencys,
+  skillsThief: defaultThievingAbilities,
 };
 
 const CharacterContext = createContext<CharacterContextType | undefined>(undefined);
