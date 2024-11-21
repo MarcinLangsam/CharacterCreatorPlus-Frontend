@@ -71,10 +71,12 @@ export interface CharacterData {
   Krycie_W_CieniuBonus?: number; //if kit allows this ability
   Rozstawianie_Pułapek?: number; //if kit allows this ability
 
+  HPdice?: number;
   HP?: number;
-  HPperLv?: number;
+
   HPperLvBonus?: number;
   IntoxicationPerDrink?: number;
+  fatigue?: number;
 
   INTmaxSpellLevel?: number; //only for mages/bards
   INTspellPerLevel?: number; //only for mages/bards
