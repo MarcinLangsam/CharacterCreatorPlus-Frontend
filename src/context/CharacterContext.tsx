@@ -33,7 +33,7 @@ const defaultProficiencys: WeaponProficiencys = {
   StylDwóchBroni: -1,
 };
 
-const defaultThievingAbilities: ThievingAbilities = {
+export const defaultThievingAbilities: ThievingAbilities = {
   Otwieranie_Zamków: -1,
   Kradzież_Kieszonkowa: -1,
   Ciche_Poruszanie: -1,

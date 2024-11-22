@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useCharacterContext } from "../context/CharacterContext";
+import { useCharacterContext, defaultThievingAbilities } from "../context/CharacterContext";
 import { ThievingAbilities, WeaponProficiencys } from "../types/CharacterData";
 import StatControl from "./ProficiencysControl";
 
@@ -890,98 +890,155 @@ const subclassProficiencies: Record<string, { skills: Partial<WeaponProficiencys
 },
 };
 
-const subclassesThievingAbilities: Record<string, { skills: Partial<ThievingAbilities>, skillPoints: number }> = {
+const subclassesThievingAbilities: Record<string, { skillsThief: Partial<ThievingAbilities>, skillPointsThief: number }> = {
   Łowca:{
-    skills: {
+    skillsThief: {
       Ciche_Poruszanie: 55,
       Krycie_W_Cieniu: 55,
     },
-    skillPoints: 0,
+    skillPointsThief: 0,
   },
   Łucznik:{
-    skills: {
+    skillsThief: {
       Ciche_Poruszanie: 55,
       Krycie_W_Cieniu: 55,
     },
-    skillPoints: 0,
+    skillPointsThief: 0,
   },
   Prześladowca:{
-    skills: {
+    skillsThief: {
       Ciche_Poruszanie: 55,
       Krycie_W_Cieniu: 55,
     },
-    skillPoints: 0,
+    skillPointsThief: 0,
   },
   Władca_Zwięrząt:{
-    skills: {
+    skillsThief: {
       Ciche_Poruszanie: 55,
       Krycie_W_Cieniu: 55,
     },
-    skillPoints: 0,
+    skillPointsThief: 0,
   },
 
   Bard:{
-    skills: {
+    skillsThief: {
       Kradzież_Kieszonkowa: 60
     },
-    skillPoints: 0,
+    skillPointsThief: 0,
   },
   Bard_Ostrzy:{
-    skills: {
+    skillsThief: {
       Kradzież_Kieszonkowa: 60
     },
-    skillPoints: 0,
+    skillPointsThief: 0,
   },
   Błazen:{
-    skills: {
+    skillsThief: {
       Kradzież_Kieszonkowa: 60
     },
-    skillPoints: 0,
+    skillPointsThief: 0,
   },
   Skald:{
-    skills: {
+    skillsThief: {
       Kradzież_Kieszonkowa: 60
     },
-    skillPoints: 0,
+    skillPointsThief: 0,
   },
   Monk:{
-    skills: {
+    skillsThief: {
       Znajdywanie_Pułapek : 0,
       Ciche_Poruszanie: 0,
       Krycie_W_Cieniu: 0,
     },
-    skillPoints: 0,
+    skillPointsThief: 0,
   },
-  Monk_Morcznego_Księżyca:{
-    skills: {
+  Monk_Mrocznego_Księżyca:{
+    skillsThief: {
       Znajdywanie_Pułapek : 0,
       Ciche_Poruszanie: 0,
       Krycie_W_Cieniu: 0,
       Wykrywanie_Iluzji: 0,
     },
-    skillPoints: 0,
+    skillPointsThief: 0,
   },
   Monk_Słonecznej_Duszy:{
-    skills: {
+    skillsThief: {
       Znajdywanie_Pułapek : 0,
       Ciche_Poruszanie: 0,
       Krycie_W_Cieniu: 0,
     },
-    skillPoints: 0,
+    skillPointsThief: 0,
   },
-  Szaman: {
-    skills: {
+  Shaman: {
+    skillsThief: {
       Wykrywanie_Iluzji: 48,
     },
-    skillPoints: 0,
+    skillPointsThief: 0,
   },
-
-
+  Łotrzyk: {
+    skillsThief: {
+      Otwieranie_Zamków: 0,
+      Kradzież_Kieszonkowa: 0,
+      Ciche_Poruszanie: 0,
+      Krycie_W_Cieniu: 0,
+      Znajdywanie_Pułapek: 0,
+      Wykrywanie_Iluzji: 0,
+      Rozstawianie_Pułapek: 0,
+    },
+    skillPointsThief: 0,
+  },
+  Asasyn: {
+    skillsThief: {
+      Otwieranie_Zamków: 0,
+      Kradzież_Kieszonkowa: 0,
+      Ciche_Poruszanie: 0,
+      Krycie_W_Cieniu: 0,
+      Znajdywanie_Pułapek: 0,
+      Wykrywanie_Iluzji: 0,
+      Rozstawianie_Pułapek: 0,
+    },
+    skillPointsThief: 0,
+  },
+  Łowca_Głów: {
+    skillsThief: {
+      Otwieranie_Zamków: 0,
+      Kradzież_Kieszonkowa: 0,
+      Ciche_Poruszanie: 0,
+      Krycie_W_Cieniu: 0,
+      Znajdywanie_Pułapek: 0,
+      Wykrywanie_Iluzji: 0,
+      Rozstawianie_Pułapek: 0,
+    },
+    skillPointsThief: 0,
+  },
+  Zawadiaka: {
+    skillsThief: {
+      Otwieranie_Zamków: 0,
+      Kradzież_Kieszonkowa: 0,
+      Ciche_Poruszanie: 0,
+      Krycie_W_Cieniu: 0,
+      Znajdywanie_Pułapek: 0,
+      Wykrywanie_Iluzji: 0,
+      Rozstawianie_Pułapek: 0,
+    },
+    skillPointsThief: 0,
+  },
+  Tancerz_Cienia: {
+    skillsThief: {
+      Otwieranie_Zamków: 0,
+      Kradzież_Kieszonkowa: 0,
+      Ciche_Poruszanie: 0,
+      Krycie_W_Cieniu: 0,
+      Znajdywanie_Pułapek: 0,
+      Wykrywanie_Iluzji: 0,
+    },
+    skillPointsThief: 0,
+  },
 }
 
-const raseBonusThievingAbilities: Record<string, { skills: Partial<ThievingAbilities>}> = {
+const raseBonusThievingAbilities: Record<string, { skillsThief: Partial<ThievingAbilities>}> = {
   Człowiek : {
-    skills: {
+    skillsThief: {
       Otwieranie_Zamków: 10,
       Kradzież_Kieszonkowa: 15,
       Ciche_Poruszanie: 10,
@@ -992,7 +1049,7 @@ const raseBonusThievingAbilities: Record<string, { skills: Partial<ThievingAbili
     }
   },
   Krasonlud : {
-    skills: {
+    skillsThief: {
       Otwieranie_Zamków: 20,
       Kradzież_Kieszonkowa: 15,
       Ciche_Poruszanie: 10,
@@ -1003,7 +1060,7 @@ const raseBonusThievingAbilities: Record<string, { skills: Partial<ThievingAbili
     }
   },
   Elf : {
-    skills: {
+    skillsThief: {
       Otwieranie_Zamków: 5,
       Kradzież_Kieszonkowa: 20,
       Ciche_Poruszanie: 15,
@@ -1014,7 +1071,7 @@ const raseBonusThievingAbilities: Record<string, { skills: Partial<ThievingAbili
     }
   },
   Gnom : {
-    skills: {
+    skillsThief: {
       Otwieranie_Zamków: 15,
       Kradzież_Kieszonkowa: 15,
       Ciche_Poruszanie: 15,
@@ -1025,7 +1082,7 @@ const raseBonusThievingAbilities: Record<string, { skills: Partial<ThievingAbili
     }
   },
   Pół_Elf : {
-    skills: {
+    skillsThief: {
       Otwieranie_Zamków: 10,
       Kradzież_Kieszonkowa: 25,
       Ciche_Poruszanie: 10,
@@ -1036,7 +1093,7 @@ const raseBonusThievingAbilities: Record<string, { skills: Partial<ThievingAbili
     }
   },
   Pół_Ork : {
-    skills: {
+    skillsThief: {
       Otwieranie_Zamków: 10,
       Kradzież_Kieszonkowa: 15,
       Ciche_Poruszanie: 10,
@@ -1047,7 +1104,7 @@ const raseBonusThievingAbilities: Record<string, { skills: Partial<ThievingAbili
     }
   },
   Niziołek : {
-    skills: {
+    skillsThief: {
       Otwieranie_Zamków: 15,
       Kradzież_Kieszonkowa: 20,
       Ciche_Poruszanie: 20,
@@ -1063,34 +1120,74 @@ const raseBonusThievingAbilities: Record<string, { skills: Partial<ThievingAbili
 const Skills: React.FC = () => {
   const { characterData, setCharacterData } = useCharacterContext();
   const selectedSubclass = characterData.subclasses;
+  const selectedRace = characterData.race;
 
   const availableSkills =
     (selectedSubclass && subclassProficiencies[selectedSubclass]?.skills) || {};
 
-    const [availablePoints, setAvailablePoints] = useState(0);
+  const [availablePoints, setAvailablePoints] = useState(0);
+
+  useEffect(() => {
+
+    const resetThievingAbilities = { ...defaultThievingAbilities };
+    if(!selectedSubclass) return;
+    if(!selectedRace) return;
+    
+
+    setCharacterData((prevData) => ({
+      ...prevData,
+      skillsThief: resetThievingAbilities,
+    }));
+      
+    const subclassData = subclassesThievingAbilities[selectedSubclass] || { skillsThief: {}, skillPointsThief: 0 };
+    const raceBonus = raseBonusThievingAbilities[selectedRace || ""]?.skillsThief || {};
+    
+    const updatedThievingSkills: ThievingAbilities = {
+      Otwieranie_Zamków: -1,
+      Kradzież_Kieszonkowa: -1,
+      Ciche_Poruszanie: -1,
+      Krycie_W_Cieniu: -1,
+      Znajdywanie_Pułapek: -1,
+      Wykrywanie_Iluzji: -1,
+      Rozstawianie_Pułapek: -1,
+    };
+
+    for (const skill in updatedThievingSkills) {
+      const subclassValue = subclassData.skillsThief[skill as keyof ThievingAbilities] ?? -1;
+      const raceBonusValue = raceBonus[skill as keyof ThievingAbilities] ?? 0;
+      updatedThievingSkills[skill as keyof ThievingAbilities] = 
+        subclassValue !== -1 ? subclassValue + raceBonusValue : -1;
+    }
+
+    setCharacterData((prevData) => ({
+      ...prevData,
+      skillsThief: updatedThievingSkills,
+    }));
+
+  }, [selectedSubclass]);
+
+  useEffect(() => {
+    if (selectedSubclass) {
+      const currentProficiencies = subclassProficiencies[selectedSubclass]?.skills || {};
+      const currentPoints = subclassProficiencies[selectedSubclass]?.skillPoints || 0;
+     
+      const updatedSkills = { ...characterData.skills };
+
+      Object.keys(currentProficiencies).forEach((skill) => {
+        if (updatedSkills[skill as keyof WeaponProficiencys] === -1) {
+          updatedSkills[skill as keyof WeaponProficiencys] = 0;
+        }
+      });
 
 
-    useEffect(() => {
-      if (selectedSubclass) {
-        const currentProficiencies = subclassProficiencies[selectedSubclass]?.skills || {};
-        const currentPoints = subclassProficiencies[selectedSubclass]?.skillPoints || 0;
-  
-        const updatedSkills = { ...characterData.skills };
-  
-        Object.keys(currentProficiencies).forEach((skill) => {
-          if (updatedSkills[skill as keyof WeaponProficiencys] === -1) {
-            updatedSkills[skill as keyof WeaponProficiencys] = 0;
-          }
-        });
-  
-        setCharacterData((prevData) => ({
-          ...prevData,
-          skills: updatedSkills,
-        }));
+      setCharacterData((prevData) => ({
+        ...prevData,
+        skills: updatedSkills,
+      }));
 
-        setAvailablePoints(currentPoints);
-      }
-    }, [selectedSubclass]);
+      setAvailablePoints(currentPoints);
+    }
+  }, [selectedSubclass]);
 
   const updateSkill = (skill: keyof WeaponProficiencys, change: number) => {
     setCharacterData((prevData) => {
@@ -1146,6 +1243,21 @@ const Skills: React.FC = () => {
       ) : (
         <p>Wybierz podklasę, aby zobaczyć dostępne biegłości.</p>
       )}
+      <br />
+      <br />
+      <br />
+      <div>
+      <h3>Umiejętności złodziejskie:</h3>
+        <ul>
+          {Object.entries(characterData.skillsThief)
+            .filter(([_, value]) => value !== -1) // Filtruj tylko umiejętności z wartością różną od -1
+            .map(([skillName, skillValue]) => (
+              <li key={skillName}>
+                {skillName.replace(/_/g, ' ')}: {skillValue}
+              </li>
+            ))}
+        </ul>
+    </div>
     </div>
   )
 }

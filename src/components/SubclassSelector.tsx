@@ -12,7 +12,7 @@ const subclassOptions: { [key: string]: string[] } = {
   Bard: ['Bard','Bard_Ostrzy', 'Błazen', 'Skald'],
   Czarodziej: ['Czarodziej', 'Uczeń_Smoka'],
   Monk: ['Monk','Monk_Mrocznego_Księżyca', 'Monk_Słonecznej_Duszy'],
-  Shaman: ['Szaman'],
+  Shaman: ['Shaman'],
 };
 
 const SubclassSelector: React.FC = () => {
