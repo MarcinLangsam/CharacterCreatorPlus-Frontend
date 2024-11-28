@@ -54,7 +54,8 @@ const Export: React.FC = () => {
         data[0x2C] = fileLengthFrom64 & 0xFF;
         data[0x2D] = (fileLengthFrom64 >> 8) & 0xFF;
 
-        //tutaj nadanie wartości siły do konkretnego miejsca w pliku heksadecymalnym
+        data[0x32C] += 1;
+
         const hexStrength = characterData.attributes.strength.toString(16);
         const hexAgility = characterData.attributes.agility.toString(16);
         const hexConstitution = characterData.attributes.constitution.toString(16);
