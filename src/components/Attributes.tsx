@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useCharacterContext } from '../context/CharacterContext';
 import StatControl from './AttributesControl';
 import { CharacterAttributes } from '../types/CharacterData';
+import { modifiers } from '../types/AttributesModifiers';
 
 const raceAttributeLimits: Record<string, Partial<Record<keyof CharacterAttributes, { min: number; max: number }>>> = {
   Człowiek: { strength: {min: 3, max: 18}, agility: {min: 3, max: 18}, constitution: {min: 3, max: 18}, intelligence: {min: 3, max: 18}, wisdom: {min: 3, max: 18}, charisma: {min: 3, max: 18}},
@@ -29,10 +30,67 @@ const classAttributeLimits: Record<string, Partial<Record<keyof CharacterAttribu
 
 const allowedClassesForModifier = ['Wojownik', 'Łowca', 'Paladyn'];
 
+interface StrengthData {
+  id: number;
+  value: number;
+  meleeThac0: number;
+  dmgBonus: number;
+  bashing: number;
+  weight: number;
+}
+interface AgilityData {
+  id: number;
+  value: number;
+  rangedThac0: number;
+  ac: number;
+  Kradziez_KieszonkowaBonus: number;
+  Otwieranie_ZamkowBonus: number;
+  Znajdywanie_PulapekBonus: number;
+  Ciche_PoruszanieBonus: number;
+  Krycie_W_CieniuBonus: number;
+  Rozstawianie_PulapekBonus: number;
+}
+interface ConstitutionData {
+  id: number;
+  value: number;
+  hpPerLevelBonus: number;
+  intoxicationPerDrink: number;
+  fatigue: number;
+}
+interface InteligneceData {
+  id: number;
+  value: number;
+  INTmaxSpellLevel: number;
+  INTspellPerLevel: number;
+  scribeSuccessRate: number;
+  INTlore: number;
+}
+interface WisdomData {
+  id: number;
+  value: number;
+  extraSpellSlotlv1: number;
+  extraSpellSlotlv2: number;
+  extraSpellSlotlv3: number;
+  extraSpellSlotlv4: number;
+  WISlore: number;
+}
+interface CharismaData {
+  id: number;
+  value: number;
+  reaction: number;
+  buyDiscount: number;
+}
+
 const Stats: React.FC = () => {
   const { characterData, setCharacterData } = useCharacterContext();
   const [availablePoints, setAvailablePoints] = useState(0);
   const [totalRolledPoints, setTotalRolledPoints] = useState(0);
+  const [strengthData, setStrengthData] = useState<StrengthData[]>([]);
+  const [agilityData, setAgilityData] = useState<AgilityData[]>([]);
+  const [constitutionData, setConstitutionData] = useState<ConstitutionData[]>([]);
+  const [inteligenceData, setIntelignceData] = useState<InteligneceData[]>([]);
+  const [wisdomData, setWisdomData] = useState<WisdomData[]>([]);
+  const [charismaData, setCharismaData] = useState<CharismaData[]>([]);
   
 
   const isModifierApplicable = (): boolean => {
@@ -92,10 +150,149 @@ const Stats: React.FC = () => {
     setAvailablePoints(0);
   };
 
+
+
+  useEffect(() => {
+    const fetchStrength = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/strength");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setStrengthData(data);
+      } catch (error) {
+        console.error("Error fetching strength data:", error);
+      }
+    };
+
+    const fetchAgility = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/agility");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setAgilityData(data);
+      } catch (error) {
+        console.error("Error fetching strength data:", error);
+      }
+    };
+
+    const fetchConstitution = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/constitution");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setConstitutionData(data);
+      } catch (error) {
+        console.error("Error fetching strength data:", error);
+      }
+    };
+
+    const fetchInteligence = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/inteligence");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setIntelignceData(data);
+      } catch (error) {
+        console.error("Error fetching strength data:", error);
+      }
+    };
+
+    const fetchWisdom = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/wisdom");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setWisdomData(data);
+      } catch (error) {
+        console.error("Error fetching strength data:", error);
+      }
+    };
+
+    const fetchCharisma = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/charisma");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setCharismaData(data);
+      } catch (error) {
+        console.error("Error fetching strength data:", error);
+      }
+    };
+
+    fetchStrength();
+    fetchAgility();
+    fetchConstitution();
+    fetchInteligence();
+    fetchWisdom();
+    fetchCharisma();
+
+  }, []);
+
+  useEffect(() => {
+      const strengthMatch = strengthData.find((item) => item.value === characterData.attributes.strength);
+      if (strengthMatch) {
+        characterData.melleThac0 = strengthMatch.meleeThac0,
+        characterData.dmgBonus = strengthMatch.dmgBonus,
+        characterData.bashing = strengthMatch.bashing,
+        characterData.weight = strengthMatch.weight
+      }
+      const agilityhMatch = agilityData.find((item) => item.value === characterData.attributes.agility);
+      if (agilityhMatch) {
+        characterData.rangedThac0 = agilityhMatch.rangedThac0,
+        characterData.AC = agilityhMatch.ac,
+        characterData.Otwieranie_ZamkówBonus = agilityhMatch.Otwieranie_ZamkowBonus,
+        characterData.Kradzież_KieszonkowaBonus = agilityhMatch.Kradziez_KieszonkowaBonus,
+        characterData.Ciche_PoruszanieBonus = agilityhMatch.Ciche_PoruszanieBonus,
+        characterData.Krycie_W_CieniuBonus = agilityhMatch.Krycie_W_CieniuBonus,
+        characterData.Znajdywanie_PułapekBonus = agilityhMatch.Znajdywanie_PulapekBonus,
+        characterData.Rozstawianie_Pułapek = agilityhMatch.Rozstawianie_PulapekBonus
+      }
+      const constitutionMatch = constitutionData.find((item) => item.value === characterData.attributes.constitution);
+      if (constitutionMatch) {
+        characterData.HPperLvBonus = constitutionMatch.hpPerLevelBonus,
+        characterData.IntoxicationPerDrink = constitutionMatch.intoxicationPerDrink,
+        characterData.fatigue = constitutionMatch.fatigue
+      }
+      const inteligenceMatch = inteligenceData.find((item) => item.value === characterData.attributes.intelligence);
+      if (inteligenceMatch) {
+        characterData.INTmaxSpellLevel = inteligenceMatch.INTmaxSpellLevel,
+        characterData.INTspellPerLevel = inteligenceMatch.INTspellPerLevel,
+        characterData.scribeSuccessRate = inteligenceMatch.scribeSuccessRate,
+        characterData.INTlore = inteligenceMatch.INTlore
+      }
+      const wisdomMatch = wisdomData.find((item) => item.value === characterData.attributes.wisdom);
+      if (wisdomMatch) {
+        characterData.extraSpellSlotlv1 = wisdomMatch.extraSpellSlotlv1,
+        characterData.extraSpellSlotlv2 = wisdomMatch.extraSpellSlotlv2,
+        characterData.extraSpellSlotlv3 = wisdomMatch.extraSpellSlotlv3,
+        characterData.extraSpellSlotlv4 = wisdomMatch.extraSpellSlotlv4,
+        characterData.WISlore = wisdomMatch.WISlore
+      }
+      const charismaMatch = charismaData.find((item) => item.value === characterData.attributes.charisma);
+      if (charismaMatch) {
+        characterData.reaction = charismaMatch.reaction,
+        characterData.buyDiscount = charismaMatch.buyDiscount
+      }
+    
+  }, [characterData.attributes, totalRolledPoints]);
+
+  
+
   const updateAttribute = (attribute: keyof CharacterAttributes, delta: number) => {
     setCharacterData((prevData) => {
       const currentAttributeValue = prevData.attributes[attribute];
-      
 
       const raceLimits = getRaseLimit();
       const classLimits = getClassLimit();
@@ -123,11 +320,13 @@ const Stats: React.FC = () => {
       const updatedAttributes = {
         ...prevData.attributes,
         [attribute]: newValue,
+
       };
-  
+
       return {
         ...prevData,
         attributes: updatedAttributes,
+        
       };
     });
 

@@ -39,6 +39,68 @@ const CreationSummary: React.FC = () => {
                     </li>
                 ))}
             </ul>
+            <p>----------------------------------------------------</p>
+            <p>Statystyki:</p>
+            <div className="flex flex-row">
+                {/* bonuses for strength */}
+                <div className="m-5">
+                    <ul>
+                        <li>THAC0 (walka wręcz): {characterData.melleThac0}</li>
+                        <li>Bonus obrażeń: {characterData.dmgBonus}</li>
+                        <li>Wyważanie zamków: {characterData.bashing}</li>
+                        <li>Udźwig: {characterData.weight}</li>
+                    </ul>
+                </div>
+                {/* bonuses for agility */}
+                <div className="m-5">
+                    <ul>
+                        <li>THAC0 (walka na dystans): {characterData.rangedThac0}</li>
+                        <li>KP: {characterData.AC}</li>
+                        <li>Bonus do kradzieży kieszonkowej: {characterData.Kradzież_KieszonkowaBonus}</li>
+                        <li>Bonus do otwierania zamków: {characterData.Otwieranie_ZamkówBonus}</li>
+                        <li>Bonus do znajdywania pułapek: {characterData.Znajdywanie_PułapekBonus}</li>
+                        <li>Bonus do cichego poruszania: {characterData.Ciche_PoruszanieBonus}</li>
+                        <li>Bonus do krycia w cienu: {characterData.Krycie_W_CieniuBonus}</li>
+                        <li>Bonus do rozstawiania pułapek: {characterData.Rozstawianie_Pułapek}</li>
+                    </ul>
+                </div>
+                {/* bonuses for constitution */}
+                <div className="m-5">
+                    <ul>
+                        <li>Bonusowe punkty zdrowia na poziom: {characterData.HPperLvBonus}</li>
+                        <li>Intoksykacja na trunek: {characterData.IntoxicationPerDrink}</li>
+                        <li>Zmęczenie: {characterData.fatigue}</li>
+                    </ul>
+                </div>
+                {/* bonuses for inteligence */}
+                <div className="m-5">
+                    <ul>
+                        <li>Max poziom zaklęć maga: {characterData.INTmaxSpellLevel}</li>
+                        <li>Max zaklęć maga na poziom: {characterData.INTspellPerLevel}</li>
+                        <li>Szansa przepisania zwoju: {characterData.scribeSuccessRate}</li>
+                        <li>Wiedza (INTELIGENCJA): {characterData.INTlore}</li>
+                    </ul>
+                </div>
+                {/* bonuses for wisdom */}
+                <div className="m-5">
+                    <ul>
+                        <li>Bonusowe zaklęcia klerka poziomu 1: {characterData.extraSpellSlotlv1}</li>
+                        <li>Bonusowe zaklęcia klerka poziomu 2: {characterData.extraSpellSlotlv2}</li>
+                        <li>Bonusowe zaklęcia klerka poziomu 3: {characterData.extraSpellSlotlv3}</li>
+                        <li>Bonusowe zaklęcia klerka poziomu 4: {characterData.extraSpellSlotlv4}</li>
+                        <li>Wiedza (MĄDROŚĆ): {characterData.WISlore}</li>
+                    </ul>
+                </div>
+                {/* bonuses for charisma */}
+                <div className="m-5">
+                    <ul>
+                        <li>Rekcja NPC: {characterData.reaction}</li>
+                        <li>Zniżka w sklepach: {characterData.buyDiscount}%</li>
+                    </ul>
+                </div>
+                
+            </div>
+
         </div>
 
     )
