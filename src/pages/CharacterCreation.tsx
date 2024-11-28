@@ -7,9 +7,11 @@ import Class from '../components/Class';
 import CharacterAlignment from '../components/CharacterAlignment';
 import Attributes from '../components/Attributes';
 import Skills from '../components/Skills';
+import Name from '../components/Name';
+import Export from '../components/CharacterExport';
 import CreationSummary from '../components/CreationSummary';
 
-type Section = 'gender' | 'portrait' | 'race' | 'class' | 'character' | 'stats' | 'skills';
+type Section = 'gender' | 'portrait' | 'race' | 'class' | 'character' | 'stats' | 'skills' | 'name' | 'export';
 
 
 const CharacterCreation: React.FC = () => {
@@ -31,6 +33,10 @@ const CharacterCreation: React.FC = () => {
         return <Attributes />;
       case 'skills':
         return <Skills />;
+      case 'name':
+        return <Name />;
+      case 'export':
+          return <Export />;
       default:
         return null;
     }
@@ -49,6 +55,8 @@ const CharacterCreation: React.FC = () => {
         <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('character')}>Charakter</button>
         <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('stats')}>Współczynniki</button>
         <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('skills')}>Umiejętności</button>
+        <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('name')}>Imię</button>
+        <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('export')}>Eksport Postaci</button>
       </div>
 
       <div className='flex flex-row'>

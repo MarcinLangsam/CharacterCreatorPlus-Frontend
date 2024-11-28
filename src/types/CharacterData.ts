@@ -47,6 +47,7 @@ export interface CharacterAttributes {
 
 export interface CharacterData {
   //character creation data
+  name?: string
   gender?: string;
   portrait?: string;
   race?: string;
