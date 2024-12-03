@@ -3,15 +3,15 @@ import { useCharacterContext } from '../context/CharacterContext';
 
 const subclassOptions: { [key: string]: string[] } = {
   Wojownik: ['Wojownik', 'Berserker', 'Zabójca_Magów', 'Kensai', 'Krasnoludzki_Obrońca', 'Barbarzyńca'],
-  Łowca: ['Łowca','Łucznik', 'Prześladowca', 'Władca_Zwierząt'],
+  Łowca: ['Łowca','Łucznik', 'Tropiciel', 'Władca_Zwierząt'],
   Paladyn: ['Paladyn','Kawalerzysta', 'Inkwizytor', 'Łowca_Nieumarłych', 'Czarny_Strażnik'],
   Kapłan: ['Kapłan','Kapłan_Talosa', 'Kapłan_Helma', 'Kapłan_Lathandera', 'Kapłan_Tyra', 'Kapłan_Tempusa'],
   Druid: ['Druid','Totemiczny_Druid', 'Zmiennokształtny', 'Mściciel'],
   Mag: ['Mag','Mag_Specjalista', 'Dziki_Mag'],
-  Łotrzyk: ['Łotrzyk','Asasyn', 'Łowca_Głów', 'Zawadiaka', 'Tancerz_Cienia'],
-  Bard: ['Bard','Bard_Ostrzy', 'Błazen', 'Skald'],
-  Czarodziej: ['Czarodziej', 'Uczeń_Smoka'],
-  Monk: ['Monk','Monk_Mrocznego_Księżyca', 'Monk_Słonecznej_Duszy'],
+  Łotrzyk: ['Złodziej','Zabójca', 'Łowca_Nagród', 'Zawadiaka', 'Tancerz_Cieni'],
+  Bard: ['Bard','Fechmistrz', 'Błazen', 'Skald'],
+  Czarodziej: ['Czarownik', 'Uczeń_Smoka'],
+  Monk: ['Mnich','Mnich_Ciemnego_Księżyca', 'Mnich_Słonecznej_Duszy'],
   Shaman: ['Shaman'],
 };
 

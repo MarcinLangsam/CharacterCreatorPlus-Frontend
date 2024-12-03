@@ -1,38 +1,38 @@
 export interface WeaponProficiencys {
-  MieczePółtoraręczne: number;
-  MieczeDługie: number;
-  MieczeKrótkie: number;
+  MieczePoltorareczne: number;
+  MieczeDlugie: number;
+  MieczeKrotkie: number;
   Topory: number;
-  MieczeDwóręczne: number;
-  Katana: number;
-  Scimtar: number;
+  MieczeObureczne: number;
+  Katany: number;
+  SejmitarWakizashiNinjaTo: number;
   Sztylety: number;
-  MłotyWojenne: number;
+  MlotyBojowe: number;
   Maczugi: number;
-  Włócznie: number;
+  Wlocznie: number;
   Halabarda: number;
-  Korbacze: number;
+  CepyBojoweMorgernszterny: number;
   Wiekiery: number;
-  KijeBojowe: number;
+  Kije: number;
   Kusze: number;
-  DługieŁuki: number;
-  KrótkieŁuki: number;
-  Strzałki: number;
+  DlugieLuki: number;
+  KrotkieLuki: number;
+  Strzalki: number;
   Proce: number;
-  StylBroniDwóręcznych: number;
-  StylMieczaITarczy: number;
-  StylMieczaJednoręcznego: number;
-  StylDwóchBroni: number;
+  StylWalkiBroniaDwureczna: number;
+  StylWalkiMieczemITarcza: number;
+  StylWalkiJednaBronia: number;
+  StylWalkiDwiemaBronmi: number;
 }
 
 export interface ThievingAbilities {
-  Otwieranie_Zamków: number;
-  Kradzież_Kieszonkowa: number;
+  Otwieranie_Zamkow: number;
+  Kradziez_Kieszonkowa: number;
   Ciche_Poruszanie: number;
   Krycie_W_Cieniu: number;
-  Znajdywanie_Pułapek: number;
+  Znajdywanie_Pulapek: number;
   Wykrywanie_Iluzji: number;
-  Rozstawianie_Pułapek: number;
+  Rozstawianie_Pulapek: number;
 }
 
 export interface CharacterAttributes {
