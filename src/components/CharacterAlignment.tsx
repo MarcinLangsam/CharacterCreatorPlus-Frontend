@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useCharacterContext } from "../context/CharacterContext";
+import { useExportDataContext } from "../context/ExportDataContext";
 
 const alignmentOptions: { [key: string]: string[]} = {
     //Warriors subclasses
-    Wojownik: ['Praworządny Dobry','Praworządny Nautralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Wojownik: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
     Berserker: ['Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Zabójca_Magów: ['Praworządny Dobry','Praworządny Nautralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Kensai: ['Praworządny Dobry','Praworządny Nautralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły'],
-    Krasnoludzki_Obrońca: ['Praworządny Dobry','Praworządny Nautralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Barbarzyńca: ['Praworządny Dobry','Praworządny Nautralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Zabójca_Magów: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Kensai: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły'],
+    Krasnoludzki_Obrońca: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Barbarzyńca: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
     //Hunter subclasses
     Łowca: ['Praworządny Dobry', 'Neytralny Dobry', 'Chotyczny Dobry'],
     Łucznik: ['Praworządny Dobry', 'Neytralny Dobry', 'Chotyczny Dobry'],
@@ -21,7 +22,7 @@ const alignmentOptions: { [key: string]: string[]} = {
     Łowca_Nieumarłych: ['Praworządny Dobry'],
     Czarny_Strażnik: ['Praworządny Zły', 'Neutralny Zły', 'Chotyczny Zły'],
     //Cleric subclasses
-    Kapłan: ['Praworządny Dobry','Praworządny Nautralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Kapłan: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
     Kapłan_Talosa: ['Chotyczny Neutralny', 'Praworządny Zły', 'Neutralny Zły', 'Chaotyczny Zły'],
     Kapłan_Helma: ['Praworządny Dobry', 'Praworządny Neutralny', 'Neutralny', 'Chotyczny Nautralny', 'Praworządny Zły'],
     Kapłan_Lathandera: ['Praworządny Dobry', 'Neutralny Dobry', 'Chotyczny Dobry', 'Neutralny'],
@@ -33,23 +34,23 @@ const alignmentOptions: { [key: string]: string[]} = {
     Zmiennokształtny: ['Neutralny'],
     Mściciel: ['Neutralny'],
     //Mage subclasses
-    Mag: ['Praworządny Dobry','Praworządny Nautralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Mag_Specjalista: ['Praworządny Dobry','Praworządny Nautralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Dziki_Mag: ['Praworządny Dobry','Praworządny Nautralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Mag: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Mag_Specjalista: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Dziki_Mag: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
     //Thief subclasses
-    Łotrzyk: ['Praworządny Nautralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Asasyn: ['Praworządny Nautralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Łowca_Głów: ['Praworządny Nautralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Zawadiaka: ['Praworządny Nautralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Tancerz_Cienia: ['Praworządny Nautralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Łotrzyk: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Asasyn: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Łowca_Głów: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Zawadiaka: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Tancerz_Cienia: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
     //Bard subclasses
     Bard: ['Neutralny Dobry','Praworządny Neutralny', 'Neutralny', 'Chaotyczny Neutralny', 'Neutralny Zły'],
     Bard_Ostrzy: ['Neutralny Dobry','Praworządny Neutralny', 'Neutralny', 'Chaotyczny Neutralny', 'Neutralny Zły'],
     Błazen: ['Neutralny Dobry','Praworządny Neutralny', 'Neutralny', 'Chaotyczny Neutralny', 'Neutralny Zły'],
     Skald: ['Neutralny Dobry','Praworządny Neutralny', 'Neutralny', 'Chaotyczny Neutralny', 'Neutralny Zły'],
     //Sorcerer subclasses
-    Czarodziej: ['Praworządny Dobry','Praworządny Nautralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Uczeń_Smoka: ['Praworządny Dobry','Praworządny Nautralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Czarodziej: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Uczeń_Smoka: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
     //Monk subclasses
     Monk: ['Praworządny Dobry','Prawożądny Nautralny','Prawożądny Zły'],
     Monk_Mrocznego_Księżyca: ['Praworządny Zły'],
@@ -61,12 +62,59 @@ const alignmentOptions: { [key: string]: string[]} = {
 
 const CharacterAlignment: React.FC = () => {
     const {characterData, setCharacterData} = useCharacterContext()
+    const {exportData, setExportData} = useExportDataContext()
+    const [backendAlignment, setAlignment] = useState<String>();
+
+
+    useEffect(() => {
+        const fetchAndInitializeData = async () => {
+            try {
+                const alignmentResponse = await fetch("http://localhost:3000/alignment");
+                if (!alignmentResponse.ok) {
+                    throw new Error(`HTTP error! status: ${alignmentResponse.status}`);
+                }
+                const data = await alignmentResponse.json();
+                const selectedAlignment = data.find(
+                    (data: { alignment: string | undefined }) => data.alignment === characterData.character
+                );
+                console.log(selectedAlignment.number)
+
+                 setExportData((prev) => ({
+                     ...prev,
+                     character: selectedAlignment.number,
+                   }));
+
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchAndInitializeData();
+
+    }, [characterData.character]);
+
 
     const handleCharacterAligmentChange = (character: string) => {
         setCharacterData((prevData) => ({
             ...prevData,
             character: character,
         }));
+
+        let characterHex = ""
+        if(character = "Praworządny Dobry") {characterHex = "11"}
+        if(character = "Praworządny Neutralny") {characterHex = "12"}
+        if(character = "Praworządny Zły") {characterHex = "13"}
+        if(character = "Neutralny Dobry") {characterHex = "21"}
+        if(character = "Neturalny") {characterHex = "22"}
+        if(character = "Neutralny Zły") {characterHex = "23"}
+        if(character = "Chaotyczny Dobry") {characterHex = "31"}
+        if(character = "Chaotyczny Neutralny") {characterHex = "32"}
+        if(character = "Chotyczny Zły") {characterHex = "33"}
+
+        setExportData((prev) => ({
+            ...prev,
+            character: characterHex,
+        }))
     };
 
     const availableAlignments = () => {

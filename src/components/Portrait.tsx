@@ -1,82 +1,83 @@
 import React, { useEffect, useState } from "react";
+import { useCharacterContext } from "../context/CharacterContext";
+import { useExportDataContext } from "../context/ExportDataContext";
 
 const Portrait: React.FC = () => {
-    const [file, setFile] = useState<File | null>(null);
-    const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+    const [imagePreview, setImagePreview] = useState<string | null>(null);
+    const [fileName, setFileName] = useState<string | null>(null);
+    const [hexValues, setHexValues] = useState<string[]>([]);
+    const [error, setError] = useState<string | null>(null);
+    const {characterData, setCharacterData} = useCharacterContext();
+    const {exportData, setExportData} = useExportDataContext();
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if(e.target.files){
-            const selectedFile = e.target.files[0];
-            setFile(selectedFile);
-
-            const fileUrl = URL.createObjectURL(selectedFile);
-            setPreviewUrl(fileUrl);
-        }
-    };
-
-    useEffect(() => {
-        return () => {
-          if (previewUrl) {
-            URL.revokeObjectURL(previewUrl);
-          }
-        };
-      }, [previewUrl]);
-
-    const handleUpload = async () => {
-        if(file){
-            console.log("Uploading file...");
-        
-            const formData = new FormData();
-            formData.append('file', file);
-
-            try{
-                const result = await fetch('',{
-                    method: 'POST',
-                    body: formData,
-                });
-
-                const data = await result.json();
-
-                console.log(data);
-            } catch(error){
-                console.error(error);
-            }
-        }
-    };
-
-    return(
-        <>
-        <div className="input-group">
-            <input id="file" type="file" onChange={handleFileChange} />
-        </div>
-        {file && (
-            <section>
-            File details:
-            <ul>
-                <li>Name: {file.name}</li>
-                <li>Type: {file.type}</li>
-                <li>Size: {file.size} bytes</li>
-            </ul>
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
             
-            </section>
-        )}
+            if (file.name.length > 8) {
+            setError('File name must be 8 characters or less.');
+            setImagePreview(null);
+            setFileName(null);
+            setHexValues([]);
+            return;
+            }
 
+            setError(null);
 
-        {previewUrl && (
-            <div className="image-preview">
-            <img src={previewUrl} alt="Portrait Preview" className="w-32 h-32 object-cover mt-4" />
+            const fileUrl = URL.createObjectURL(file);
+            setImagePreview(fileUrl);
+            setCharacterData((prev) => ({
+                ...prev,
+                portrait: fileUrl,
+            }))
+
+            setFileName(file.name);
+
+            const hexArray = Array.from(file.name).map((char) =>
+            char.charCodeAt(0).toString(16)
+            );
+            setHexValues(hexArray);
+            setExportData((prev) => ({
+                ...prev,
+                portrait: hexArray,
+            }))
+        }
+        };
+
+    return (
+        <div style={{ textAlign: 'center', margin: '20px' }}>
+          <h1>Image Uploader</h1>
+          <input type="file" accept="image/*" onChange={handleFileChange} />
+          {error && (
+            <div style={{ marginTop: '10px', color: 'red' }}>
+              <strong>Error:</strong> {error}
             </div>
-        )}
-
-        {file && (
-            <button 
-            onClick={handleUpload}
-            className="submit"
-            >Upload a file</button>
-        )}
-        </>
-    )
-}
+          )}
+          {imagePreview && (
+            <div style={{ marginTop: '20px' }}>
+              <h2>Preview:</h2>
+              <img
+                src={imagePreview}
+                alt="Uploaded Preview"
+                style={{ maxWidth: '300px', maxHeight: '300px' }}
+              />
+            </div>
+          )}
+          {fileName && (
+            <div style={{ marginTop: '20px' }}>
+              <h2>File Name:</h2>
+              <p>{fileName}</p>
+            </div>
+          )}
+          {hexValues.length > 0 && (
+            <div style={{ marginTop: '20px' }}>
+              <h2>Hexadecimal Values:</h2>
+              <p>{hexValues.join(' ')}</p>
+            </div>
+          )}
+        </div>
+      );
+    };
 
 export default Portrait
 

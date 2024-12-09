@@ -1,3 +1,5 @@
+import { SetStateAction } from "react";
+
 export interface WeaponProficiencys {
   MieczePoltorareczne: number;
   MieczeDlugie: number;

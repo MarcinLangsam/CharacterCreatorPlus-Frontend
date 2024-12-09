@@ -5,9 +5,11 @@ import CharacterCreation from './pages/CharacterCreation';
 import HexEdit from './pages/HexEdit'
 import Navbar from './components/Navbar';
 import { CharacterProvider } from './context/CharacterContext';
+import { ExportDataProvider } from './context/ExportDataContext';
 
 const App: React.FC = () => {
   return (
+    <ExportDataProvider>
     <CharacterProvider>
       <Router>
         <Navbar />
@@ -18,6 +20,7 @@ const App: React.FC = () => {
         </Routes>
       </Router>
     </CharacterProvider>
+    </ExportDataProvider>
   );
 };
 
