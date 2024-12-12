@@ -57,10 +57,17 @@ const defaultProficiencys: WeaponProficiencys = {
   };
 
 const defaultExportData: ExportData = {
-    attributes: defaultAttributes,
-    skills: defaultProficiencys,
-    skillsThief: defaultThievingAbilities,
-  };
+  attributes: defaultAttributes,
+  skills: defaultProficiencys,
+  skillsThief: defaultThievingAbilities,
+  name: [],
+  gender: "",
+  portrait: [],
+  race: "",
+  classes: "",
+  subclasses: "",
+  character: ""
+};
   
 
 const ExportDataContext = createContext<ExportDataContextType | undefined>(undefined);

@@ -124,26 +124,6 @@ const Skills: React.FC = () => {
   
         const updatedSkills = { ...characterData.skills };
         const updatedThievingSkills = { ...characterData.skillsThief };
-
-        /*const resetSkills = () => {
-          const resetSkills = Object.keys(characterData.skills).reduce((acc, skill) => {
-            acc[skill as keyof WeaponProficiencys] = -1;
-            return acc;
-          }, {} as WeaponProficiencys);
-
-          const resetThievingSkills = Object.keys(characterData.skillsThief).reduce((acc, skillsThief) => {
-            acc[skillsThief as keyof ThievingAbilities] = -1;
-            return acc;
-          }, {} as ThievingAbilities);
-      
-          setCharacterData((prev) => ({
-            ...prev,
-            skills: resetSkills,
-            skillsThief: resetThievingSkills,
-          }));
-        };
-
-        resetSkills();*/
         
   
         if (selectedProficiencys) {
@@ -241,50 +221,50 @@ const Skills: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>Wybierz Biegłóści</h2>
-      <p>Pozostałe punkty: {proficiencysPoints}</p>
-      {selectedSubclass ? (
-          <div>
-          {Object.entries(characterData.skills)
-          .filter(([skill, value]) => backendProficiencys[skill] !== -1)
-          .map(([skill, value]) => (
-            <div key={skill}>
-              <span>{skill}: {value}</span>
-              <button onClick={() => increaseSkill(skill as keyof WeaponProficiencys)}>+</button>
-              <button onClick={() => decreaseSkill(skill as keyof WeaponProficiencys)}>-</button>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p>Wybierz podklasę, aby zobaczyć dostępne biegłości.</p>
-      )}
-      <br />
-      <br />
-      <br />
-      <div>
+    <>
+      <h2 className="secondaryText">Wybierz Biegłości</h2>
+      <div className="proficiencysBackground">
+        <p className="plainTextBig">Pozostałe punkty biegłości: {proficiencysPoints}</p>
+        {selectedSubclass ? (
+            <div>
+            {Object.entries(characterData.skills)
+            .filter(([skill, value]) => backendProficiencys[skill] !== -1)
+            .map(([skill, value]) => (
+              <div key={skill}>
+                <span className='plainText'>{skill}: {value}</span>
+                <button className="statsButton" onClick={() => increaseSkill(skill as keyof WeaponProficiencys)}>+</button>
+                <button className="statsButton" onClick={() => decreaseSkill(skill as keyof WeaponProficiencys)}>-</button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="plainTextBig">Wybierz podklasę, aby zobaczyć dostępne biegłości.</p>
+        )}
+        <br />
+        <br />
+        <br />
+        <div>
 
-        <h3>Umiejętności złodziejskie:</h3>
-        <p>Punkty do rozdania: {ThievingAbilitiesPoints}</p>
+        <p className="plainTextBig">Pozostałe punkty umiejętności złodziejskich: {ThievingAbilitiesPoints}</p>
         {selectedSubclass ? (
           <div>
           {Object.entries(characterData.skillsThief)
           .filter(([skillsThief, value]) => backednThievingAbilities[skillsThief] !== -1)
           .map(([skillsThief, value]) => (
-            
             <div key={skillsThief}>
-              <span>{skillsThief}: {value}</span>
-              <button onClick={() => increaseThievingSkills(skillsThief as keyof ThievingAbilities)}>+</button>
-              <button onClick={() => decreaseThievingSkills(skillsThief as keyof ThievingAbilities)}>-</button>
+              <span className='plainText'>{skillsThief}: {value}</span>
+              <button className="statsButton"  onClick={() => increaseThievingSkills(skillsThief as keyof ThievingAbilities)}>+</button>
+              <button className="statsButton"  onClick={() => decreaseThievingSkills(skillsThief as keyof ThievingAbilities)}>-</button>
             </div>
           ))}
         </div>
       ) : (
-        <p>Wybierz podklasę, aby zobaczyć dostępne umiejętności złodziejskie.</p>
+        <p className="plainTextBig">Wybierz podklasę, aby zobaczyć dostępne umiejętności złodziejskie.</p>
       )}
 
-    </div>
-    </div>
+      </div>
+      </div>
+    </>
   )
 }
 

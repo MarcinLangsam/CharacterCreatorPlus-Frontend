@@ -25,11 +25,13 @@ const Gender: React.FC = () => {
     };
      
     return(
-    <div>
-        <h2>Wybierz Płeć</h2>
-        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleGenderChange('Mężczyzna')}>Mężczyzna</button>
-        <button className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleGenderChange('Kobieta')}>Kobieta</button>
-    </div>
+    <>
+        <h2 className="secondaryText">Wybierz Płeć</h2>
+        <div className="secondaryBackground">
+            <button className="tertiaryText" onClick={() => handleGenderChange('Mężczyzna')}>Mężczyzna</button>
+            <button className="tertiaryText" onClick={() => handleGenderChange('Kobieta')}>Kobieta</button>
+        </div>
+    </>
     )
 }
 

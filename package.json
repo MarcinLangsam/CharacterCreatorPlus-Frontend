@@ -30,7 +30,8 @@
     "@types/react-router-dom": "^5.3.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.28.0"
+    "react-router-dom": "^6.28.0",
+    "tailwind-merge": "^2.5.4"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.26.0",
@@ -38,12 +39,13 @@
     "@babel/preset-typescript": "^7.26.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "autoprefixer": "^10.4.20",
     "babel-loader": "^9.2.1",
     "css-loader": "^7.1.2",
     "html-webpack-plugin": "^5.6.3",
-    "postcss": "8.1",
+    "postcss": "^8.4.49",
     "style-loader": "^4.0.0",
-    "tailwindcss": "^3.4.14",
+    "tailwindcss": "^3.4.16",
     "typescript": "^5.6.3",
     "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4",

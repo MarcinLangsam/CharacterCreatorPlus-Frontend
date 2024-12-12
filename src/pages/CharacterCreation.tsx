@@ -10,12 +10,16 @@ import Skills from '../components/Skills';
 import Name from '../components/Name';
 import Export from '../components/CharacterExport';
 import CreationSummary from '../components/CreationSummary';
+import SidePanel from '../components/SIdePanel';
+import { useCharacterContext } from '../context/CharacterContext';
 
 type Section = 'gender' | 'portrait' | 'race' | 'class' | 'character' | 'stats' | 'skills' | 'name' | 'export';
 
 
 const CharacterCreation: React.FC = () => {
   const [activeSection, setActiveSection] = useState<Section>('gender');
+  const {characterData, setCharacterData} = useCharacterContext()
+
 
   const renderContent = () => {
     switch (activeSection) {
@@ -45,23 +49,23 @@ const CharacterCreation: React.FC = () => {
 
 
   return (
-    <div>
-      <h1 className='font-bold underline'>Tworzenie Postaci</h1>
-      <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
-        <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('gender')}>Płeć</button>
-        <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('portrait')}>Portret</button>
-        <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('race')}>Rasa</button>
-        <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('class')}>Klasa</button>
-        <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('character')}>Charakter</button>
-        <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('stats')}>Współczynniki</button>
-        <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('skills')}>Umiejętności</button>
-        <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('name')}>Imię</button>
-        <button className="border border-black m-2 bg-yellow-700 p-2" onClick={() => setActiveSection('export')}>Eksport Postaci</button>
+    <div className='characterCreationBackground'>
+      <h1 className='secondaryText'>Tworzenie Postaci</h1>
+      <div className="buttonGroup">
+        <button className="primaryButton" onClick={() => setActiveSection('gender')}>Płeć</button>
+        <button className="primaryButton" onClick={() => setActiveSection('portrait')}>Portret</button>
+        <button className="primaryButton" onClick={() => setActiveSection('race')}>Rasa</button>
+        <button className="primaryButton" onClick={() => setActiveSection('class')}>Klasa</button>
+        <button className="primaryButton" onClick={() => setActiveSection('character')}>Charakter</button>
+        <button className="primaryButton" onClick={() => setActiveSection('stats')}>Współczynniki</button>
+        <button className="primaryButton" onClick={() => setActiveSection('skills')}>Umiejętności</button>
+        <button className="primaryButton" onClick={() => setActiveSection('name')}>Imię</button>
+        <button className="primaryButton" onClick={() => setActiveSection('export')}>Eksport Postaci</button>
       </div>
 
       <div className='flex flex-row'>
         <div className='m-5'>{renderContent()}</div>
-        <div className='m-5'><CreationSummary/></div>
+        <SidePanel />
       </div>
     </div>
   );

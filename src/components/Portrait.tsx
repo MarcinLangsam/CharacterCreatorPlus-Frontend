@@ -11,11 +11,17 @@ const Portrait: React.FC = () => {
     const {exportData, setExportData} = useExportDataContext();
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+
         const file = event.target.files?.[0];
         if (file) {
+
+          const fileNameParts = file.name.split('.');
+          const extension = fileNameParts.pop(); // rozszerzenie pliku
+          const baseName = fileNameParts.join('.');
             
-            if (file.name.length > 8) {
-            setError('File name must be 8 characters or less.');
+            if (baseName.length > 8) {
+            setError('Nazwa pliku nie może mieć więcej niż 8 znaków.');
             setImagePreview(null);
             setFileName(null);
             setHexValues([]);
@@ -31,9 +37,9 @@ const Portrait: React.FC = () => {
                 portrait: fileUrl,
             }))
 
-            setFileName(file.name);
+            setFileName(baseName);
 
-            const hexArray = Array.from(file.name).map((char) =>
+            const hexArray = Array.from(baseName).map((char) =>
             char.charCodeAt(0).toString(16)
             );
             setHexValues(hexArray);
@@ -45,37 +51,27 @@ const Portrait: React.FC = () => {
         };
 
     return (
-        <div style={{ textAlign: 'center', margin: '20px' }}>
-          <h1>Image Uploader</h1>
-          <input type="file" accept="image/*" onChange={handleFileChange} />
+      <>
+        <h1 className="secondaryText">Wybierz Portret</h1>
+        <div className="secondaryBackground">
+          <input className="plainButton" type="file" accept="image/*" onChange={handleFileChange} />
           {error && (
             <div style={{ marginTop: '10px', color: 'red' }}>
               <strong>Error:</strong> {error}
             </div>
           )}
           {imagePreview && (
-            <div style={{ marginTop: '20px' }}>
-              <h2>Preview:</h2>
+            <div>
+              <h2 className="tertiaryTextNoHover">Podgląd:</h2>
               <img
                 src={imagePreview}
                 alt="Uploaded Preview"
-                style={{ maxWidth: '300px', maxHeight: '300px' }}
+                style={{ maxWidth: '300px', maxHeight: '300px'}}
               />
             </div>
           )}
-          {fileName && (
-            <div style={{ marginTop: '20px' }}>
-              <h2>File Name:</h2>
-              <p>{fileName}</p>
-            </div>
-          )}
-          {hexValues.length > 0 && (
-            <div style={{ marginTop: '20px' }}>
-              <h2>Hexadecimal Values:</h2>
-              <p>{hexValues.join(' ')}</p>
-            </div>
-          )}
         </div>
+      </>
       );
     };
 

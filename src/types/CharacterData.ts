@@ -94,5 +94,5 @@ export interface CharacterData {
 
   reaction?: number;
   buyDiscount?: number;
-
+  bonuses?: string;
 }

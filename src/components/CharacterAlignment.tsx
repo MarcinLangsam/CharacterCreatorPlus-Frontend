@@ -128,16 +128,16 @@ const CharacterAlignment: React.FC = () => {
      }
     
     return(
-    <div>
-        <h2>Wybierz Charakter</h2>
-        <div className="flex flex-col">
+    <>
+        <h2 className="secondaryText">Wybierz Charakter</h2>
+        <div className="flex flex-col secondaryBackground">
             {availableAlignments().map((alignment) => (
-                <button key={alignment} className="border border-black m-2 bg-gray-800 p-2 text-white" onClick={() => handleCharacterAligmentChange(alignment)}>
+                <button key={alignment} className="tertiaryText" onClick={() => handleCharacterAligmentChange(alignment)}>
                 {alignment}
             </button>
             ))}
         </div>
-    </div>
+    </>
     )
 }
 

@@ -631,3 +631,304 @@ video {
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
+
+:root{
+  margin: 0;
+  padding: 0;
+}
+
+html {background-color: rgb(48, 48, 46);}
+
+.mainMenuBackground {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background-color: rgb(48, 48, 46);
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.characterCreationBackground {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background-color: rgb(125, 92, 44);
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.primaryText {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 1.6rem;
+  margin: 40px;
+  padding: 5px;
+  color: rgb(255, 255, 255);
+  border-right: 3px solid white;
+  border-left: 3px solid white;
+}
+
+.secondaryText {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: rgb(230, 211, 154);
+  text-align: center;
+}
+
+.tertiaryText {
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: rgb(255, 255, 255);
+  padding: 5px;
+  text-align: left;
+}
+
+.tertiaryText:hover {
+  background-color: rgb(163, 33, 0);
+}
+
+.tertiaryTextNoHover {
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: rgb(255, 255, 255);
+  padding: 5px;
+  text-align: left;
+}
+
+.plainText {
+  font-size: 1.2rem;
+  color: rgb(255, 255, 255);
+  padding: 5px;
+  text-align: left;
+}
+
+.plainTextBig {
+  font-size: 1.5rem;
+  color: rgb(255, 255, 255);
+  padding: 5px;
+  text-align: left;
+}
+
+.plainTextSmall {
+  font-size: 0.8rem;
+  color: rgb(255, 255, 255);
+  padding: 5px;
+  text-align: left;
+}
+
+.textBox {
+  font-size: 1.2rem;
+  color: rgb(0, 0, 0);
+  padding: 5px;
+  text-align: left;
+}
+
+.primaryBackground {
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  background-color: rgb(125, 92, 44);
+}
+
+.secondaryBackground {
+  width: 20vw;
+  height: 65vh;
+  padding: 20px;
+  margin: 0;
+  overflow: hidden;
+  background-color: rgb(48, 48, 46);
+  border: 2px solid white;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.descriptionBackground {
+  width: 30vw;
+  height: 65vh;
+  padding: 20px;
+  margin: 0;
+  margin-left: 10px;
+  overflow: hidden;
+  background-color: rgb(48, 48, 46);
+  border: 2px solid white;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.attributesBackground {
+  width: 90vw;
+  height: 65vh;
+  padding: 20px;
+  margin: 0;
+  margin-left: 10px;
+  overflow: hidden;
+  background-color: rgb(48, 48, 46);
+  border: 2px solid white;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.proficiencysBackground {
+  width: 30vw;
+  height: 200vh;
+  padding: 20px;
+  margin: 0;
+  overflow: hidden;
+  background-color: rgb(48, 48, 46);
+  border: 2px solid white;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.secondaryBackground > * {
+  margin-bottom: 10px;
+}
+
+.topMenu {
+  padding: 5px;
+  margin: 0;
+  padding: 10px;
+  background-color: rgb(201, 156, 90);
+  border-bottom: 3px solid white;
+}
+
+.primaryButton {
+  flex: 1;
+  max-width: 100%;
+  padding: 5px;
+  margin: 0;
+  color: rgb(230, 211, 154);
+  border: 2px solid rgb(230, 211, 154);
+  background-color: transparent;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+}
+
+.plainButton {
+  padding: 5px;
+  margin: 5px;
+  color: rgb(230, 211, 154);
+  border: 2px solid rgb(230, 211, 154);
+  background-color: transparent;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+}
+
+.plainButton:hover {
+  background-color: rgb(230, 211, 154);
+  color: black;
+}
+
+.primaryButton:not(:last-child) {
+  margin-right: 10px;
+}
+
+.primaryButton:hover {
+  background-color: rgb(230, 211, 154);
+  color: black;
+}
+
+.buttonGroup {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 10px;
+}
+
+.statsButton {
+  width: 2.3vw;
+  padding: 5px;
+  margin: 5px;
+  color: rgb(230, 211, 154);
+  border: 2px solid rgb(230, 211, 154);
+  background-color: transparent;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+}
+
+.rollStatsButton {
+  flex: 1;
+  width: 20vw;
+  padding: 5px;
+  margin: 5px;
+  color: rgb(230, 211, 154);
+  border: 2px solid rgb(230, 211, 154);
+  background-color: transparent;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.rollStatsButton:hover {
+  background-color: rgb(230, 211, 154);
+  color: black;
+}
+
+
+
+/*side panel*/
+.container {
+  position: relative;
+  display: flex;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.sidePanel {
+  position: fixed;
+  top: 0;
+  right: -500px;
+  width: 500px;
+  height: 100%;
+  background-color: rgb(48, 48, 46);
+  color: rgb(230, 211, 154);
+  border-left: 2px solid white;
+  padding: 20px;
+  transition: right 0.3s ease-in-out;
+  overflow-y: auto;
+}
+
+.sidePanel.visible {
+  right: 0;
+}
+
+.toggleButton {
+  position: fixed;
+  top: 45%;
+  right: 10px;
+  padding: 5px;
+  background-color: rgb(230, 211, 154);
+  border: 2px solid rgb(48, 48, 46);
+  color: rgb(48, 48, 46);
+  cursor: pointer;
+  z-index: 1000;
+  transition: right 0.3s ease-in-out; 
+}
+
+.toggleButton.visible {
+  right: 510px;
+}

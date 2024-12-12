@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar: React.FC = () => (
-  <nav>
-    <Link className="m-5" to="/">Menu Główne</Link>
-    <Link className="m-5" to="/CharacterCreation">Tworzenie Postaci</Link>
-    <Link className="m-5" to="/HexEdit">Hex Edit</Link>
+  <nav className='topMenu'>
+    <Link className="primaryText" to="/">Menu Główne</Link>
+    <Link className="primaryText" to="/CharacterCreation">Tworzenie Postaci</Link>
+    <Link className="primaryText" to="/HexEdit">Hex Edit</Link>
   </nav>
 );
 

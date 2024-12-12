@@ -9,18 +9,18 @@ import { ExportDataProvider } from './context/ExportDataContext';
 
 const App: React.FC = () => {
   return (
-    <ExportDataProvider>
-    <CharacterProvider>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<MainMenu />} />
-          <Route path="/CharacterCreation" element={<CharacterCreation />} />
-          <Route path="/HexEdit" element={<HexEdit />} />
-        </Routes>
-      </Router>
-    </CharacterProvider>
-    </ExportDataProvider>
+     <ExportDataProvider>
+     <CharacterProvider>
+       <Router>
+         <Navbar />
+         <Routes>
+           <Route path="/" element={<MainMenu />} />
+           <Route path="/CharacterCreation" element={<CharacterCreation />} />
+           <Route path="/HexEdit" element={<HexEdit />} />
+         </Routes>
+       </Router>
+     </CharacterProvider>
+     </ExportDataProvider>
   );
 };
 
