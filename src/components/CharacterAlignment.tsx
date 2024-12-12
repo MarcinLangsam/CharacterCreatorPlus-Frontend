@@ -13,7 +13,7 @@ const alignmentOptions: { [key: string]: string[]} = {
     //Hunter subclasses
     Łowca: ['Praworządny Dobry', 'Neytralny Dobry', 'Chotyczny Dobry'],
     Łucznik: ['Praworządny Dobry', 'Neytralny Dobry', 'Chotyczny Dobry'],
-    Prześladowca: ['Praworządny Dobry', 'Neytralny Dobry', 'Chotyczny Dobry'],
+    Tropiciel: ['Praworządny Dobry', 'Neytralny Dobry', 'Chotyczny Dobry'],
     Władca_Zwierząt: ['Praworządny Dobry', 'Neytralny Dobry', 'Chotyczny Dobry'],
     //Paladin subclasses
     Paladyn: ['Praworządny Dobry'],
@@ -38,23 +38,23 @@ const alignmentOptions: { [key: string]: string[]} = {
     Mag_Specjalista: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
     Dziki_Mag: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
     //Thief subclasses
-    Łotrzyk: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Asasyn: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Łowca_Głów: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Złodziej: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Zabójca: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Łowca_Nagród: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
     Zawadiaka: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Tancerz_Cienia: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Tancerz_Cieni: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
     //Bard subclasses
     Bard: ['Neutralny Dobry','Praworządny Neutralny', 'Neutralny', 'Chaotyczny Neutralny', 'Neutralny Zły'],
-    Bard_Ostrzy: ['Neutralny Dobry','Praworządny Neutralny', 'Neutralny', 'Chaotyczny Neutralny', 'Neutralny Zły'],
+    Fechmistrz: ['Neutralny Dobry','Praworządny Neutralny', 'Neutralny', 'Chaotyczny Neutralny', 'Neutralny Zły'],
     Błazen: ['Neutralny Dobry','Praworządny Neutralny', 'Neutralny', 'Chaotyczny Neutralny', 'Neutralny Zły'],
     Skald: ['Neutralny Dobry','Praworządny Neutralny', 'Neutralny', 'Chaotyczny Neutralny', 'Neutralny Zły'],
     //Sorcerer subclasses
-    Czarodziej: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Czarownik: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
     Uczeń_Smoka: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
     //Monk subclasses
-    Monk: ['Praworządny Dobry','Prawożądny Nautralny','Prawożądny Zły'],
-    Monk_Mrocznego_Księżyca: ['Praworządny Zły'],
-    Monk_Słonecznej_Duszy: ['Praworządny Dobry'],
+    Mnich: ['Praworządny Dobry','Prawożądny Nautralny','Prawożądny Zły'],
+    Mnich_Ciemnego_Księżyca: ['Praworządny Zły'],
+    Mnich_Słonecznej_Duszy: ['Praworządny Dobry'],
     //Szaman subclasses :P
     Szaman: ['Neutralny Dobry', 'Neutralny', 'Neutralny Zły'],
 }

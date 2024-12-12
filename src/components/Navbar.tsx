@@ -5,7 +5,6 @@ const Navbar: React.FC = () => (
   <nav className='topMenu'>
     <Link className="primaryText" to="/">Menu Główne</Link>
     <Link className="primaryText" to="/CharacterCreation">Tworzenie Postaci</Link>
-    <Link className="primaryText" to="/HexEdit">Hex Edit</Link>
   </nav>
 );
 
