@@ -916,6 +916,15 @@ html {background-color: rgb(48, 48, 46);}
   right: 0;
 }
 
+.portraitButton {
+  padding: 5px;
+  background-color: rgb(230, 211, 154);
+  border: 2px solid rgb(48, 48, 46);
+  color: rgb(48, 48, 46);
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
 .toggleButton {
   position: fixed;
   top: 45%;
@@ -931,4 +940,71 @@ html {background-color: rgb(48, 48, 46);}
 
 .toggleButton.visible {
   right: 510px;
+}
+
+
+
+/*                                              Popup                             */
+.open-popup-button {
+  padding: 10px 20px;
+  background-color: rgb(125, 92, 44);
+  color: rgb(230, 211, 154);
+  border: 2px solid rgb(230, 211, 154);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.open-popup-button:hover {
+  background-color: rgb(100, 70, 35);
+}
+
+/* Tło przyciemnione */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Popup */
+.popup {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.popup h2 {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+/* Przyciski w popupie */
+.popup-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.popup-button {
+  padding: 10px 20px;
+  background-color: rgb(125, 92, 44);
+  color: rgb(230, 211, 154);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.popup-button:hover {
+  background-color: rgb(100, 70, 35);
 }
