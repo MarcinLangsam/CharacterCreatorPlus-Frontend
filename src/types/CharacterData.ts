@@ -59,6 +59,7 @@ export interface CharacterData {
   attributes: CharacterAttributes;
   skills: WeaponProficiencys;
   skillsThief:  ThievingAbilities;
+  racialEnemy?: string;
   //details stats data
   melleThac0?: number;
   dmgBonus?: number;

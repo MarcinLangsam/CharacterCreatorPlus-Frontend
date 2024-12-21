@@ -781,10 +781,10 @@ html {background-color: rgb(48, 48, 46);}
 
 .proficiencysBackground {
   width: 30vw;
-  height: 200vh;
+  height: 80vh;
   padding: 20px;
   margin: 0;
-  overflow: hidden;
+  overflow: auto;
   background-color: rgb(48, 48, 46);
   border: 2px solid white;
   

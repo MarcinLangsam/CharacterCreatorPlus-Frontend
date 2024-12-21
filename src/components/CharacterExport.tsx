@@ -3,7 +3,6 @@ import { useCharacterContext } from '../context/CharacterContext';
 import { useExportDataContext } from '../context/ExportDataContext';
 import { SubclassesExport, ThievingAbilitiesExport, WeaponProficiencysExport } from '../types/ExportData';
 
-
 const thievingAbilitiesExport: ThievingAbilitiesExport = {
   Otwieranie_Zamkow: 0xCB,
   Kradziez_Kieszonkowa: 0xCE,
@@ -286,7 +285,14 @@ const Export: React.FC = () => {
     data[0x2A1] = parseInt(hexConstitution, 16)
     data[0x2A2] = parseInt(hexCharisma, 16)
     return data;
-    };
+  };
+
+  const setRacialEnemy = (data: Uint8Array): Uint8Array => {
+    if(characterData.racialEnemy) {
+      data[0x2A5] = parseInt(characterData.racialEnemy , 16)
+    }
+    return data
+  }
   
   const saveFile = (data: Uint8Array, fileName: string) => {
     const blob = new Blob([data], { type: 'application/octet-stream' });

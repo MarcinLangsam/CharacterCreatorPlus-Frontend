@@ -2,6 +2,38 @@ import React, { useEffect, useState } from "react";
 import { useCharacterContext, defaultThievingAbilities } from "../context/CharacterContext";
 import { ThievingAbilities, WeaponProficiencys } from "../types/CharacterData";
 import StatControl from "./ProficiencysControl";
+import { useExportDataContext } from "../context/ExportDataContext";
+
+const racialEnemyData = {
+  Obserwator: "0x123",
+  DemonyUpadli: "0x121",
+  Smok: "0x146",
+  Żywiołak: "0x145",
+  Ettercap: "0x107",
+  IstotyBaśniowe: "0x120",
+  Geniusz: "0x147",
+  Ghul: "0x108",
+  Golem: "0x144",
+  Hobgoblin: "0x111",
+  Chochlik: "0x109",
+  Koblod: "0x112",
+  KuoToa: "0x135",
+  Lisz: "0x150",
+  Likantrop: "0x122",
+  Mefit: "0x139",
+  ŁupieżcaUmysłu: "0x124",
+  Ogr: "0x113",
+  Otaig: "0x127",
+  Rakshasa: "0x128",
+  Sahuagin: "0x131",
+  Cień: "0x132",
+  Szlam: "0x119",
+  Pająk: "0x116",
+  Trol: "0x129",
+  UmbrowyKolos: "0x130",
+  Wampir: "0x125",
+  Ork: "0x143",
+}
 
 const raseBonusThievingAbilities: Record<string, { skillsThief: Partial<ThievingAbilities>}> = {
   Człowiek : {
@@ -87,6 +119,7 @@ const raseBonusThievingAbilities: Record<string, { skillsThief: Partial<Thieving
 
 const Skills: React.FC = () => {
   const { characterData, setCharacterData } = useCharacterContext();
+  const { exportData, setExportData } = useExportDataContext();
   const selectedSubclass = characterData.subclasses;
   const selectedRace = characterData.race;
 
@@ -220,6 +253,18 @@ const Skills: React.FC = () => {
     }
   };
 
+  const setRacialEenemy = (racialEnemeyName: string, hexValue: string) => {
+    setCharacterData((prev) => ({
+      ...prev,
+      racialEnemy: racialEnemeyName.toString()
+    }));
+
+    setExportData((prev) => ({
+      ...prev,
+      racialEnemy: hexValue
+    }));
+  }
+
   return (
     <>
       <h2 className="secondaryText">Wybierz Biegłości</h2>
@@ -244,25 +289,41 @@ const Skills: React.FC = () => {
         <br />
         <br />
         <div>
-
-        <p className="plainTextBig">Pozostałe punkty umiejętności złodziejskich: {ThievingAbilitiesPoints}</p>
-        {selectedSubclass ? (
-          <div>
-          {Object.entries(characterData.skillsThief)
-          .filter(([skillsThief, value]) => backednThievingAbilities[skillsThief] !== -1)
-          .map(([skillsThief, value]) => (
-            <div key={skillsThief}>
-              <span className='plainText'>{skillsThief}: {value}</span>
-              <button className="statsButton"  onClick={() => increaseThievingSkills(skillsThief as keyof ThievingAbilities)}>+</button>
-              <button className="statsButton"  onClick={() => decreaseThievingSkills(skillsThief as keyof ThievingAbilities)}>-</button>
-            </div>
-          ))}
+          <p className="plainTextBig">Pozostałe punkty umiejętności złodziejskich: {ThievingAbilitiesPoints}</p>
+          {selectedSubclass ? (
+            <div>
+            {Object.entries(characterData.skillsThief)
+            .filter(([skillsThief, value]) => backednThievingAbilities[skillsThief] !== -1)
+            .map(([skillsThief, value]) => (
+              <div key={skillsThief}>
+                <span className='plainText'>{skillsThief}: {value}</span>
+                <button className="statsButton"  onClick={() => increaseThievingSkills(skillsThief as keyof ThievingAbilities)}>+</button>
+                <button className="statsButton"  onClick={() => decreaseThievingSkills(skillsThief as keyof ThievingAbilities)}>-</button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="plainTextBig">Wybierz podklasę, aby zobaczyć dostępne umiejętności złodziejskie.</p>
+        )}
         </div>
-      ) : (
-        <p className="plainTextBig">Wybierz podklasę, aby zobaczyć dostępne umiejętności złodziejskie.</p>
-      )}
-
-      </div>
+        <br />
+        <br />
+        <br />
+        <div>
+          <p className="plainTextBig">Wybierz wroga rasowego:</p>
+          {selectedSubclass ? (
+            <div>
+            {Object.entries(racialEnemyData)
+            .map(([racialEnemy, value]) => (
+              <div key={racialEnemy}>
+                <button className="tertiaryText" onClick={() => setRacialEenemy(racialEnemy,value)}>{racialEnemy}</button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <></>
+        )}
+        </div>
       </div>
     </>
   )

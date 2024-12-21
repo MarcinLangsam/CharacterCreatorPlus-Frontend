@@ -88,6 +88,7 @@ const SidePanel: React.FC = () => {
               <p className="plainText">Zmęczenie: {characterData.fatigue}</p>
               <p className="plainText">Rekcja NPC: {characterData.reaction}</p>
               <p className="plainText">Zniżka w sklepach: {characterData.buyDiscount}%</p>
+              <p className="plainText">Przeciwnik Rasowy: {characterData.racialEnemy}</p>
             </div>
         </div>
       </div>

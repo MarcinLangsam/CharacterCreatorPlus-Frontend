@@ -66,7 +66,8 @@ const defaultExportData: ExportData = {
   race: "",
   classes: "",
   subclasses: "",
-  character: ""
+  character: "",
+  racialEnemy: ""
 };
   
 
