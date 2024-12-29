@@ -59,6 +59,7 @@ const defaultCharacterData: CharacterData = {
   attributes: defaultAttributes,
   skills: defaultProficiencys,
   skillsThief: defaultThievingAbilities,
+  wizardSpells: []
 };
 
 const CharacterContext = createContext<CharacterContextType | undefined>(undefined);

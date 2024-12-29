@@ -67,7 +67,8 @@ const defaultExportData: ExportData = {
   classes: "",
   subclasses: "",
   character: "",
-  racialEnemy: ""
+  racialEnemy: "",
+  wizardSpell: [],
 };
   
 

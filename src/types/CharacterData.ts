@@ -47,6 +47,14 @@ export interface CharacterAttributes {
   charisma: number;
 }
 
+export interface WizardSpell {
+  name: string;
+  level: number;
+  hex: string;
+  icon: string;
+  rememberCount: number;
+}
+
 export interface CharacterData {
   //character creation data
   name?: string
@@ -59,6 +67,8 @@ export interface CharacterData {
   attributes: CharacterAttributes;
   skills: WeaponProficiencys;
   skillsThief:  ThievingAbilities;
+  wizardSpells: WizardSpell[];
+
   racialEnemy?: string;
   //details stats data
   melleThac0?: number;

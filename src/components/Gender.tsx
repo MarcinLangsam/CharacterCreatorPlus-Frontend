@@ -14,8 +14,8 @@ const Gender: React.FC = () => {
         }));
 
         let genderHex = ""
-        if(gender = "Mężczyzna"){genderHex = "01"}
-        if(gender = "Kobieta"){genderHex = "02"}
+        if(gender == "Mężczyzna"){genderHex = "01"}
+        if(gender == "Kobieta"){genderHex = "02"}
 
         setExportData((prevData) => ({
             ...prevData,

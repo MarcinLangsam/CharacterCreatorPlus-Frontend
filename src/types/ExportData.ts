@@ -95,6 +95,7 @@ export interface ExportData {
     character: string;
     attributes: CharacterAttributes;
     skills: Record<keyof WeaponProficiencys, number>;
-    skillsThief:  Record<keyof ThievingAbilities, number>;   
+    skillsThief:  Record<keyof ThievingAbilities, number>;
+    wizardSpell: string[][],
     racialEnemy: string;
-  }
+}

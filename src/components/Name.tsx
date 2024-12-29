@@ -14,7 +14,7 @@ const Name: React.FC = () => {
 
     const nameHex = Array.from(nameInput).map((char) =>
       char.charCodeAt(0).toString(16)
-      );
+    );
 
     console.log(nameHex)
     setExportData((prevData) => ({

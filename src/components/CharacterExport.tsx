@@ -120,6 +120,8 @@ const Export: React.FC = () => {
       data = setAttriutes(data)
       data = setProficiencys(data)
       data = setName(data)
+      //data = setRacialEnemy(data)
+      data = setWizardSpells(data)
       data = setFileLenght(data)
       saveFile(data, "postac.chr")
     }
@@ -292,6 +294,11 @@ const Export: React.FC = () => {
       data[0x2A5] = parseInt(characterData.racialEnemy , 16)
     }
     return data
+  }
+
+  const setWizardSpells = (data: Uint8Array): Uint8Array => {
+    console.log(exportData.wizardSpell)
+    return data;
   }
   
   const saveFile = (data: Uint8Array, fileName: string) => {

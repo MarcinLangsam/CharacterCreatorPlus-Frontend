@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useCharacterContext, defaultThievingAbilities } from "../context/CharacterContext";
 import { ThievingAbilities, WeaponProficiencys } from "../types/CharacterData";
-import StatControl from "./ProficiencysControl";
 import { useExportDataContext } from "../context/ExportDataContext";
+import WizardSpellRecord from "./WizardSpellRecord";
+import ProficiencysMenu from "./ProficiencysMenu";
+import ThievingAbilitiesMenu from "./ThievingAbilitiesMenu";
+import RacialEnemyMenu from "./RacialEnemyMenu";
+import WizardSpellsMenu from "./WizardSpellsMenu";
 
 const racialEnemyData = {
   Obserwator: "0x123",
@@ -115,9 +119,20 @@ const raseBonusThievingAbilities: Record<string, { skillsThief: Partial<Thieving
   },
 }
 
+interface WizardSpell {
+  id: number;
+  name: string;
+  school: string;
+  level: number;
+  descriptionFile: string;
+  iconFile: string;
+  hexData: string;
+}
 
+type Category = 'proficiencys' | 'thievingSKills' | 'racialEnemy' | 'wizardSpells';
 
 const Skills: React.FC = () => {
+  const [activeCategory, setActiveCategory] = useState<Category>('proficiencys');
   const { characterData, setCharacterData } = useCharacterContext();
   const { exportData, setExportData } = useExportDataContext();
   const selectedSubclass = characterData.subclasses;
@@ -127,6 +142,8 @@ const Skills: React.FC = () => {
   const [backednThievingAbilities, setBackendThievingAbilities] = useState<any>({});
   const [proficiencysPoints, setProficiencysPoints] = useState(0);
   const [ThievingAbilitiesPoints, setThievingAbilitiesPoints] = useState(0);
+  const [WizardSpellsData, setWizardSpells] = useState<WizardSpell[]>([]);
+
 
 
   useEffect(() => {
@@ -149,11 +166,16 @@ const Skills: React.FC = () => {
         const selectedThievingAbilities = thievingData.find(
           (data: { subclass: string | undefined }) => data.subclass === selectedSubclass
         );
-        console.log(selectedProficiencys)
-        console.log(selectedThievingAbilities)
+
+        const wizardRespone = await fetch("http://localhost:3000/wizardSpellData");
+        if (!wizardRespone.ok) {
+          throw new Error(`HTTP error! status: ${wizardRespone.status}`);
+        }
+        const wizardSpells = await wizardRespone.json();
   
         setBackendProficiencys(selectedProficiencys || {});
         setBackendThievingAbilities(selectedThievingAbilities || {});
+        setWizardSpells(wizardSpells || {});
   
         const updatedSkills = { ...characterData.skills };
         const updatedThievingSkills = { ...characterData.skillsThief };
@@ -265,66 +287,109 @@ const Skills: React.FC = () => {
     }));
   }
 
+  const wizardSpells = () =>
+  {
+    console.log(characterData.wizardSpells)
+  }
+
+
+  const renderContent = () => {
+    switch (activeCategory) {
+      case 'proficiencys':
+        return <ProficiencysMenu />;
+      case 'thievingSKills':
+        return <ThievingAbilitiesMenu />;
+      case 'racialEnemy':
+        return <RacialEnemyMenu />;
+      case 'wizardSpells':
+        return <WizardSpellsMenu />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <h2 className="secondaryText">Wybierz Biegłości</h2>
-      <div className="proficiencysBackground">
-        <p className="plainTextBig">Pozostałe punkty biegłości: {proficiencysPoints}</p>
-        {selectedSubclass ? (
-            <div>
-            {Object.entries(characterData.skills)
-            .filter(([skill, value]) => backendProficiencys[skill] !== -1)
-            .map(([skill, value]) => (
-              <div key={skill}>
-                <span className='plainText'>{skill}: {value}</span>
-                <button className="statsButton" onClick={() => increaseSkill(skill as keyof WeaponProficiencys)}>+</button>
-                <button className="statsButton" onClick={() => decreaseSkill(skill as keyof WeaponProficiencys)}>-</button>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="plainTextBig">Wybierz podklasę, aby zobaczyć dostępne biegłości.</p>
-        )}
-        <br />
-        <br />
-        <br />
-        <div>
-          <p className="plainTextBig">Pozostałe punkty umiejętności złodziejskich: {ThievingAbilitiesPoints}</p>
-          {selectedSubclass ? (
-            <div>
-            {Object.entries(characterData.skillsThief)
-            .filter(([skillsThief, value]) => backednThievingAbilities[skillsThief] !== -1)
-            .map(([skillsThief, value]) => (
-              <div key={skillsThief}>
-                <span className='plainText'>{skillsThief}: {value}</span>
-                <button className="statsButton"  onClick={() => increaseThievingSkills(skillsThief as keyof ThievingAbilities)}>+</button>
-                <button className="statsButton"  onClick={() => decreaseThievingSkills(skillsThief as keyof ThievingAbilities)}>-</button>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="plainTextBig">Wybierz podklasę, aby zobaczyć dostępne umiejętności złodziejskie.</p>
-        )}
-        </div>
-        <br />
-        <br />
-        <br />
-        <div>
-          <p className="plainTextBig">Wybierz wroga rasowego:</p>
-          {selectedSubclass ? (
-            <div>
-            {Object.entries(racialEnemyData)
-            .map(([racialEnemy, value]) => (
-              <div key={racialEnemy}>
-                <button className="tertiaryText" onClick={() => setRacialEenemy(racialEnemy,value)}>{racialEnemy}</button>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <></>
-        )}
-        </div>
+
+      <div className="buttonGroup">
+        <button className="primaryButton" onClick={() => setActiveCategory('proficiencys')}>Biegłości</button>
+        <button className="primaryButton" onClick={() => setActiveCategory('thievingSKills')}>Umiejętności Złodziejskie</button>
+        <button className="primaryButton" onClick={() => setActiveCategory('racialEnemy')}>Wróg Rasowy</button>
+        <button className="primaryButton" onClick={() => setActiveCategory('wizardSpells')}>Zaklęcia Maga</button>
       </div>
+
+      <div className='m-5'>{renderContent()}</div>
+
+      {/*<div className="flex flex-row">
+        <div className="proficiencysBackground">
+          <p className="plainTextBig">Pozostałe punkty biegłości: {proficiencysPoints}</p>
+          {selectedSubclass ? (
+              <div>
+              {Object.entries(characterData.skills)
+              .filter(([skill, value]) => backendProficiencys[skill] !== -1)
+              .map(([skill, value]) => (
+                <div key={skill}>
+                  <span className='plainText'>{skill}: {value}</span>
+                  <button className="statsButton" onClick={() => increaseSkill(skill as keyof WeaponProficiencys)}>+</button>
+                  <button className="statsButton" onClick={() => decreaseSkill(skill as keyof WeaponProficiencys)}>-</button>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="plainTextBig">Wybierz podklasę, aby zobaczyć dostępne biegłości.</p>
+          )}
+          <br />
+          <br />
+          <br />
+          <div>
+            <p className="plainTextBig">Pozostałe punkty umiejętności złodziejskich: {ThievingAbilitiesPoints}</p>
+            {selectedSubclass ? (
+              <div>
+              {Object.entries(characterData.skillsThief)
+              .filter(([skillsThief, value]) => backednThievingAbilities[skillsThief] !== -1)
+              .map(([skillsThief, value]) => (
+                <div key={skillsThief}>
+                  <span className='plainText'>{skillsThief}: {value}</span>
+                  <button className="statsButton"  onClick={() => increaseThievingSkills(skillsThief as keyof ThievingAbilities)}>+</button>
+                  <button className="statsButton"  onClick={() => decreaseThievingSkills(skillsThief as keyof ThievingAbilities)}>-</button>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="plainTextBig">Wybierz podklasę, aby zobaczyć dostępne umiejętności złodziejskie.</p>
+          )}
+          </div>
+          <br />
+          <br />
+          <br />
+          <div>
+            <p className="plainTextBig">Wybierz wroga rasowego:</p>
+            {selectedSubclass ? (
+              <div>
+              {Object.entries(racialEnemyData)
+              .map(([racialEnemy, value]) => (
+                <div key={racialEnemy}>
+                  <button className="tertiaryText" onClick={() => setRacialEenemy(racialEnemy,value)}>{racialEnemy}</button>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <></>
+          )}
+          </div>
+        </div>
+
+        <div className="proficiencysBackground">
+          {WizardSpellsData.map((spell, index) => (
+              <div key={index} style={{ border: "1px solid gray", margin: "10px", padding: "10px" }}>
+                <WizardSpellRecord name={spell.name} school={spell.school} level={spell.level} iconData={spell.iconFile} hexData={spell.hexData} />
+              </div>
+              ))}
+        </div>
+        <button onClick={wizardSpells}>Zaklecia</button>
+      </div>
+      */}
     </>
   )
 }
