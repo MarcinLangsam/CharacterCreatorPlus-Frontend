@@ -118,10 +118,11 @@ const Export: React.FC = () => {
       data = setPortrait(data)
       data = setAlignment(data)
       data = setAttriutes(data)
-      data = setProficiencys(data)
       data = setName(data)
-      //data = setRacialEnemy(data)
-      data = setWizardSpells(data)
+      data = setThievingAbilites(data)
+      if(characterData.classes == "Łowca") {data = setRacialEnemy(data)}
+      if(characterData.classes == "Mag") {data = setWizardSpells(data)}
+      data = setProficiencys(data)
       data = setFileLenght(data)
       saveFile(data, "postac.chr")
     }
@@ -138,7 +139,7 @@ const Export: React.FC = () => {
   const setRace = (data: Uint8Array): Uint8Array => {
    
     let characterAnimation = ""
-    if(characterData.gender = "Kobieta") { characterAnimation += "1"}
+    if(characterData.gender == "Kobieta") { characterAnimation += "1"}
     else{ characterAnimation += "0" }
 
     if(characterData.race == "Człowiek") {characterAnimation += "0"}
@@ -234,7 +235,7 @@ const Export: React.FC = () => {
 
   const setThievingAbilites = (data: Uint8Array): Uint8Array => {
     
-    Object.entries(characterData.skillsThief).forEach(([skillThief, value]) => {
+    Object.entries(exportData.skillsThief).forEach(([skillThief, value]) => {
       if(value > 0) {
         const thiefSkillId = thievingAbilitiesExport[skillThief as keyof ThievingAbilitiesExport]
         if(thiefSkillId === undefined){
@@ -297,9 +298,510 @@ const Export: React.FC = () => {
   }
 
   const setWizardSpells = (data: Uint8Array): Uint8Array => {
-    console.log(exportData.wizardSpell)
-    return data;
+    const wizardSpellsBytes = exportData.wizardSpell
+    .flat()
+    .map((hexString) => Number.parseInt(hexString, 16));
+
+    const sortedSpells = characterData.wizardSpells
+    .filter((spell) => spell.rememberCount > 0)
+    .sort((a, b) => a.level - b.level);
+
+    const constBytesMage = [
+      ...new Array(16).fill(0x00),
+      0x01,
+      ...new Array(15).fill(0x00),
+      0x02,
+      ...new Array(15).fill(0x00),
+      0x03,
+      ...new Array(15).fill(0x00),
+      0x04,
+      ...new Array(15).fill(0x00),
+      0x05,
+      ...new Array(15).fill(0x00),
+      0x06,
+      ...new Array(17).fill(0x00),
+      0x04,
+      0x00,
+      0x04,
+      0x00,
+      0x01,
+      ...new Array(5).fill(0x00),
+      0x04,
+      ...new Array(3).fill(0x00),
+      0x01,
+      0x00,
+      0x03,
+      0x00,
+      0x03,
+      0x00,
+      0x01,
+      0x00,
+      0x04,
+      ...new Array(3).fill(0x00),
+      0x03,
+      ...new Array(3).fill(0x00),
+      0x02,
+      0x00,
+      0x02,
+      0x00,
+      0x02,
+      0x00,
+      0x01,
+      0x00,
+      0x07,
+      ...new Array(3).fill(0x00),
+      0x02,
+      ...new Array(3).fill(0x00),
+      0x03,
+      0x00,
+      0x01,
+      0x00,
+      0x01,
+      0x00,
+      0x01,
+      0x00,
+      0x09,
+      ...new Array(3).fill(0x00),
+      0x01,
+      ...new Array(3).fill(0x00),
+      
+      0x04,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x0A,
+      ...new Array(7).fill(0x00),
+
+      0x05,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x0A,
+      ...new Array(7).fill(0x00),
+
+      0x06,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x0A,
+      ...new Array(7).fill(0x00),
+
+      0x06,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x0A,
+      ...new Array(7).fill(0x00),
+
+      0x08,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x0A,
+      ...new Array(7).fill(0x00),
+    ];
+
+    //alternative const data for mage subclasses
+    const constBytesSpecialistMage = [
+      ...new Array(16).fill(0x00),
+      0x01,
+      ...new Array(15).fill(0x00),
+      0x02,
+      ...new Array(15).fill(0x00),
+      0x03,
+      ...new Array(15).fill(0x00),
+      0x04,
+      ...new Array(15).fill(0x00),
+      0x05,
+      ...new Array(15).fill(0x00),
+      0x06,
+      ...new Array(17).fill(0x00),
+      0x05,
+      0x00,
+      0x05,
+      0x00,
+      0x01,
+      ...new Array(5).fill(0x00),
+      0x05,
+      ...new Array(3).fill(0x00),
+      0x01,
+      0x00,
+      0x04,
+      0x00,
+      0x04,
+      0x00,
+      0x01,
+      0x00,
+      0x05,
+      ...new Array(3).fill(0x00),
+      0x04,
+      ...new Array(3).fill(0x00),
+      0x02,
+      0x00,
+      0x03,
+      0x00,
+      0x03,
+      0x00,
+      0x01,
+      0x00,
+      0x09,
+      ...new Array(3).fill(0x00),
+      0x03,
+      ...new Array(3).fill(0x00),
+      0x03,
+      0x00,
+      0x02,
+      0x00,
+      0x02,
+      0x00,
+      0x01,
+      0x00,
+      0x0C,
+      ...new Array(3).fill(0x00),
+      0x02,
+      ...new Array(3).fill(0x00),
+      
+      0x04,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x0E,
+      ...new Array(7).fill(0x00),
+
+      0x05,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x0E,
+      ...new Array(7).fill(0x00),
+
+      0x06,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x0E,
+      ...new Array(7).fill(0x00),
+
+      0x06,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x0E,
+      ...new Array(7).fill(0x00),
+
+      0x08,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x0E,
+      ...new Array(7).fill(0x00),
+    ];
+
+    const rememberedSpellsBytes = sortedSpells.flatMap((spell) => {
+      const spellHexBytes = Array.from(spell.hex).map((char) => char.charCodeAt(0));
+      const padding = [0x00, 0x01, 0x00, 0x00, 0x00];
+      const spellBlock = [...spellHexBytes, ...padding];
+      return Array(spell.rememberCount).fill(spellBlock).flat();
+    });
+
+    //data fill betwen spells and proficiencys( with this there is no need to find where spell gonna be put, just add everythink at the end of .chr file)
+    const bridgeToProficiencys = [
+      ...new Array(76).fill(0xFF),
+      0xE08,
+      0x03,
+      ...new Array(2).fill(0x00),
+    ];
+
+    const combinedData = new Uint8Array(
+      data.length + wizardSpellsBytes.length + constBytesMage.length + rememberedSpellsBytes.length + bridgeToProficiencys.length
+    );
+    combinedData.set(data);
+    combinedData.set(wizardSpellsBytes, data.length);
+    if(characterData.subclasses === "Mag") {combinedData.set(constBytesMage, data.length + wizardSpellsBytes.length)}
+    else {combinedData.set(constBytesSpecialistMage, data.length + wizardSpellsBytes.length)}
+    combinedData.set(rememberedSpellsBytes, data.length + wizardSpellsBytes.length + constBytesMage.length);
+    combinedData.set(bridgeToProficiencys, data.length + wizardSpellsBytes.length + constBytesMage.length + rememberedSpellsBytes.length);
+  
+    return combinedData;
+
   }
+
+  const setClericSpells = (data: Uint8Array): Uint8Array => {
+    const clericSpellsBytes = exportData.clericSpell
+    .flat()
+    .map((hexString) => Number.parseInt(hexString, 16));
+
+    const sortedSpells = characterData.clericSpells
+    .filter((spell) => spell.rememberCount > 0)
+    .sort((a, b) => a.level - b.level);
+
+    const constBytesCleric = [
+      ...new Array(2).fill(0x00),
+      0x03,
+      0x00,
+      0x03,
+      ...new Array(7).fill(0x00),
+      0x03,
+      ...new Array(3).fill(0x00),
+      0x01,
+      0x00,
+      0x03,
+      0x00,
+      0x03,
+      ...new Array(3).fill(0x00),
+      0x03,
+      ...new Array(3).fill(0x00),
+      0x03,
+      ...new Array(3).fill(0x00),
+      0x02,
+      0x00,
+      0x02,
+      0x00,
+      0x02,
+      ...new Array(3).fill(0x00),
+      0x06,
+      ...new Array(3).fill(0x00),
+      0x02,
+      ...new Array(3).fill(0x00),
+      0x03,
+      0x01,
+      0x01,
+      ...new Array(3).fill(0x00),
+      0x08,
+      ...new Array(3).fill(0x00),
+      0x01,
+      ...new Array(3).fill(0x00),
+      0x04,
+      ...new Array(7).fill(0x00),
+      0x09,
+      ...new Array(7).fill(0x00),
+      0x05,
+      ...new Array(7).fill(0x00),
+      0x09,
+      ...new Array(7).fill(0x00),
+      0x06,
+      ...new Array(7).fill(0x00), 
+      0x09,
+      ...new Array(13).fill(0x00),
+      0x01,
+      0x00,
+      0x09,
+      ...new Array(7).fill(0x00),
+
+      0x01,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x09,
+      ...new Array(7).fill(0x00),
+
+      0x02,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x09,
+      ...new Array(7).fill(0x00),
+
+      0x03,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x09,
+      ...new Array(7).fill(0x00),
+
+      0x04,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x09,
+      ...new Array(7).fill(0x00),
+
+      0x05,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x09,
+      ...new Array(7).fill(0x00),
+
+      0x06,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x09,
+      ...new Array(7).fill(0x00),
+
+      0x07,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x09,
+      ...new Array(7).fill(0x00),
+
+      0x08,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x09,
+      ...new Array(13).fill(0x00),
+
+      0x02,
+      0x00,
+      0x09,
+      ...new Array(7).fill(0x00),
+    ];
+
+    //alternative const data for cleric subclasses
+    const constBytesSpecialistCleric = [
+      ...new Array(2).fill(0x00),
+      0x03,
+      0x00,
+      0x03,
+      ...new Array(7).fill(0x00),
+      0x03,
+      ...new Array(3).fill(0x00),
+      0x01,
+      0x00,
+      0x03,
+      0x00,
+      0x03,
+      ...new Array(3).fill(0x00),
+      0x03,
+      ...new Array(3).fill(0x00),
+      0x03,
+      ...new Array(3).fill(0x00),
+      0x02,
+      0x00,
+      0x02,
+      0x00,
+      0x02,
+      ...new Array(3).fill(0x00),
+      0x06,
+      ...new Array(3).fill(0x00),
+      0x02,
+      ...new Array(3).fill(0x00),
+      0x03,
+      0x00,
+      0x01,
+      0x00,
+      0x01,
+      ...new Array(3).fill(0x00),
+      0x08,
+      ...new Array(3).fill(0x00),
+      0x01,
+      ...new Array(3).fill(0x00),
+      0x04,
+      ...new Array(7).fill(0x00),
+      0x09,
+      ...new Array(7).fill(0x00),
+      0x05,
+      ...new Array(7).fill(0x00),
+      0x09,
+      ...new Array(7).fill(0x00),
+      0x06,
+      ...new Array(7).fill(0x00),
+      0x09,
+      ...new Array(13).fill(0x00),
+      0x01,
+      0x00,
+      0x09,
+      ...new Array(7).fill(0x00),
+
+      0x01,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x09,
+      ...new Array(7).fill(0x00),
+
+      0x02,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x09,
+      ...new Array(7).fill(0x00),
+
+      0x03,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x09,
+      ...new Array(7).fill(0x00),
+
+      0x04,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x09,
+      ...new Array(7).fill(0x00),
+
+      0x05,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x09,
+      ...new Array(7).fill(0x00),
+
+      0x06,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x09,
+      ...new Array(7).fill(0x00),
+
+      0x07,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x09,
+      ...new Array(7).fill(0x00),
+
+      0x08,
+      ...new Array(5).fill(0x00),
+      0x01,
+      0x00,
+      0x09,
+      ...new Array(9).fill(0x00),
+      0x03,
+      0x00,
+      0x03,
+      0x00,
+      0x02,
+      0x00,
+      0x09,
+      ...new Array(3).fill(0x00),
+      0x03,
+      ...new Array(3).fill(0x00),
+    ];
+
+    const rememberedSpellsBytes = sortedSpells.flatMap((spell) => {
+      const spellHexBytes = Array.from(spell.hex).map((char) => char.charCodeAt(0));
+      const padding = [0x00, 0x01, 0x00, 0x00, 0x00];
+      const spellBlock = [...spellHexBytes, ...padding];
+      return Array(spell.rememberCount).fill(spellBlock).flat();
+    });
+
+    //data fill betwen spells and proficiencys( with this there is no need to find where spell gonna be put, just add everythink at the end of .chr file)
+    const bridgeToProficiencys = [
+      ...new Array(76).fill(0xFF),
+      0xE08,
+      0x03,
+      ...new Array(2).fill(0x00),
+    ];
+
+    const combinedData = new Uint8Array(
+      data.length + clericSpellsBytes.length + constBytesCleric.length + rememberedSpellsBytes.length + bridgeToProficiencys.length
+    );
+    combinedData.set(data);
+    combinedData.set(clericSpellsBytes, data.length);
+    if(characterData.subclasses === "Mag") {combinedData.set(constBytesCleric, data.length + clericSpellsBytes.length)}
+    else {combinedData.set(constBytesSpecialistCleric, data.length + clericSpellsBytes.length)}
+    combinedData.set(rememberedSpellsBytes, data.length + clericSpellsBytes.length + constBytesCleric.length);
+    combinedData.set(bridgeToProficiencys, data.length + clericSpellsBytes.length + constBytesCleric.length + rememberedSpellsBytes.length);
+  
+    return combinedData;
+
+  }
+
   
   const saveFile = (data: Uint8Array, fileName: string) => {
     const blob = new Blob([data], { type: 'application/octet-stream' });

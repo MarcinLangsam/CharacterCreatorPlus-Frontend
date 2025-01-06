@@ -39,7 +39,7 @@ const WizardSpellRecord: React.FC<WizardSpellRecordProps>  = ({name, school, lev
       return;
     }
 
-    const newSpell = { name, level, hex: hexData, icon: iconData, rememberCount: 0 };
+    const newSpell = { name, level, school, hex: hexData, icon: iconData, rememberCount: 0 };
     const spellHex = [
       ...Array.from(newSpell.hex).map((char) =>
         `0x${char.charCodeAt(0).toString(16).padStart(2, "0")}`
@@ -48,6 +48,7 @@ const WizardSpellRecord: React.FC<WizardSpellRecordProps>  = ({name, school, lev
       `0x${(newSpell.level - 1).toString(16).padStart(2, "0")}`,
       "0x00",
       "0x01",
+      "0x00",
     ];
 
     setCharacterData((prev) => ({

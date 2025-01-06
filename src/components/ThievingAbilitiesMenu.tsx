@@ -84,6 +84,14 @@ const raseBonusThievingAbilities: Record<string, { skillsThief: Partial<Thieving
   },
 }
 
+type ThievingAbilityName =
+  | 'Kradziez_Kieszonkowa'
+  | 'Otwieranie_Zamkow'
+  | 'Znajdywanie_Pulapek'
+  | 'Ciche_Poruszanie'
+  | 'Krycie_W_Cieniu'
+  | 'Rozstawianie_Pulapek';
+
 const ThievingAbilitiesMenu: React.FC = () => {
     const { characterData, setCharacterData } = useCharacterContext();
     const { exportData, setExportData } = useExportDataContext();
@@ -133,7 +141,9 @@ const ThievingAbilitiesMenu: React.FC = () => {
         };
       
         fetchAndInitializeData();
-      }, [selectedSubclass]);
+    }, [selectedSubclass]);
+
+
     
 
     const increaseThievingSkills = (skillsThief: keyof ThievingAbilities) => {
@@ -146,43 +156,93 @@ const ThievingAbilitiesMenu: React.FC = () => {
             },
           }));
           setThievingAbilitiesPoints((prev) => prev - 1);
-        }
-      };
-    
-      const decreaseThievingSkills = (skillsThief: keyof ThievingAbilities) => {
-        const minLevel = backednThievingAbilities[skillsThief];
-        if (characterData.skillsThief[skillsThief] > minLevel) {
-          setCharacterData((prev) => ({
+
+          setExportData((prev) => ({
             ...prev,
             skillsThief: {
               ...prev.skillsThief,
-              [skillsThief]: prev.skillsThief[skillsThief] - 1,
-            },
-          }));
-          setThievingAbilitiesPoints((prev) => prev + 1);
+              [skillsThief]: prev.skillsThief[skillsThief] + 1 + getThievingAbilityBonus(skillsThief),
+            }
+          }))
         }
       };
+    
+    const decreaseThievingSkills = (skillsThief: keyof ThievingAbilities) => {
+      const minLevel = backednThievingAbilities[skillsThief];
+      if (characterData.skillsThief[skillsThief] > minLevel) {
+        setCharacterData((prev) => ({
+          ...prev,
+          skillsThief: {
+            ...prev.skillsThief,
+            [skillsThief]: prev.skillsThief[skillsThief] - 1,
+          },
+        }));
+        setThievingAbilitiesPoints((prev) => prev + 1);
+      }
+    };
+
+    const getThievingSkillsForRace = (race: string): Partial<ThievingAbilities> => {
+     const raceData = raseBonusThievingAbilities[race];
+      
+      if (!raceData) {
+        throw new Error(`Invalid race: ${race}`);
+      }
+      
+      return raceData.skillsThief;
+    };
+
+
+
+
+    function getThievingAbilityBonus(
+      abilityName: string,
+    ): number {
+      const bonusMapping: Record<ThievingAbilityName, string> = {
+        Kradziez_Kieszonkowa: 'Kradzież_KieszonkowaBonus',
+        Otwieranie_Zamkow: 'Otwieranie_ZamkówBonus',
+        Znajdywanie_Pulapek: 'Znajdywanie_PułapekBonus',
+        Ciche_Poruszanie: 'Ciche_PoruszanieBonus',
+        Krycie_W_Cieniu: 'Krycie_W_CieniuBonus',
+        Rozstawianie_Pulapek: 'Rozstawianie_PułapekBonus',
+      };
+    
+      if (abilityName in bonusMapping) {
+        const bonusKey = bonusMapping[abilityName as ThievingAbilityName];
+        return characterData.skillsThief[bonusKey as keyof ThievingAbilities] || 0;
+      }
+    
+      return 0;
+    }
 
     return(
         <>
         <div className="proficiencysBackground">
-            <p className="plainTextBig">Pozostałe punkty umiejętności złodziejskich: {ThievingAbilitiesPoints}</p>
-            {selectedSubclass ? (
-                <div>
-                {Object.entries(characterData.skillsThief)
+          <p className="plainTextBig">Pozostałe punkty umiejętności złodziejskich: {ThievingAbilitiesPoints}</p>
+          {selectedSubclass ? (
+            <div>
+              {Object.entries(characterData.skillsThief)
                 .filter(([skillsThief, value]) => backednThievingAbilities[skillsThief] !== -1)
-                .map(([skillsThief, value]) => (
-                <div key={skillsThief}>
-                    <span className='plainText'>{skillsThief}: {value}</span>
-                    <button className="statsButton"  onClick={() => increaseThievingSkills(skillsThief as keyof ThievingAbilities)}>+</button>
-                    <button className="statsButton"  onClick={() => decreaseThievingSkills(skillsThief as keyof ThievingAbilities)}>-</button>
-                </div>
-                ))}
+                .map(([skillsThief, value]) => {
+                  const race = characterData.race || "Człowiek";
+                  const raceBonuses = getThievingSkillsForRace(race);
+                  const raceBonus = raceBonuses[skillsThief as keyof ThievingAbilities] || 0;
+                  const attributeBonus = getThievingAbilityBonus(skillsThief)
+                  
+                  return (
+                    <div key={skillsThief}>
+                      <span className='plainText'>
+                        {skillsThief}: {value} + {raceBonus} + {attributeBonus} = {value+raceBonus+attributeBonus}
+                      </span>
+                      <button className="statsButton" onClick={() => increaseThievingSkills(skillsThief as keyof ThievingAbilities)}>+</button>
+                      <button className="statsButton" onClick={() => decreaseThievingSkills(skillsThief as keyof ThievingAbilities)}>-</button>
+                    </div>
+                  );
+                })}
             </div>
-            ) : (
+          ) : (
             <p className="plainTextBig">Wybierz podklasę, aby zobaczyć dostępne umiejętności złodziejskie.</p>
-            )}
-        </div>
+          )}
+          </div>
         </>
     )
 }

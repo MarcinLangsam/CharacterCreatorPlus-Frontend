@@ -61,7 +61,7 @@ const CreationSummary: React.FC = () => {
                         <li>Bonus do znajdywania pułapek: {characterData.Znajdywanie_PułapekBonus}</li>
                         <li>Bonus do cichego poruszania: {characterData.Ciche_PoruszanieBonus}</li>
                         <li>Bonus do krycia w cienu: {characterData.Krycie_W_CieniuBonus}</li>
-                        <li>Bonus do rozstawiania pułapek: {characterData.Rozstawianie_Pułapek}</li>
+                        <li>Bonus do rozstawiania pułapek: {characterData.Rozstawianie_PułapekBonus}</li>
                     </ul>
                 </div>
                 {/* bonuses for constitution */}

@@ -50,6 +50,16 @@ export interface CharacterAttributes {
 export interface WizardSpell {
   name: string;
   level: number;
+  school: string; 
+  hex: string;
+  icon: string;
+  rememberCount: number;
+}
+
+export interface ClericSpell {
+  name: string;
+  level: number;
+  school: string; 
   hex: string;
   icon: string;
   rememberCount: number;
@@ -62,12 +72,13 @@ export interface CharacterData {
   portrait?: string;
   race?: string;
   classes?: string;
-  subclasses?: string;
-  character?: string;
+  subclasses: string;
+  character: string;
   attributes: CharacterAttributes;
   skills: WeaponProficiencys;
   skillsThief:  ThievingAbilities;
   wizardSpells: WizardSpell[];
+  clericSpells: ClericSpell[];
 
   racialEnemy?: string;
   //details stats data
@@ -83,7 +94,7 @@ export interface CharacterData {
   Znajdywanie_PułapekBonus?: number; //if kit allows this ability
   Ciche_PoruszanieBonus?: number; //if kit allows this ability
   Krycie_W_CieniuBonus?: number; //if kit allows this ability
-  Rozstawianie_Pułapek?: number; //if kit allows this ability
+  Rozstawianie_PułapekBonus?: number; //if kit allows this ability
 
   HPdice?: number;
   HP?: number;
@@ -97,10 +108,10 @@ export interface CharacterData {
   scribeSuccessRate?: number;
   INTlore?: number;
 
-  extraSpellSlotlv1?: number; //only for clerics/druids
-  extraSpellSlotlv2?: number; //only for clerics/druids
-  extraSpellSlotlv3?: number; //only for clerics/druids
-  extraSpellSlotlv4?: number; //only for clerics/druids
+  extraSpellSlotlv1: number; //only for clerics/druids
+  extraSpellSlotlv2: number; //only for clerics/druids
+  extraSpellSlotlv3: number; //only for clerics/druids
+  extraSpellSlotlv4: number; //only for clerics/druids
   WISlore?: number;
 
   reaction?: number;

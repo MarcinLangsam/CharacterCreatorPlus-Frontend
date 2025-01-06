@@ -69,7 +69,7 @@ const SidePanel: React.FC = () => {
               <p className="plainText">Bonus do znajdywania pułapek: {characterData.Znajdywanie_PułapekBonus}</p>
               <p className="plainText">Bonus do cichego poruszania: {characterData.Ciche_PoruszanieBonus}</p>
               <p className="plainText">Bonus do krycia w cienu: {characterData.Krycie_W_CieniuBonus}</p>
-              <p className="plainText">Bonus do rozstawiania pułapek: {characterData.Rozstawianie_Pułapek}</p>
+              <p className="plainText">Bonus do rozstawiania pułapek: {characterData.Rozstawianie_PułapekBonus}</p>
             </div>
             <div  className="m-5">
               <p className="plainText">Max poziom zaklęć maga: {characterData.INTmaxSpellLevel}</p>

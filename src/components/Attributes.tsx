@@ -20,6 +20,16 @@ const classAttributeLimits: Record<string, Partial<Record<keyof CharacterAttribu
   Kleryk: { wisdom: 9 },
   Druid: { wisdom: 12, charisma: 15 },
   Mag: { intelligence: 9 },
+
+  Mistrz_Odrzucania: {intelligence: 9, wisdom: 15},
+  Mistrz_Przywołań: {intelligence: 9, constitution: 15},
+  Mistrz_Pozanania: {intelligence: 9, wisdom: 16},
+  Mistrz_Zauroczeń: {intelligence: 9, charisma: 16},
+  Ilizjonista: {intelligence: 9, agility: 16},
+  Mistrz_Inwokacji: {intelligence: 9, constitution: 16},
+  Nekromanta: {intelligence: 9, wisdom: 16},
+  Mistrz_Przemian: {intelligence: 9, agility: 15},
+
   Łotrzyk: { agility: 9 },
   Bard: { agility: 12, intelligence: 13, charisma: 15 },
   Czarodziej: { intelligence: 9, charisma: 9 },
@@ -107,6 +117,11 @@ const Stats: React.FC = () => {
   const getClassLimit = (): Partial<Record<keyof CharacterAttributes, number>> => {
     const selectedClass = characterData.classes
     if (!selectedClass) return {};
+
+    const mageVariants = ["Mistrz_Odrzucania", "Mistrz_Przywołań", "Mistrz_Pozanania", "Mistrz_Zauroczeń", "Ilizjonista", "Mistrz_Inwokacji", "Nekromanta", "Mistrz_Przemian"];
+    if (characterData.subclasses && mageVariants.includes(characterData.subclasses)) {
+      return classAttributeLimits[characterData.subclasses] || {};
+    }
     return classAttributeLimits[selectedClass] || {};
   }
 
@@ -255,7 +270,7 @@ const Stats: React.FC = () => {
       characterData.Ciche_PoruszanieBonus = agilityhMatch.Ciche_PoruszanieBonus,
       characterData.Krycie_W_CieniuBonus = agilityhMatch.Krycie_W_CieniuBonus,
       characterData.Znajdywanie_PułapekBonus = agilityhMatch.Znajdywanie_PulapekBonus,
-      characterData.Rozstawianie_Pułapek = agilityhMatch.Rozstawianie_PulapekBonus
+      characterData.Rozstawianie_PułapekBonus = agilityhMatch.Rozstawianie_PulapekBonus
     }
     const constitutionMatch = constitutionData.find((item) => item.value === characterData.attributes.constitution);
     if (constitutionMatch) {
@@ -396,7 +411,7 @@ const Stats: React.FC = () => {
           <p className='plainTextSmall'>Bonus znajdywania pułapek: {characterData.Znajdywanie_PułapekBonus} |</p>
           <p className='plainTextSmall'>Bonus cichego poruszania: {characterData.Ciche_PoruszanieBonus} |</p>
           <p className='plainTextSmall'>Bonus krycia w cieniu: {characterData.Krycie_W_CieniuBonus} |</p>
-          <p className='plainTextSmall'>Bonus rozstawiania pułapek: {characterData.Rozstawianie_Pułapek} |</p>
+          <p className='plainTextSmall'>Bonus rozstawiania pułapek: {characterData.Rozstawianie_PułapekBonus} |</p>
         </div>
 
           <div className='flex flex-row'> 
