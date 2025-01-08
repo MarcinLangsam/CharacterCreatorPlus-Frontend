@@ -4,7 +4,7 @@ import { useCharacterContext } from "../context/CharacterContext";
 import WizardSpellRecord from "./WizardSpellRecord";
 import RememberWizardSpellRecord from "./RememberWizardSpellRecod";
 
-interface WizardSpellBackedn {
+interface WizardSpellBackend {
     id: number;
     name: string;
     school: string;
@@ -43,7 +43,7 @@ const WizardSpellsMenu: React.FC = () => {
     const selectedSubclass = characterData.subclasses;
 
     const [currentSpellLevel, setCurrentSpellLevel] = useState(1);
-    const [WizardSpellsData, setWizardSpells] = useState<WizardSpellBackedn[]>([]);
+    const [WizardSpellsData, setWizardSpells] = useState<WizardSpellBackend[]>([]);
         
     useEffect(() => {    
         const fetchAndInitializeData = async () => {
@@ -105,64 +105,69 @@ const WizardSpellsMenu: React.FC = () => {
 
     return(
         <>
-            <div className="buttonGroup">
-                    <button className="primaryButton" onClick={() => setCurrentSpellLevel(1)}>Poziom 1</button>
-                    <button className="primaryButton" onClick={() => setCurrentSpellLevel(2)}>Poziom 2</button>
-                    <button className="primaryButton" onClick={() => setCurrentSpellLevel(3)}>Poziom 3</button>
-                    <button className="primaryButton" onClick={() => setCurrentSpellLevel(4)}>Poziom 4</button>
-            </div>
-            <p>
-                Wybrano zaklęcia: {selectedSpellsCount}/{spellLevelLimits[currentSpellLevel]}
-            </p>
-            <div className="flex flex-row">
-                <div className="proficiencysBackground">
-                {!hasRequiredSpell() && (
-                    <p style={{ color: "red" }}>
-                        Musisz wybrać przynajmniej jedno zaklęcie z wymaganej szkoły magii!
-                    </p>
-                    )}
-                    {WizardSpellsData.filter((spell) => {
-                    const restrictedSchool = spellRestriction[characterData.subclasses as keyof typeof spellRestriction];
-                    if (!restrictedSchool) return true;
-                    return spell.school !== restrictedSchool;
-                    })
-                    .filter((spell) => spell.level === currentSpellLevel)
-                    .map((spell, index) => {
-                    const requiredSchool = spellRequirement[characterData.subclasses as keyof typeof spellRequirement];
-                    const isRequiredSpell = spell.school === requiredSchool;
+            <h2 className="secondary-text">Wybierz Zaklęcia {"=========> "}Zapamiętaj Zaklęcia</h2>
+            <div className="d-flex flex-row">
+                <div className="creation-background">
+                    <div className="button-group" style={{ backgroundColor: "rgb(30, 30, 30)"}}>
+                            <button className="standard-button" onClick={() => setCurrentSpellLevel(1)}>Poziom 1</button>
+                            <button className="standard-button" onClick={() => setCurrentSpellLevel(2)}>Poziom 2</button>
+                            <button className="standard-button" onClick={() => setCurrentSpellLevel(3)}>Poziom 3</button>
+                            <button className="standard-button" onClick={() => setCurrentSpellLevel(4)}>Poziom 4</button>
+                    </div>
+                    <span>
+                        Wybrano zaklęcia: {selectedSpellsCount}/{spellLevelLimits[currentSpellLevel]}
+                    </span>
+                    <div className="d-flex flex-row" style={{ backgroundColor: "rgb(30, 30, 30)"}}>
+                        <div style={{ backgroundColor: "rgb(30, 30, 30)"}}>
+                        {!hasRequiredSpell() && (
+                            <span style={{ color: "red" }}>
+                                Musisz wybrać przynajmniej jedno zaklęcie z wymaganej szkoły magii!
+                            </span>
+                            )}
+                            {WizardSpellsData.filter((spell) => {
+                            const restrictedSchool = spellRestriction[characterData.subclasses as keyof typeof spellRestriction];
+                            if (!restrictedSchool) return true;
+                            return spell.school !== restrictedSchool;
+                            })
+                            .filter((spell) => spell.level === currentSpellLevel)
+                            .map((spell, index) => {
+                            const requiredSchool = spellRequirement[characterData.subclasses as keyof typeof spellRequirement];
+                            const isRequiredSpell = spell.school === requiredSchool;
 
-                    return (
-                        <div
-                        key={index}
-                        style={{
-                            border: isRequiredSpell ? "2px solid green" : "1px solid gray",
-                            margin: "10px",
-                            padding: "10px",
-                        }}
-                        >
-                        <WizardSpellRecord
-                            name={spell.name}
-                            school={spell.school}
-                            level={spell.level}
-                            iconData={spell.iconFile}
-                            hexData={spell.hexData}
-                        />
+                            return (
+                                <div
+                                key={index}
+                                style={{
+                                    border: isRequiredSpell ? "2px solid green" : "1px solid gray",
+                                    margin: "10px",
+                                    padding: "10px",
+                                    backgroundColor: "rgb(30, 30, 30)"
+                                }}
+                                >
+                                <WizardSpellRecord
+                                    name={spell.name}
+                                    school={spell.school}
+                                    level={spell.level}
+                                    iconData={spell.iconFile}
+                                    hexData={spell.hexData}
+                                />
+                                </div>
+                            );
+                            })}
                         </div>
-                    );
-                    })}
+                    </div>
                 </div>
-                <div>
-                {characterData.wizardSpells
-                    .filter((spell) => spell.level === currentSpellLevel)
-                    .map((spell, index) => (
-                        <div key={index} style={{ border: "1px solid gray", margin: "10px", padding: "10px" }}>
-                            <RememberWizardSpellRecord name={spell.name} level={spell.level} iconData={spell.icon} rememberCount={spell.rememberCount} />
-                        </div>
-                ))}
+
+                <div className="creation-background">
+                    {characterData.wizardSpells
+                        .filter((spell) => spell.level === currentSpellLevel)
+                        .map((spell, index) => (
+                            <div key={index} style={{ backgroundColor: "rgb(30, 30, 30)", border: "1px solid gray", margin: "10px", padding: "10px" }}>
+                                <RememberWizardSpellRecord name={spell.name} level={spell.level} iconData={spell.icon} rememberCount={spell.rememberCount} />
+                            </div>
+                        ))}
                 </div>
             </div>
-
-
         </>
     )
 }

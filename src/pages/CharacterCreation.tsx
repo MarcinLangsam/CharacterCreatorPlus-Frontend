@@ -49,25 +49,30 @@ const CharacterCreation: React.FC = () => {
 
 
   return (
-    <div className='characterCreationBackground'>
-      <h1 className='secondaryText'>Tworzenie Postaci</h1>
-      <div className="buttonGroup">
-        <button className="primaryButton" onClick={() => setActiveSection('gender')}>Płeć</button>
-        <button className="primaryButton" onClick={() => setActiveSection('portrait')}>Portret</button>
-        <button className="primaryButton" onClick={() => setActiveSection('race')}>Rasa</button>
-        <button className="primaryButton" onClick={() => setActiveSection('class')}>Klasa</button>
-        <button className="primaryButton" onClick={() => setActiveSection('character')}>Charakter</button>
-        <button className="primaryButton" onClick={() => setActiveSection('stats')}>Współczynniki</button>
-        <button className="primaryButton" onClick={() => setActiveSection('skills')}>Umiejętności</button>
-        <button className="primaryButton" onClick={() => setActiveSection('name')}>Imię</button>
-        <button className="primaryButton" onClick={() => setActiveSection('export')}>Eksport Postaci</button>
-      </div>
+  <div>
+    <h1 className="primary-text">Tworzenie Postaci</h1>
+    <div className="button-group">
+      <button className="category-button" onClick={() => setActiveSection("gender")}>Płeć</button>
+      <button className="category-button" onClick={() => setActiveSection("portrait")}>Portret</button>
+      <button className="category-button" onClick={() => setActiveSection("race")}>Rasa</button>
+      <button className="category-button" onClick={() => setActiveSection("class")}>Klasa</button>
+      <button className="category-button" onClick={() => setActiveSection("character")}>Charakter</button>
+      <button className="category-button" onClick={() => setActiveSection("stats")}>Współczynniki</button>
+      <button className="category-button" onClick={() => setActiveSection("skills")}>Umiejętności</button>
+      <button className="category-button" onClick={() => setActiveSection("name")}>Imię</button>
+      <button className="category-button" onClick={() => setActiveSection("export")}>Eksport Postaci</button>
+    </div>
 
-      <div className='flex flex-row'>
-        <div className='m-5'>{renderContent()}</div>
+    <div className="flex-container">
+      <div className="main-content">
+        <div className="m-5">{renderContent()}</div>
+      </div>
+      <div className="side-panel">
         <SidePanel />
       </div>
     </div>
+</div>
+
   );
 };
 

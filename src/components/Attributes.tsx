@@ -3,6 +3,16 @@ import { useCharacterContext } from '../context/CharacterContext';
 import StatControl from './AttributesControl';
 import { CharacterAttributes } from '../types/CharacterData';
 
+
+const strengtDescription = "Opisuję siłę mieśni bohatera, jego wytrzymałość i wytrwałość. Jest podstawową cechą zbrojnych\n\nSiła wpływa na:\n\nTHAC0\nZadawane obrażenia\nUmiejętność wyważania zamków\nMaksymalny udźwig"
+const agilityDescription = "Opisuję zwinność, reflek, kordynacje i umiejętnośc zachowania równowagi. Jest podstawową cechą złodzieji.\n\nZręczność wpływa na:\n\nTHAC0 w walce dystansowej\nKlasę Pancerza (AC)\nWszelkie umiejętności złodziejskie"
+const constitutionDescription = "Opisuję ogólną budowę bohatera, jego stan zdrowia i fizyczną wytrzymałość na obrażenia, choroby i inne rodzaju trudy. Ta cecha jest ważna dla łowców.\n\nKondycja wpływa na:\n\nBonus zdrowia na poziom bohatera\nPróg zmęczenia\nOdpornośc na upojenie alkocholowe\n(Tylko Krasnoludy/Gnomy/Niziołki) Bonus do rzutów obronnych"
+const inteligenceDescription = "Opisuję zdolnośc rozumowania, zapamiętywania oraz uczenia się. Jest podstawową cechą magów.\n\n UWAGA: Postać o inteligencji mniejszej bądź równej 8 jest niepiśmienna i nie może kożystac ze zwojów oraz różdżek.\n\nInteligencja wpływa na:\nSzansę przepisania zwoju\nOkreśla maksymalny poziom zaklęcia dla magów\nOkreśla maksymalną ilośc znanych zaklęć dla magów\nWiedzę"
+const wisdomDescription = "Opisuję intuicję, zdolność osądu, zdrowy rozsądek i siłe woli bohatera. Jest podstawową cechą kapłanów\n\nMądrość wpływa na:\n\nOkreśla maksymalny poziom zaklęcia dla kapłanów\nDodatkową ilość zapamiętanych zaklęć dla kapłanów\nWiedzę"
+const charismaDescription = "Opisuję siłe przekonywania bohatera, jego urok osobisty i zdolności przywódcze. Jest to cecha istotna dla druidów, bardów i paladynów\n\nCharyzma wpływa na:\n\nZniżki u kupców\nPoczątkowe nastawienie NPC do bohatera"
+
+
+
 const raceAttributeLimits: Record<string, Partial<Record<keyof CharacterAttributes, { min: number; max: number }>>> = {
   Człowiek: { strength: {min: 3, max: 18}, agility: {min: 3, max: 18}, constitution: {min: 3, max: 18}, intelligence: {min: 3, max: 18}, wisdom: {min: 3, max: 18}, charisma: {min: 3, max: 18}},
   Elf: { strength: {min: 3, max: 18}, agility: {min: 7, max: 19}, constitution: {min: 6, max: 17}, intelligence: {min: 8, max: 18}, wisdom: {min: 3, max: 18}, charisma: {min: 8, max: 18} },
@@ -100,6 +110,7 @@ const Stats: React.FC = () => {
   const [inteligenceData, setIntelignceData] = useState<InteligneceData[]>([]);
   const [wisdomData, setWisdomData] = useState<WisdomData[]>([]);
   const [charismaData, setCharismaData] = useState<CharismaData[]>([]);
+  const [attributeDescription, setAttributeDescription] = useState<string>("Użyj przycisków +/- aby wyświetlić opis atrybuty");
   
 
   const isModifierApplicable = (): boolean => {
@@ -131,16 +142,16 @@ const Stats: React.FC = () => {
   const randomizeAttributes = () => {
     const raceLimits = getRaseLimit();
     const classLimits = getClassLimit();
-
+  
     const newAttributes = (Object.keys(characterData.attributes) as (keyof CharacterAttributes)[]).reduce(
       (attrs, attr) => {
         const raceMin = raceLimits[attr]?.min ?? 1;
         const raceMax = raceLimits[attr]?.max ?? 18;
         const classMin = classLimits[attr] ?? 1;
-
+  
         const finalMin = Math.max(raceMin, classMin);
         const finalMax = raceMax;
-
+  
         attrs[attr] = getRandomValueInRange(finalMin, finalMax);
         return attrs;
       },
@@ -154,16 +165,65 @@ const Stats: React.FC = () => {
     } else {
       newAttributes.strenghtModifier = 0;
     }
-
-    setCharacterData((prevData) => ({
-      ...prevData,
-      attributes: newAttributes,
-    }));
-    
-
-    setTotalRolledPoints(sumPoints);
-    setAvailablePoints(0);
+  
+    const updatedCharacterData = { ...characterData, attributes: newAttributes };
+  
+    // Oblicz bonusy na podstawie nowych wartości atrybutów
+    const strengthMatch = strengthData.find((item) => item.value === newAttributes.strength);
+    if (strengthMatch) {
+      updatedCharacterData.melleThac0 = strengthMatch.meleeThac0;
+      updatedCharacterData.dmgBonus = strengthMatch.dmgBonus;
+      updatedCharacterData.bashing = strengthMatch.bashing;
+      updatedCharacterData.weight = strengthMatch.weight;
+    }
+  
+    const agilityMatch = agilityData.find((item) => item.value === newAttributes.agility);
+    if (agilityMatch) {
+      updatedCharacterData.rangedThac0 = agilityMatch.rangedThac0;
+      updatedCharacterData.AC = agilityMatch.ac;
+      updatedCharacterData.Otwieranie_ZamkówBonus = agilityMatch.Otwieranie_ZamkowBonus;
+      updatedCharacterData.Kradzież_KieszonkowaBonus = agilityMatch.Kradziez_KieszonkowaBonus;
+      updatedCharacterData.Ciche_PoruszanieBonus = agilityMatch.Ciche_PoruszanieBonus;
+      updatedCharacterData.Krycie_W_CieniuBonus = agilityMatch.Krycie_W_CieniuBonus;
+      updatedCharacterData.Znajdywanie_PułapekBonus = agilityMatch.Znajdywanie_PulapekBonus;
+      updatedCharacterData.Rozstawianie_PułapekBonus = agilityMatch.Rozstawianie_PulapekBonus;
+    }
+  
+    const constitutionMatch = constitutionData.find((item) => item.value === newAttributes.constitution);
+    if (constitutionMatch) {
+      updatedCharacterData.HPperLvBonus = constitutionMatch.hpPerLevelBonus;
+      updatedCharacterData.IntoxicationPerDrink = constitutionMatch.intoxicationPerDrink;
+      updatedCharacterData.fatigue = constitutionMatch.fatigue;
+    }
+  
+    const inteligenceMatch = inteligenceData.find((item) => item.value === newAttributes.intelligence);
+    if (inteligenceMatch) {
+      updatedCharacterData.INTmaxSpellLevel = inteligenceMatch.INTmaxSpellLevel;
+      updatedCharacterData.INTspellPerLevel = inteligenceMatch.INTspellPerLevel;
+      updatedCharacterData.scribeSuccessRate = inteligenceMatch.scribeSuccessRate;
+      updatedCharacterData.INTlore = inteligenceMatch.INTlore;
+    }
+  
+    const wisdomMatch = wisdomData.find((item) => item.value === newAttributes.wisdom);
+    if (wisdomMatch) {
+      updatedCharacterData.extraSpellSlotlv1 = wisdomMatch.extraSpellSlotlv1;
+      updatedCharacterData.extraSpellSlotlv2 = wisdomMatch.extraSpellSlotlv2;
+      updatedCharacterData.extraSpellSlotlv3 = wisdomMatch.extraSpellSlotlv3;
+      updatedCharacterData.extraSpellSlotlv4 = wisdomMatch.extraSpellSlotlv4;
+      updatedCharacterData.WISlore = wisdomMatch.WISlore;
+    }
+  
+    const charismaMatch = charismaData.find((item) => item.value === newAttributes.charisma);
+    if (charismaMatch) {
+      updatedCharacterData.reaction = charismaMatch.reaction;
+      updatedCharacterData.buyDiscount = charismaMatch.buyDiscount;
+    }
+  
+    // Zapisz nowe dane postaci zaktualizowanymi bonusami
+    setCharacterData(updatedCharacterData);
+    setTotalRolledPoints(sumPoints)
   };
+  
 
   useEffect(() => {
     const fetchStrength = async () => {
@@ -298,11 +358,18 @@ const Stats: React.FC = () => {
       characterData.reaction = charismaMatch.reaction,
       characterData.buyDiscount = charismaMatch.buyDiscount
     }
-  }, [characterData.attributes, totalRolledPoints]);
+  }, [characterData.attributes]);
 
   
 
   const updateAttribute = (attribute: keyof CharacterAttributes, delta: number) => {
+    if(attribute == "strength") {setAttributeDescription(strengtDescription)}
+    if(attribute == "agility") {setAttributeDescription(agilityDescription)}
+    if(attribute == "constitution") {setAttributeDescription(constitutionDescription)}
+    if(attribute == "intelligence") {setAttributeDescription(inteligenceDescription)}
+    if(attribute == "wisdom") {setAttributeDescription(wisdomDescription)}
+    if(attribute == "charisma") {setAttributeDescription(charismaDescription)}
+
     setCharacterData((prevData) => {
       const currentAttributeValue = prevData.attributes[attribute];
 
@@ -373,101 +440,123 @@ const Stats: React.FC = () => {
 
   return (
     <>
-      <h2 className="secondaryText">Rozdaj Atrybuty</h2>
-      <div className="attributesBackground">
-        <button onClick={randomizeAttributes} className="rollStatsButton">
-          Powtórz rzut
-        </button> 
-        <p className="plainTextBig">Punkty do wydania: {availablePoints}</p>
+      <h2 className="secondary-text">Rozdaj Atrybuty</h2>
+      <div className='d-flex flex-row'>
+        <div className="creation-background" style={{ backgroundColor: "rgb(30, 30, 30)" }}>
+          <button onClick={randomizeAttributes} className="standard-button">
+            Powtórz rzut
+          </button> 
+          <div className='d-flex flex-row' style={{ backgroundColor: "rgb(30, 30, 30)" }}>
+            <p className="secondary-text" style={{fontSize: "1.55rem", margin: "7px"}}>Punkty do wydania: {availablePoints}</p>
+            <p className="secondary-text" style={{fontSize: "1.55rem", margin: "7px"}}>Suma Wylosowanych Punktów: {totalRolledPoints}</p>
+          </div>
 
-        <div className='flex flex-row'> 
-          <StatControl
-            statName={
-              characterData.attributes.strength === 18 && isModifierApplicable()
-                ? `Siła ${characterData.attributes.strength}/${characterData.attributes.strenghtModifier}`
-                : 'Siła'
-            }
-            statValue={characterData.attributes.strength}
-            onIncrement={() => updateAttribute('strength', 1)}
-            onDecrement={() => updateAttribute('strength', -1)}
-          />
-          <p className='plainTextSmall'>| THAC0: {characterData.melleThac0} |</p>
-          <p className='plainTextSmall'>Bonus do obrażeń: {characterData.dmgBonus} |</p>
-          <p className='plainTextSmall'>Wyważanie zamków: {characterData.bashing} |</p>
-          <p className='plainTextSmall'>Udźwig: {characterData.weight} |</p>
+            <div style={{ backgroundColor: "rgb(30, 30, 30)" }}>
+              <StatControl
+                statName={
+                  characterData.attributes.strength === 18 && isModifierApplicable()
+                    ? `Siła ${characterData.attributes.strength}/${characterData.attributes.strenghtModifier}`
+                    : 'Siła'
+                }
+                statValue={characterData.attributes.strength}
+                onIncrement={() => updateAttribute('strength', 1)}
+                onDecrement={() => updateAttribute('strength', -1)}
+              />
+
+              <StatControl
+                statName="Zręczność"
+                statValue={characterData.attributes.agility}
+                onIncrement={() => updateAttribute('agility', 1)}
+                onDecrement={() => updateAttribute('agility', -1)}
+              />
+
+              <StatControl
+                statName="Kondycja"
+                statValue={characterData.attributes.constitution}
+                onIncrement={() => updateAttribute('constitution', 1)}
+                onDecrement={() => updateAttribute('constitution', -1)}
+              />
+
+              <StatControl
+                statName="Inteligencja"
+                statValue={characterData.attributes.intelligence}
+                onIncrement={() => updateAttribute('intelligence', 1)}
+                onDecrement={() => updateAttribute('intelligence', -1)}
+              />
+
+              <StatControl
+                statName="Mądrość"
+                statValue={characterData.attributes.wisdom}
+                onIncrement={() => updateAttribute('wisdom', 1)}
+                onDecrement={() => updateAttribute('wisdom', -1)}
+              />
+      
+
+              <StatControl
+                statName="Charyzma"
+                statValue={characterData.attributes.charisma}
+                onIncrement={() => updateAttribute('charisma', 1)}
+                onDecrement={() => updateAttribute('charisma', -1)}
+              />
+          </div>
         </div>
 
-        <div className='flex flex-row'> 
-          <StatControl
-            statName="Zręczność"
-            statValue={characterData.attributes.agility}
-            onIncrement={() => updateAttribute('agility', 1)}
-            onDecrement={() => updateAttribute('agility', -1)}
-          />
-          <p className='plainTextSmall'>| THAC0(dystansowe): {characterData.rangedThac0} |</p>
-          <p className='plainTextSmall'>Bonus do KP: {characterData.AC} |</p>
-          <p className='plainTextSmall'>Bonus kradzieży kieszonkowej: {characterData.Kradzież_KieszonkowaBonus} |</p>
-          <p className='plainTextSmall'>Bonus otwierania zamków: {characterData.Otwieranie_ZamkówBonus} |</p>
-          <p className='plainTextSmall'>Bonus znajdywania pułapek: {characterData.Znajdywanie_PułapekBonus} |</p>
-          <p className='plainTextSmall'>Bonus cichego poruszania: {characterData.Ciche_PoruszanieBonus} |</p>
-          <p className='plainTextSmall'>Bonus krycia w cieniu: {characterData.Krycie_W_CieniuBonus} |</p>
-          <p className='plainTextSmall'>Bonus rozstawiania pułapek: {characterData.Rozstawianie_PułapekBonus} |</p>
+        <div className="creation-background"  style={{ backgroundColor: "rgb(30, 30, 30)" }}>
+          <span style={{ whiteSpace: "pre-wrap" }}>{attributeDescription}</span>
         </div>
-
-          <div className='flex flex-row'> 
-        <StatControl
-          statName="Kondycja"
-          statValue={characterData.attributes.constitution}
-          onIncrement={() => updateAttribute('constitution', 1)}
-          onDecrement={() => updateAttribute('constitution', -1)}
-        />
-          <p className='plainTextSmall'>| Bonuowe zdrowie na poziom: {characterData.HPperLvBonus} |</p>
-          <p className='plainTextSmall'>Mocna głowa: {characterData.IntoxicationPerDrink} |</p>
-          <p className='plainTextSmall'>Próg zmęczenia: {characterData.fatigue} |</p>
-          <p className='plainTextSmall'>Udźwig: {characterData.weight} |</p>
-        </div>
-
-
-        <div className='flex flex-row'> 
-        <StatControl
-          statName="Inteligencja"
-          statValue={characterData.attributes.intelligence}
-          onIncrement={() => updateAttribute('intelligence', 1)}
-          onDecrement={() => updateAttribute('intelligence', -1)}
-        />
-          <p className='plainTextSmall'>| Max poziom zaklęć maga: {characterData.INTmaxSpellLevel} |</p>
-          <p className='plainTextSmall'>Max zaklęć maga na poziom: {characterData.INTspellPerLevel} |</p>
-          <p className='plainTextSmall'>Szansa przepisania zwoju: {characterData.scribeSuccessRate} |</p>
-          <p className='plainTextSmall'>Wiedza: {characterData.INTlore} |</p>
-        </div>
-
-
-        <div className='flex flex-row'> 
-        <StatControl
-          statName="Mądrość"
-          statValue={characterData.attributes.wisdom}
-          onIncrement={() => updateAttribute('wisdom', 1)}
-          onDecrement={() => updateAttribute('wisdom', -1)}
-        />
-        <p className='plainTextSmall'>| Bonus zaklęcia kleryka poziomu 1: {characterData.extraSpellSlotlv1} |</p>
-        <p className='plainTextSmall'>Bonus zaklęcia kleryka poziomu 2: {characterData.extraSpellSlotlv2} |</p>
-        <p className='plainTextSmall'>Bonus zaklęcia kleryka poziomu 3: {characterData.extraSpellSlotlv3} |</p>
-        <p className='plainTextSmall'>Bonus zaklęcia kleryka poziomu 4: {characterData.extraSpellSlotlv4} |</p>
-        <p className='plainTextSmall'>Wiedza: {characterData.WISlore} |</p>
       </div>
 
-      <div className='flex flex-row'> 
-        <StatControl
-          statName="Charyzma"
-          statValue={characterData.attributes.charisma}
-          onIncrement={() => updateAttribute('charisma', 1)}
-          onDecrement={() => updateAttribute('charisma', -1)}
-        />
-        <p className='plainTextSmall'>| Reakcja NPC: {characterData.reaction} |</p>
-        <p className='plainTextSmall'>Zniżka w sklepach: {characterData.buyDiscount}% |</p>
-      </div>
 
-      <p className="plainTextBig">Suma Wylosowanych Punktów: {totalRolledPoints}</p>
+      <div className='attributes-background' style={{ backgroundColor: "rgb(30, 30, 30)" }}>
+        {/* STRENGTH */}
+        <div className='d-flex flex-row' style={{ backgroundColor: "rgb(30, 30, 30)" }}>
+            <p className="attributes-description-text">|+ THAC0: <strong>{characterData.melleThac0}</strong>|</p>
+            <p className="attributes-description-text">|+ Obrażenia: <strong>{characterData.dmgBonus}</strong>|</p>
+            <p className="attributes-description-text">|Wyważanie zamków: <strong>{characterData.bashing}</strong>|</p>
+            <p className="attributes-description-text">|Udźwig: <strong>{characterData.weight}</strong>|</p>
+        </div>
+
+        {/* DEXTERITY */}
+        <div className='d-flex flex-row' style={{ backgroundColor: "rgb(30, 30, 30)" }}>
+        <p className="attributes-description-text">|+ THAC0(dystansowe): <strong>{characterData.rangedThac0}</strong>|</p>
+            <p className="attributes-description-text">|+ AC: <strong>{characterData.AC}</strong>|</p>
+            <p className="attributes-description-text">|+ Kradzieży kieszonkowej: <strong>{characterData.Kradzież_KieszonkowaBonus}</strong>|</p>
+            <p className="attributes-description-text">|+ Otwierania zamków: <strong>{characterData.Otwieranie_ZamkówBonus}</strong>|</p>
+            <p className="attributes-description-text">|+ Znajdywania pułapek: <strong>{characterData.Znajdywanie_PułapekBonus}</strong>|</p>
+            <p className="attributes-description-text">|+ Cichego poruszania: <strong>{characterData.Ciche_PoruszanieBonus}</strong>|</p>
+            <p className="attributes-description-text">|+ Krycia w cieniu: <strong>{characterData.Krycie_W_CieniuBonus}</strong>|</p>
+            <p className="attributes-description-text">|+ Rozstawiania pułapek: <strong>{characterData.Rozstawianie_PułapekBonus}</strong>|</p>
+        </div>
+
+        {/* CONSTITUTION */}
+        <div className='d-flex flex-row' style={{ backgroundColor: "rgb(30, 30, 30)" }}>
+          <p className="attributes-description-text">|+ Zdrowie na poziom: <strong>{characterData.HPperLvBonus}</strong>|</p>
+            <p className="attributes-description-text">|Mocna głowa: <strong>{characterData.IntoxicationPerDrink}</strong>|</p>
+            <p className="attributes-description-text">|Próg zmęczenia: <strong>{characterData.fatigue}</strong>|</p>
+        </div>
+
+        {/* INTELIGENCE */}
+        <div className='d-flex flex-row' style={{ backgroundColor: "rgb(30, 30, 30)" }}>
+            <p className="attributes-description-text">|Max poziom zaklęć maga: <strong>{characterData.INTmaxSpellLevel}</strong>|</p>
+            <p className="attributes-description-text">|Max zaklęć maga na poziom: <strong>{characterData.INTspellPerLevel}</strong>|</p>
+            <p className="attributes-description-text">|Szansa przepisania zwoju: <strong>{characterData.scribeSuccessRate}</strong>|</p>
+            <p className="attributes-description-text">|+ Wiedza: <strong>{characterData.INTlore}</strong>|</p>
+        </div>
+
+        {/* WISDOM */}
+        <div className='d-flex flex-row' style={{ backgroundColor: "rgb(30, 30, 30)" }}>
+          <p className="attributes-description-text">|+ Zaklęć kleryka poziomu 1: <strong>{characterData.extraSpellSlotlv1}</strong>|</p>
+          <p className="attributes-description-text">|+ Zaklęć kleryka poziomu 2: <strong>{characterData.extraSpellSlotlv2}</strong>|</p>
+          <p className="attributes-description-text">|+ Zaklęć kleryka poziomu 3: <strong>{characterData.extraSpellSlotlv3}</strong>|</p>
+          <p className="attributes-description-text">|+ Zaklęć kleryka poziomu 4: <strong>{characterData.extraSpellSlotlv4}</strong>|</p>
+          <p className="attributes-description-text">|+ Wiedza: <strong>{characterData.WISlore}</strong>|</p>
+        </div>
+
+        {/* CHARISMA */}
+        <div className='d-flex flex-row' style={{ backgroundColor: "rgb(30, 30, 30)" }}>
+          <p className="attributes-description-text">|+ Reakcja NPC: <strong>{characterData.reaction}</strong>|</p>
+          <p  className="attributes-description-text">|Zniżka w sklepach: <strong>{characterData.buyDiscount}%</strong>|</p>
+        </div>
       </div>
     </>
   );

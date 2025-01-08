@@ -73,15 +73,15 @@ const WizardSpellRecord: React.FC<WizardSpellRecordProps>  = ({name, school, lev
     
 
   return(
-      <div>
+      <div style={{ backgroundColor: "rgb(30, 30, 30)"}}>
           <img 
               src={`http://localhost:3000/WizardSpells/WizardSpellsIcons/${iconData}`}
               alt="Wizard Spell Icon"
               style={{maxWidth: "50px", maxHeight: "50px"}}    
           />
-          <p>Nazwa: {name}, Szkola: {school}, Poziom: {level}, Hex: {hexData}</p>
-          <button className="statsButton" onClick={handleAddWizardSpell}>+</button>
-          <button className="statsButton" onClick={handleRemoveWizardSpell}>-</button>
+            <span>Nazwa: {name}, Szkola: {school}, Poziom: {level}</span>
+            <button className="attributes-button" onClick={handleAddWizardSpell}>+</button>
+            <button className="attributes-button" onClick={handleRemoveWizardSpell}>-</button>
       </div>
   )
 }

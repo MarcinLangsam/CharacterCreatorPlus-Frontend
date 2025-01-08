@@ -846,10 +846,10 @@ const Export: React.FC = () => {
     
   return (
     <>
-      <h1 className="secondaryText">Eksport postaci</h1>
-      <div className="secondaryBackground">
-        <input className="plainButton" type="submit" onClick={handelBackendFile} />
-        <button className="plainButton" onClick={saveCharacterToServer}>Zapisz postać w bazie</button>
+      <h2 className="secondary-text">Eksport postaci</h2>
+      <div className="creation-background">
+        <input className="standard-button" type="submit" onClick={handelBackendFile} value="Pobierz plik postaci"/>
+        {/*<button className="plainButton" onClick={saveCharacterToServer}>Zapisz postać w bazie</button>*/}
       </div>
     </>
     

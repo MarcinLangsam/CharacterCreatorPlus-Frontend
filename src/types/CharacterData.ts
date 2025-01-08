@@ -67,11 +67,12 @@ export interface ClericSpell {
 
 export interface CharacterData {
   //character creation data
+  level: number;
   name?: string
   gender?: string;
   portrait?: string;
-  race?: string;
-  classes?: string;
+  race: string;
+  classes: string;
   subclasses: string;
   character: string;
   attributes: CharacterAttributes;
@@ -82,13 +83,17 @@ export interface CharacterData {
 
   racialEnemy?: string;
   //details stats data
-  melleThac0?: number;
+  baseThac0: number;
+  melleThac0: number;
+  classBonusThac0: number;
   dmgBonus?: number;
   bashing?: number;
   weight?: number;
 
-  rangedThac0?: number;
-  AC?: number;
+  rangedThac0: number;
+  baseAC: number,
+  AC: number;
+  classBonusAC: number;
   Kradzież_KieszonkowaBonus?: number; //if kit allows this ability
   Otwieranie_ZamkówBonus?: number; //if kit allows this ability
   Znajdywanie_PułapekBonus?: number; //if kit allows this ability
@@ -96,23 +101,22 @@ export interface CharacterData {
   Krycie_W_CieniuBonus?: number; //if kit allows this ability
   Rozstawianie_PułapekBonus?: number; //if kit allows this ability
 
-  HPdice?: number;
-  HP?: number;
+  HPdice: number;
 
-  HPperLvBonus?: number;
+  HPperLvBonus: number;
   IntoxicationPerDrink?: number;
   fatigue?: number;
 
   INTmaxSpellLevel?: number; //only for mages/bards
   INTspellPerLevel?: number; //only for mages/bards
   scribeSuccessRate?: number;
-  INTlore?: number;
+  INTlore: number;
 
   extraSpellSlotlv1: number; //only for clerics/druids
   extraSpellSlotlv2: number; //only for clerics/druids
   extraSpellSlotlv3: number; //only for clerics/druids
   extraSpellSlotlv4: number; //only for clerics/druids
-  WISlore?: number;
+  WISlore: number;
 
   reaction?: number;
   buyDiscount?: number;

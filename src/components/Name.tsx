@@ -29,8 +29,8 @@ const Name: React.FC = () => {
   };
 
   return (
-    <div className='secondaryBackground'>
-      <label className='plainText'>
+    <div className='creation-background'>
+      <label className='secondary-text'>
         Imię postaci:
         <input
           className='textBox'
@@ -41,8 +41,8 @@ const Name: React.FC = () => {
           maxLength={19}
         />
       </label>
-      <button className="plainButton" onClick={saveName}>Zapisz imię</button>
-      <p className='plainText'>Aktualne imię: {characterData.name || '<Brak>'}</p>
+      <button className="standard-button" onClick={saveName}>Zapisz imię</button>
+      <span>Aktualne imię: {characterData.name || '<Brak>'}</span>
     </div>
   );
 };

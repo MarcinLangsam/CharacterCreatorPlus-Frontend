@@ -15,13 +15,34 @@ const subclassOptions: { [key: string]: string[] } = {
   Szaman: ['Szaman'],
 };
 
+const classThac0Bonuses = {
+  Zawadiaka: 2,
+  Zabójca: 1,
+  Kensai: 2,
+  Skald: 1,
+}
+
+const classACBonuses = {
+  Mnich: 4,
+  Mnich_Ciemnego_Księżyca: 4,
+  Mnich_Słonecznej_Duszy: 4,
+  Zawadiaka: 2,
+  Uczeń_Smoka: 2,
+  Kensai: 2,
+}
+
 const SubclassSelector: React.FC = () => {
   const { characterData, setCharacterData } = useCharacterContext();
 
   const setSubclass = (subclasses: string) => {
+    const Thaco0Bonus = classThac0Bonuses[characterData.subclasses as keyof typeof classThac0Bonuses] ?? 0;
+    const ACBonus = classACBonuses[characterData.subclasses as keyof typeof classACBonuses] ?? 0;
+
     setCharacterData((prevData) => ({
       ...prevData,
       subclasses: subclasses,
+      classBonusThac0: Thaco0Bonus,
+      classBonusAC: ACBonus,
     }));
   };
 
@@ -56,12 +77,15 @@ const SubclassSelector: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col secondaryBackground">
+    <div className="d-flex flex-col creation-background">
       {availableSubclasses().map((subclass) => (
-        <button key={subclass} className="tertiaryText" onClick={() => setSubclass(subclass)}>
+        <button key={subclass} className="creation-button" onClick={() => setSubclass(subclass)}>
           {subclass}
         </button>
       ))}
+      {characterData.subclasses != "" && (
+        <p className='chosen-creation-data'>Wybrano: {characterData.subclasses}</p>
+      )}
     </div>
   );
 };

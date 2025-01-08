@@ -55,16 +55,20 @@ const RacialEnemeyMenu: React.FC = () => {
 
     return(
         <>
-            <div className="proficiencysBackground">
-              <p className="plainTextBig">Wybierz wroga rasowego:</p>
+            <div className="creation-background">
+              <span>Wybierz wroga rasowego:</span>
               {selectedSubclass ? (
-                <div>
+                <div style={{backgroundColor: "rgb(30, 30, 30)"}}>
+                  {characterData.racialEnemy !== "" ? (
+                    <p className="chosen-creation-data">Wybrano: {characterData.racialEnemy}</p>
+                  ): null}
                   {Object.entries(racialEnemyData)
                   .map(([racialEnemy, value]) => (
                     <div key={racialEnemy}>
-                      <button className="tertiaryText" onClick={() => setRacialEenemy(racialEnemy,value)}>{racialEnemy}</button>
+                      <button className="creation-button" onClick={() => setRacialEenemy(racialEnemy,value)}>{racialEnemy}</button>
                     </div>
                   ))}
+                  
                 </div>
             ) : (
               <></>

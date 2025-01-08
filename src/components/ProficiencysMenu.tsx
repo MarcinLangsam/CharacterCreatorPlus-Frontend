@@ -84,23 +84,27 @@ const ProficiencysMenu: React.FC = () => {
 
     return(
         <>
-            <div className="proficiencysBackground">
-                <p className="plainTextBig">Pozostałe punkty biegłości: {proficiencysPoints}</p>
-                    {selectedSubclass ? (
-                        <div>
-                        {Object.entries(characterData.skills)
-                        .filter(([skill, value]) => backendProficiencys[skill] !== -1)
-                        .map(([skill, value]) => (
-                        <div key={skill}>
-                            <span className='plainText'>{skill}: {value}</span>
-                            <button className="statsButton" onClick={() => increaseSkill(skill as keyof WeaponProficiencys)}>+</button>
-                            <button className="statsButton" onClick={() => decreaseSkill(skill as keyof WeaponProficiencys)}>-</button>
-                        </div>
-                        ))}
+          <h2 className="secondary-text">Wybierz Biegłości</h2>
+          <div className="creation-background">
+              <span>Pozostałe punkty biegłości: {proficiencysPoints}</span>
+                  {selectedSubclass ? (
+                      <div style={{ backgroundColor: "rgb(30, 30, 30)" }}>
+                      {Object.entries(characterData.skills)
+                      .filter(([skill, value]) => backendProficiencys[skill] !== -1)
+                      .map(([skill, value]) => (
+                      <div key={skill} className="d-flex flex-row attributes-container" style={{ backgroundColor: "rgb(30, 30, 30)" }}>
+                          <span className='attributes-value'>{skill}:</span>
+                          <div className="attributes-buttons" style={{ backgroundColor: "rgb(30, 30, 30)" }}>
+                            <span>{value}</span>
+                            <button className="attributes-button" onClick={() => increaseSkill(skill as keyof WeaponProficiencys)}>+</button>
+                            <button className="attributes-button" onClick={() => decreaseSkill(skill as keyof WeaponProficiencys)}>-</button>
+                          </div>
+                      </div>
+                      ))}
                     </div>
-                    ) : (
-                    <p className="plainTextBig">Wybierz podklasę, aby zobaczyć dostępne biegłości.</p>
-                    )}
+                  ) : (
+                  <span>Wybierz podklasę, aby zobaczyć dostępne biegłości.</span>
+                  )}
             </div>
         </>
     )

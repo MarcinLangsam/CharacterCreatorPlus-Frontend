@@ -146,27 +146,26 @@ const ClericSpellsMenu: React.FC = () => {
 
     return(
         <>
-            <div className="buttonGroup">
-                    <button className="primaryButton" onClick={() => setCurrentSpellLevel(1)}>Poziom 1</button>
-                    <button className="primaryButton" onClick={() => setCurrentSpellLevel(2)}>Poziom 2</button>
-                    <button className="primaryButton" onClick={() => setCurrentSpellLevel(3)}>Poziom 3</button>
-                    <button className="primaryButton" onClick={() => setCurrentSpellLevel(4)}>Poziom 4</button>
+          <h2 className="secondary-text">Wybierz Zaklęcia {"=========> "}Zapamiętaj Zaklęcia</h2>
+          <div className="creation-background">
+              <div className="button-group" style={{ backgroundColor: "rgb(30, 30, 30)"}}>
+                      <button className="standard-button" onClick={() => setCurrentSpellLevel(1)}>Poziom 1</button>
+                      <button className="standard-button" onClick={() => setCurrentSpellLevel(2)}>Poziom 2</button>
+                      <button className="standard-button" onClick={() => setCurrentSpellLevel(3)}>Poziom 3</button>
+                      <button className="standard-button" onClick={() => setCurrentSpellLevel(4)}>Poziom 4</button>
+              </div>
+              <div className="d-flex flex-row" style={{ backgroundColor: "rgb(30, 30, 30)"}}>
+                  <div style={{ backgroundColor: "rgb(30, 30, 30)"}}>
+                      {characterData.clericSpells
+                          .filter((spell) => spell.level === currentSpellLevel)
+                          .map((spell, index) => (
+                              <div key={index} style={{ backgroundColor: "rgb(30, 30, 30)", border: "1px solid gray", margin: "10px", padding: "10px" }}>
+                                  <RememberClericSpellRecord name={spell.name} level={spell.level} iconData={spell.icon} rememberCount={spell.rememberCount} school={spell.school} />
+                              </div>
+                      ))}
+                  </div>
+              </div>
             </div>
-            <div className="flex flex-row">
-                <div className="proficiencysBackground">
-                    {characterData.clericSpells
-                        .filter((spell) => spell.level === currentSpellLevel)
-                        .map((spell, index) => (
-                            <div key={index} style={{ border: "1px solid gray", margin: "10px", padding: "10px" }}>
-                                <RememberClericSpellRecord name={spell.name} level={spell.level} iconData={spell.icon} rememberCount={spell.rememberCount} school={spell.school} />
-                            </div>
-                    ))}
-                </div>
-                <div>
-                
-                </div>
-            </div>
-
 
         </>
     )

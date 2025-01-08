@@ -12,6 +12,34 @@ const classesOptions: { [key: string]: string[] } = {
     Pół_Ork: ['Wojownik', 'Kapłan', 'Złodziej', 'Szaman'],
   };
 
+const baseThac0ForClasses = {
+  Wojownik: 14,
+  Łowca: 14,
+  Paladyn: 14,
+  Kapłan: 16,
+  Druid: 16,
+  Mag: 18,
+  Złodziej: 17,
+  Bard: 17,
+  Czarownik: 18,
+  Mnich: 14,
+  Szaman: 18,
+}
+
+const baseLevelForClasses = {
+  Wojownik: 7,
+  Łowca: 7,
+  Paladyn: 7,
+  Kapłan: 7,
+  Druid: 8,
+  Mag: 7,
+  Złodziej: 8,
+  Bard: 8,
+  Czarownik: 7,
+  Mnich: 7,
+  Szaman: 7,
+}
+
 const classes: React.FC = () => {
     const {characterData, setCharacterData} = useCharacterContext();
     const [classDescription, setClassDescription] = useState<string>();
@@ -41,12 +69,17 @@ const classes: React.FC = () => {
         if(classes === "Złodziej" || classes === "Bard"){hpdice = 6}
         if(classes === "Mag" || classes === "Czarownik"){hpdice = 4}
 
+        const thac0 = baseThac0ForClasses[classes as keyof typeof baseThac0ForClasses] ?? 17;
+        const level = baseLevelForClasses[classes as keyof typeof baseLevelForClasses] ?? 7;
+
         handelBackendFile(classes)
         setCharacterData((prevData) => ({
             ...prevData,
             classes: classes,
             subclasses: subclasses,
-            HPdice: hpdice
+            HPdice: hpdice,
+            baseThac0: thac0,
+            level: level,
         }));
     };
 
@@ -63,19 +96,27 @@ const classes: React.FC = () => {
 
     return(
     <>
-      <h2 className="secondaryText">Wybierz Klasę</h2>
-      <div className="flex flex-row">
-          <div className="flex flex-col secondaryBackground">
-              
+    <div className="d-flex flex-row">
+      <h2 className="secondary-text">Wybierz Klasę</h2>
+      {characterData.classes != "noneClass" && (
+        <h2 className="secondary-text">{" =======> "}Wybierz Podklasę</h2>
+      )}
+    </div>
+    
+      <div className="d-flex flex-row">
+          <div className="d-flex flex-col creation-background">
               {availableClasses().map((classes) => (
-                  <button className="tertiaryText" onClick={() => handleClassesChange(classes,'')}>
-                  {classes}
-              </button>
+                  <button className="creation-button" onClick={() => handleClassesChange(classes,'')}>
+                    {classes}
+                  </button>
               ))}
+              {characterData.classes != "noneClass" && (
+                <p className="chosen-creation-data">Wybrano: {characterData.classes}</p>
+              )}
           </div>
           <SubclassSelector />
-          <div className="descriptionBackground">
-            <p className="plainText">{classDescription}</p>
+          <div className="creation-background">
+          <span style={{ whiteSpace: "pre-wrap" }}>{classDescription}</span>
           </div>
       </div>
     </>

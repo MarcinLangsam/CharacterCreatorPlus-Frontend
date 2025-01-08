@@ -4,7 +4,7 @@ import { useCharacterContext } from "../context/CharacterContext";
 import { useExportDataContext } from "../context/ExportDataContext";
 
 
-const raseBonusThievingAbilities: Record<string, { skillsThief: Partial<ThievingAbilities>}> = {
+export const raseBonusThievingAbilities: Record<string, { skillsThief: Partial<ThievingAbilities>}> = {
   Człowiek : {
     skillsThief: {
       Otwieranie_Zamkow: 10,
@@ -84,7 +84,7 @@ const raseBonusThievingAbilities: Record<string, { skillsThief: Partial<Thieving
   },
 }
 
-type ThievingAbilityName =
+export type ThievingAbilityName =
   | 'Kradziez_Kieszonkowa'
   | 'Otwieranie_Zamkow'
   | 'Znajdywanie_Pulapek'
@@ -216,32 +216,34 @@ const ThievingAbilitiesMenu: React.FC = () => {
 
     return(
         <>
-        <div className="proficiencysBackground">
-          <p className="plainTextBig">Pozostałe punkty umiejętności złodziejskich: {ThievingAbilitiesPoints}</p>
-          {selectedSubclass ? (
-            <div>
-              {Object.entries(characterData.skillsThief)
-                .filter(([skillsThief, value]) => backednThievingAbilities[skillsThief] !== -1)
-                .map(([skillsThief, value]) => {
-                  const race = characterData.race || "Człowiek";
-                  const raceBonuses = getThievingSkillsForRace(race);
-                  const raceBonus = raceBonuses[skillsThief as keyof ThievingAbilities] || 0;
-                  const attributeBonus = getThievingAbilityBonus(skillsThief)
-                  
-                  return (
-                    <div key={skillsThief}>
-                      <span className='plainText'>
-                        {skillsThief}: {value} + {raceBonus} + {attributeBonus} = {value+raceBonus+attributeBonus}
-                      </span>
-                      <button className="statsButton" onClick={() => increaseThievingSkills(skillsThief as keyof ThievingAbilities)}>+</button>
-                      <button className="statsButton" onClick={() => decreaseThievingSkills(skillsThief as keyof ThievingAbilities)}>-</button>
-                    </div>
-                  );
-                })}
-            </div>
-          ) : (
-            <p className="plainTextBig">Wybierz podklasę, aby zobaczyć dostępne umiejętności złodziejskie.</p>
-          )}
+          <h2 className="secondary-text">Wybierz Umiejętności Złodziejskie</h2>
+          <div className="creation-background">
+            <span>Pozostałe punkty umiejętności złodziejskich: {ThievingAbilitiesPoints}</span>
+            {selectedSubclass ? (
+              <div  style={{ backgroundColor: "rgb(30, 30, 30)" }}>
+                {Object.entries(characterData.skillsThief)
+                  .filter(([skillsThief, value]) => backednThievingAbilities[skillsThief] !== -1)
+                  .map(([skillsThief, value]) => {
+                    const race = characterData.race || "Człowiek";
+                    const raceBonuses = getThievingSkillsForRace(race);
+                    const raceBonus = raceBonuses[skillsThief as keyof ThievingAbilities] || 0;
+                    const attributeBonus = getThievingAbilityBonus(skillsThief)
+                    
+                    return (
+                      <div key={skillsThief} className="d-flex flex-row attributes-container" style={{ backgroundColor: "rgb(30, 30, 30)" }}>
+                        <div className="attributes-buttons" style={{ backgroundColor: "rgb(30, 30, 30)" }}>
+                          <span className='attributes-value'>{skillsThief}:</span>
+                          <span>{value} + {raceBonus} + {attributeBonus} = {value+raceBonus+attributeBonus}</span>
+                          <button className="attributes-button" onClick={() => increaseThievingSkills(skillsThief as keyof ThievingAbilities)}>+</button>
+                          <button className="attributes-button" onClick={() => decreaseThievingSkills(skillsThief as keyof ThievingAbilities)}>-</button>
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
+            ) : (
+              <span>Wybierz podklasę, aby zobaczyć dostępne umiejętności złodziejskie.</span>
+            )}
           </div>
         </>
     )

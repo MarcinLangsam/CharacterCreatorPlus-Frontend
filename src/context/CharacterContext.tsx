@@ -66,7 +66,21 @@ const defaultCharacterData: CharacterData = {
   extraSpellSlotlv1: 0,
   extraSpellSlotlv2: 0,
   extraSpellSlotlv3: 0,
-  extraSpellSlotlv4: 0
+  extraSpellSlotlv4: 0,
+  race: 'noneRace',
+  classes: 'noneClass',
+  baseAC: 10,
+  AC: 0,
+  baseThac0: 0,
+  classBonusThac0: 0,
+  classBonusAC: 0,
+  level: 0,
+  HPdice: 0,
+  HPperLvBonus: 0,
+  melleThac0: 0,
+  rangedThac0: 0,
+  INTlore: 0,
+  WISlore: 0
 };
 
 const CharacterContext = createContext<CharacterContextType | undefined>(undefined);

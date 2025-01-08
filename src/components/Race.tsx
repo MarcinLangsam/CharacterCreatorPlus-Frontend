@@ -52,20 +52,23 @@ const Race: React.FC = () => {
 
     return(
     <>
-      <h2 className="secondaryText">Wybierz Rasę</h2>
-      <div className="flex flex-row">
-        <div className="flex flex-col secondaryBackground">
-            <button className="tertiaryText" onClick={() => handleRaceChange('Człowiek','','')}>Człowiek</button>
-            <button className="tertiaryText" onClick={() => handleRaceChange('Elf','','')}>Elf</button>
-            <button className="tertiaryText" onClick={() => handleRaceChange('Pół_Elf','','')}>Pół-Elf</button>
-            <button className="tertiaryText" onClick={() => handleRaceChange('Gnom','','')}>Gnom</button>
-            <button className="tertiaryText" onClick={() => handleRaceChange('Niziołek','','')}>Niziołek</button>
-            <button className="tertiaryText" onClick={() => handleRaceChange('Krasnolud','','')}>Krasnolud</button>
-            <button className="tertiaryText" onClick={() => handleRaceChange('Pół_Ork','','')}>Pół-Ork</button>
+      <h2 className="secondary-text">Wybierz Rasę</h2>
+      <div className="d-flex flex-row">
+        <div className="d-flex flex-col creation-background">
+            <button className="creation-button" onClick={() => handleRaceChange('Człowiek','','')}>Człowiek</button>
+            <button className="creation-button" onClick={() => handleRaceChange('Elf','','')}>Elf</button>
+            <button className="creation-button" onClick={() => handleRaceChange('Pół_Elf','','')}>Pół-Elf</button>
+            <button className="creation-button" onClick={() => handleRaceChange('Gnom','','')}>Gnom</button>
+            <button className="creation-button" onClick={() => handleRaceChange('Niziołek','','')}>Niziołek</button>
+            <button className="creation-button" onClick={() => handleRaceChange('Krasnolud','','')}>Krasnolud</button>
+            <button className="creation-button" onClick={() => handleRaceChange('Pół_Ork','','')}>Pół-Ork</button>
+            {characterData.race !== "noneRace" ? (
+              <p className="chosen-creation-data">Wybrano: {characterData.race}</p>
+            ): null}
         </div>
 
-        <div className="descriptionBackground">
-          <p className="plainText">{raceDescription}</p>
+        <div className="creation-background">
+          <span style={{ whiteSpace: "pre-wrap" }}>{raceDescription}</span>
         </div>
         
       </div>

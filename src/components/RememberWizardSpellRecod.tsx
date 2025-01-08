@@ -56,15 +56,15 @@ const RememberWizardSpellRecord: React.FC<WizardSpellRecordProps>  = ({name, lev
   };
     
   return(
-      <div>
+      <div style={{ backgroundColor: "rgb(30, 30, 30)"}}>
           <img 
               src={`http://localhost:3000/WizardSpells/WizardSpellsIcons/${iconData}`}
               alt="Wizard Spell Icon"
               style={{maxWidth: "50px", maxHeight: "50px"}}    
           />
-          <p>{name} Zapamiętanie:{rememberCount}</p>
-          <button className="statsButton" onClick={handleRememberWizardSpell}>+</button>
-          <button className="statsButton" onClick={handleForgetWizardSpell}>-</button>
+          <span>{name} Zapamiętanie:{rememberCount}</span>
+          <button className="attributes-button" onClick={handleRememberWizardSpell}>+</button>
+          <button className="attributes-button" onClick={handleForgetWizardSpell}>-</button>
       </div>
   )
 }

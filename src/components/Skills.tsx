@@ -241,14 +241,43 @@ const Skills: React.FC = () => {
 
   return (
     <>
-      <h2 className="secondaryText">Wybierz Biegłości</h2>
+      <h2 className="secondary-text">Wybierz Biegłości</h2>
+      <div className="button-group">
+        <button className="standard-button" onClick={() => setActiveCategory('proficiencys')}>
+          Biegłości
+        </button>
 
-      <div className="buttonGroup">
-        <button className="primaryButton" onClick={() => setActiveCategory('proficiencys')}>Biegłości</button>
-        <button className="primaryButton" onClick={() => setActiveCategory('thievingSKills')}>Umiejętności Złodziejskie</button>
-        <button className="primaryButton" onClick={() => setActiveCategory('racialEnemy')}>Wróg Rasowy</button>
-        <button className="primaryButton" onClick={() => setActiveCategory('wizardSpells')}>Zaklęcia Maga</button>
-        <button className="primaryButton" onClick={() => setActiveCategory('clericSpells')}>Zaklęcia Kleryka</button>
+        <button
+          className="standard-button"
+          onClick={() => ['Złodziej', 'Łowca', 'Szaman', 'Bard', 'Mnich'].includes(characterData.classes) && setActiveCategory('thievingSKills')}
+          disabled={!['Złodziej', 'Łowca', 'Szaman', 'Bard', 'Mnich'].includes(characterData.classes)}
+        >
+          Umiejętności Złodziejskie
+        </button>
+
+        <button
+          className="standard-button"
+          onClick={() => ['Mag', 'Czarownik', 'Bard'].includes(characterData.classes) && setActiveCategory('wizardSpells')}
+          disabled={!['Mag', 'Czarownik', 'Bard'].includes(characterData.classes)}
+        >
+          Zaklęcia Maga
+        </button>
+
+        <button
+          className="standard-button"
+          onClick={() => ['Kapłan', 'Druid', 'Szaman'].includes(characterData.classes) && setActiveCategory('clericSpells')}
+          disabled={!['Kapłan', 'Druid', 'Szaman'].includes(characterData.classes)}
+        >
+          Zaklęcia Kleryka
+        </button>
+
+        <button
+          className="standard-button"
+          onClick={() => ['Łowca'].includes(characterData.classes) && setActiveCategory('racialEnemy')}
+          disabled={!['Łowca'].includes(characterData.classes)}
+        >
+          Wróg Rasowy
+        </button>
       </div>
 
       <div className='m-5'>{renderContent()}</div>

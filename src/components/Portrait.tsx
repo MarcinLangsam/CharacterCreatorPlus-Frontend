@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useCharacterContext } from "../context/CharacterContext";
 import { useExportDataContext } from "../context/ExportDataContext";
-import Popup from "./PopupHelpPortrait";
+import Popup from "./popups/HelpPortraitPopup";
 
 interface PortraitNames {
   id: number;
@@ -150,26 +150,38 @@ const Portrait: React.FC = () => {
 
   return (
     <>
-      <h1 className="secondaryText">Wybierz Portret</h1>
-      <div className="flex flex-row">
-        <div className="secondaryBackground">
+      <h1 className="secondary-text">Wybierz Portret</h1>
+      <div className="d-flex flex-row">
+        <div>
+          <label htmlFor="file-upload" className="standard-button">
+            Dodaj własny portret
+          </label>
+          <input
+            id="file-upload"
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            style={{ display: "none" }}
+          />
+        </div>
+        <Popup/>
+      </div>
+      <div className="d-flex flex-row">
+        <div className="creation-background">
           {error && (
             <div style={{ marginTop: '10px', color: 'red' }}>
               <strong>Error:</strong> {error}
             </div>
           )}
-          <div className="flex flex-row" style={{display: 'flex', justifyContent: 'center'}}>
-            <button className="portraitButton" onClick={handlePrev} disabled={currentPortraitIndex === 0}>
-              {"<--"}
-            </button>
+          <div
+            className="d-flex flex-row justify-content-center align-items-center" style={{ backgroundColor: "rgb(30, 30, 30)"}}>
+            <button className="arrow-left" onClick={handlePrev} disabled={currentPortraitIndex === 0}/>
             <img
-              src={imagePreview}
-              alt="Current Portrait"
-              style={{ maxWidth: "300px", maxHeight: "300px" }}
+              src={characterData.portrait === "" ? "http://localhost:3000/images/nonePortrait.png" : imagePreview}
+              alt=""
+              style={{ maxWidth: "300px", maxHeight: "300px", margin: "5px" }}
             />
-            <button className="portraitButton" onClick={handleNext} disabled={currentPortraitIndex === portraitsData.length - 1}>
-              {"-->"}
-            </button>
+            <button className="arrow-right" onClick={handleNext} disabled={currentPortraitIndex === portraitsData.length - 1}/>
           </div>
         </div>
         <div style={{ display: "flex", flexWrap: "wrap", marginLeft: "15px", overflow: 'auto', width: '75%', height: '65vh' }}>
@@ -199,10 +211,7 @@ const Portrait: React.FC = () => {
             ))}
           </div>
       </div>
-      <div className="flex flex-row">
-      <input className="plainButton" type="file" accept="image/*" onChange={handleFileChange} />
-      <Popup/>
-      </div>
+      
     </>
   );
 };

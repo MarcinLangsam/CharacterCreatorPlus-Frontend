@@ -56,15 +56,15 @@ const RememberClericSpellRecord: React.FC<ClericSpellRecordProps>  = ({name, lev
   };
     
   return(
-      <div>
+      <div style={{ backgroundColor: "rgb(30, 30, 30)"}}>
           <img 
               src={`http://localhost:3000/ClericSpells/ClericSpellsIcons/${iconData}`}
               alt="Cleric Spell Icon"
               style={{maxWidth: "50px", maxHeight: "50px"}}    
           />
-          <p>{name},{school} Zapamiętanie:{rememberCount}</p>
-          <button className="statsButton" onClick={handleRememberClericSpell}>+</button>
-          <button className="statsButton" onClick={handleForgetClericSpell}>-</button>
+          <span>{name},{school} Zapamiętanie:{rememberCount}</span>
+          <button className="attributes-button" onClick={handleRememberClericSpell}>+</button>
+          <button className="attributes-button" onClick={handleForgetClericSpell}>-</button>
       </div>
   )
 }
