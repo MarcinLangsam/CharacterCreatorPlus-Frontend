@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useCharacterContext } from "../context/CharacterContext";
 import { useExportDataContext } from "../context/ExportDataContext";
-import SpellDescriptionPopup from "./popups/SpellDescriptionPopup";
+import SpellDescriptionPopup from "./popups/BhaalDescriptionPopup";
 
 const alignmentOptions: { [key: string]: string[]} = {
     //Warriors subclasses

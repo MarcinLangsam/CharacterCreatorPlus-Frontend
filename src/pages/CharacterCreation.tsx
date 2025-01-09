@@ -67,7 +67,7 @@ const CharacterCreation: React.FC = () => {
       <div className="main-content">
         <div className="m-5">{renderContent()}</div>
       </div>
-      <div className="side-panel">
+      <div>
         <SidePanel />
       </div>
     </div>

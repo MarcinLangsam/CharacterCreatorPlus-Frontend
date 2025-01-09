@@ -55,24 +55,31 @@ const RacialEnemeyMenu: React.FC = () => {
 
     return(
         <>
-            <div className="creation-background">
-              <span>Wybierz wroga rasowego:</span>
-              {selectedSubclass ? (
-                <div style={{backgroundColor: "rgb(30, 30, 30)"}}>
-                  {characterData.racialEnemy !== "" ? (
-                    <p className="chosen-creation-data">Wybrano: {characterData.racialEnemy}</p>
-                  ): null}
-                  {Object.entries(racialEnemyData)
-                  .map(([racialEnemy, value]) => (
-                    <div key={racialEnemy}>
-                      <button className="creation-button" onClick={() => setRacialEenemy(racialEnemy,value)}>{racialEnemy}</button>
-                    </div>
-                  ))}
-                  
-                </div>
-            ) : (
-              <></>
-            )}
+          <h2 className="secondary-text">Wybierz wroga rasowego:</h2>
+          <div className="d-flex flex-row" style={{backgroundColor: "rgb(30, 30, 30)"}}>
+              <div className="creation-background">
+                {selectedSubclass ? (
+                  <div style={{backgroundColor: "rgb(30, 30, 30)"}}>
+                    {characterData.racialEnemy !== "" ? (
+                      <p className="chosen-creation-data">Wybrano: {characterData.racialEnemy}</p>
+                    ): null}
+                    {Object.entries(racialEnemyData)
+                    .map(([racialEnemy, value]) => (
+                      <div key={racialEnemy}>
+                        <button className="creation-button" onClick={() => setRacialEenemy(racialEnemy,value)}>{racialEnemy}</button>
+                      </div>
+                    ))}
+                    
+                  </div>
+              ) : (
+                <></>
+              )}
+              </div>
+              <div className="creation-background">
+                  <span>
+                      Łowca może wybrać jednego wroga rasowego z którym w walce będzie otrzymywał bonus do trafienia (Thac0) +4 oraz zadawał +4 punkty obrażeń.
+                  </span>
+              </div>
             </div>
         </>
     )

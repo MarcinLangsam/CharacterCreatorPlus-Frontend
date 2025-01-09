@@ -146,7 +146,7 @@ const ClericSpellsMenu: React.FC = () => {
 
     return(
         <>
-          <h2 className="secondary-text">Wybierz Zaklęcia {"=========> "}Zapamiętaj Zaklęcia</h2>
+          <h2 className="secondary-text">Zapamiętaj Zaklęcia</h2>
           <div className="creation-background">
               <div className="button-group" style={{ backgroundColor: "rgb(30, 30, 30)"}}>
                       <button className="standard-button" onClick={() => setCurrentSpellLevel(1)}>Poziom 1</button>

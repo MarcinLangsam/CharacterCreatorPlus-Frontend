@@ -139,6 +139,24 @@ div {
   max-width: 600px;
 }
 
+.sidepanel-background {
+  background-color: rgb(30, 30, 30); /* Bardzo ciemne szare tło */
+  margin-top: 10px; /* Margines */
+  padding: 15px; /* Wewnętrzne odstępy */
+  box-shadow: 0 0 5px rgba(139, 69, 19, 0.6), inset 0 0 5px rgba(0, 0, 0, 0.5); /* Zewnętrzny blask brązu i wklęsły efekt */
+  display: flex; /* Rozkład elementów */
+  flex-direction: column; /* Ustawienie elementów w kolumnie */
+  min-width: 500px; /* Minimalna szerokość */
+  width: fit-content; /* Dopasowanie szerokości do zawartości */
+  border: 4px solid rgb(139, 69, 19); /* Ciemny brązowy kolor */
+  border-radius: 10px; /* Zaokrąglone rogi */
+  background-image: linear-gradient(to bottom, rgba(60, 30, 15, 0.3), rgba(30, 30, 30, 0.8)); /* Subtelne gradientowe zdobienie tła */
+  align-self: flex-start; /* Pozwala elementowi rozszerzać się w pionie */
+  position: relative; /* Pozycja względem strony */
+  overflow: visible; /* Brak przewijania */
+  min-width: 600px;
+}
+
 .attributes-background {
   background-color: rgb(30, 30, 30); /* Bardzo ciemne szare tło */
   min-height: 300px; /* Minimalna wysokość */
@@ -277,6 +295,14 @@ span {
   padding: 5px;
   margin: 10px;
   font-style: italic;
+}
+
+.center-text {
+  font-size: 1.5rem; /* Zwiększony rozmiar czcionki */
+  padding: 5px; /* Odstęp wewnętrzny */
+  margin: 5px; /* Odstęp zewnętrzny */
+  font-style: normal; /* Usunięcie pochylenia */
+  text-align: center; /* Wycentrowanie tekstu */
 }
 
 .category-button {
