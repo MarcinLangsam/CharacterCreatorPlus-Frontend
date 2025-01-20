@@ -401,3 +401,38 @@ span {
   border-width: 25px 25px 25px 0;
   border-color: transparent rgb(139, 69, 19) transparent transparent;
 }
+
+.popup-description {
+  color: rgb(210, 180, 140);
+  text-decoration: underline;
+  background-color: rgb(30, 30, 30);
+  font-family: "Morris Roman", serif;
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse; /* Usuń odstępy między komórkami */
+  background-color: rgb(30, 30, 30); /* Ciemne tło */
+  font-family: "Morris Roman", serif; /* Styl tekstu */
+  color: white; /* Kolor tekstu */
+  font-size: 0.9rem; /* Zmniejszony rozmiar czcionki */
+}
+
+th, td {
+  border: 1px solid white; /* Cienka biała ramka */
+  padding: 2px 3px; /* Zmniejszone wewnętrzne odstępy */
+  text-align: center; /* Wyśrodkowanie tekstu */
+}
+
+th {
+  background-color: rgb(50, 50, 50); /* Jaśniejsze tło dla nagłówków */
+  font-weight: bold; /* Pogrubienie nagłówków */
+}
+
+tr:nth-child(even) {
+  background-color: rgb(40, 40, 40); /* Alternatywne tło dla parzystych wierszy */
+}
+
+tr:nth-child(odd) {
+  background-color: rgb(30, 30, 30); /* Tło dla nieparzystych wierszy */
+}
