@@ -21,7 +21,7 @@ const SidePanelCharacteristic: React.FC = () => {
             <li>Rasa: {characterData.race !== "noneRace" ? characterData.race : ""}</li>
             <li>Klasa: {characterData.classes !== "noneClass" ? characterData.classes : ""}</li>
             <li>Podklasa: {characterData.subclasses}</li>
-            <li>Charakter: {characterData.character}</li>
+            <li>Charakter: {characterData.aligment}</li>
         </ul>
 
         <p className="center-text">Atrybuty:</p>

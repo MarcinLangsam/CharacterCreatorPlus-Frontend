@@ -18,7 +18,7 @@ const CreationSummary: React.FC = () => {
             <p>Rasa: {characterData.race}</p>
             <p>Klasa: {characterData.classes}</p>
             <p>Podklasa: {characterData.subclasses}</p>
-            <p>Charakter: {characterData.character}</p>
+            <p>Charakter: {characterData.aligment}</p>
             <p>----------------------------------------------------</p>
             <p>Atrybuty: 
                 <ul className="ml-5">

@@ -57,9 +57,9 @@ const ClericSpellsMenu: React.FC = () => {
               
                 if (
                   (spellName === "Święte Uderzenie" &&
-                    !(characterData.character.includes("Neutralny") || characterData.character.includes("Dobry"))) ||
+                    !(characterData.aligment.includes("Neutralny") || characterData.aligment.includes("Dobry"))) ||
                   (spellName === "Przeklęta Strefa" &&
-                    !(characterData.character.includes("Neutralny") || characterData.character.includes("Zły")))
+                    !(characterData.aligment.includes("Neutralny") || characterData.aligment.includes("Zły")))
                 ) {
                   continue;
                 }

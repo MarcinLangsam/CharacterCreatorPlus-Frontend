@@ -103,7 +103,7 @@ const CharacterAlignment: React.FC = () => {
                 }
                 const alignment = await alignmentResponse.json();
                 const selectedAlignment = alignment.find(
-                    (data: { alignment: string | undefined }) => data.alignment === characterData.character
+                    (data: { alignment: string | undefined }) => data.alignment === characterData.aligment
                 );
 
                 if (selectedAlignment) {
@@ -131,13 +131,13 @@ const CharacterAlignment: React.FC = () => {
 
         fetchAndInitializeData();
 
-    }, [characterData.character]);
+    }, [characterData.aligment]);
 
 
     const handleCharacterAligmentChange = (character: string) => {
         setCharacterData((prevData) => ({
             ...prevData,
-            character: character,
+            aligment: character,
         }));
 
         let characterHex = ""
@@ -174,8 +174,8 @@ const CharacterAlignment: React.FC = () => {
                     {alignment}
                 </button>
                 ))}
-                {characterData.character != "" && (
-                <p className="chosen-creation-data">Wybrano: {characterData.character}</p>
+                {characterData.aligment != "" && (
+                <p className="chosen-creation-data">Wybrano: {characterData.aligment}</p>
               )}
             </div>
             <div className="d-flex flex-col creation-background">
@@ -195,7 +195,7 @@ const CharacterAlignment: React.FC = () => {
                     {bhallspawnAbilities && bhallspawnAbilities.length > 0 ? (
                         bhallspawnAbilities
                             .filter((ability) =>
-                                BhaalspawnAbilitiesByAligment[characterData.character]?.includes(ability.name)
+                                BhaalspawnAbilitiesByAligment[characterData.aligment]?.includes(ability.name)
                             )
                             .map((ability, index) => (
                                 <div key={`${ability.id}-${index}`} style={{ backgroundColor: "rgb(30, 30, 30)" }}>

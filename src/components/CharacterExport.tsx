@@ -822,10 +822,13 @@ const Export: React.FC = () => {
   }
 
   const saveCharacterToServer = async () => {
+
+    console.log(characterData.skillsThief);
+
     const payload = {
       ...characterData,
       skills: characterData.skills,
-      //skillsThief: characterData.skillsThief,
+      skillsThief: characterData.skillsThief,
     };
 
     const response = await fetch('http://localhost:3000/sendCharacter',{
@@ -849,7 +852,7 @@ const Export: React.FC = () => {
       <h2 className="secondary-text">Eksport postaci</h2>
       <div className="creation-background">
         <input className="standard-button" type="submit" onClick={handelBackendFile} value="Pobierz plik postaci"/>
-        {/*<button className="plainButton" onClick={saveCharacterToServer}>Zapisz postać w bazie</button>*/}
+        <button className="plainButton" onClick={saveCharacterToServer}>Zapisz postać w bazie</button>
       </div>
     </>
     

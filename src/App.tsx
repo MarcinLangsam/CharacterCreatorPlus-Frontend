@@ -5,6 +5,7 @@ import CharacterCreation from './pages/CharacterCreation';
 import Navbar from './components/Navbar';
 import { CharacterProvider } from './context/CharacterContext';
 import { ExportDataProvider } from './context/ExportDataContext';
+import InstructionPage from './pages/Instruction';
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
          <Routes>
            <Route path="/" element={<MainMenu />} />
            <Route path="/CharacterCreation" element={<CharacterCreation />} />
+           <Route path="/Instruction" element={<InstructionPage />} />
          </Routes>
        </Router>
      </CharacterProvider>

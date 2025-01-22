@@ -294,7 +294,6 @@ span {
   font-size: 1.4rem;
   padding: 5px;
   margin: 10px;
-  font-style: italic;
 }
 
 .center-text {
@@ -435,4 +434,80 @@ tr:nth-child(even) {
 
 tr:nth-child(odd) {
   background-color: rgb(30, 30, 30); /* Tło dla nieparzystych wierszy */
+}
+
+
+.vertical-rectangle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(30, 30, 30);
+  border: 3px solid white;
+  border-radius: 10px;
+  width: 450px; /* Szerokość prostokąta */
+  height: 550px; /* Wysokość prostokąta */
+  padding: 20px;
+  position: relative;
+  margin: 25px;
+}
+
+.vertical-rectangle-button {
+  font-size: 6rem;
+  border: none;
+  width: 200px;
+  height: 300px;
+  background-color: rgb(70, 70, 70);
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center; /* Wyśrodkowanie tekstu w poziomie */
+  display: grid; /* Aktywacja Grid */
+  place-items: center;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  border: 3px solid white;
+  border-radius: 10px;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.vertical-rectangle-button:hover {
+  color: rgb(255, 215, 0); /* Złoty tekst przy najechaniu */
+  border: 3px solid rgb(255, 215, 0);
+  transform: scale(1.05); /* Delikatne powiększenie */
+}
+
+.vertical-rectangle-text {
+  flex-grow: 1;
+  margin-left: 10px;
+  font-size: 3rem;
+  color: white;
+  text-align: center;
+  background-color: rgb(30, 30, 30);
+}
+
+
+.character-rectangle-button {
+  font-size: 6rem;
+  border: none;
+  max-width: 300px;
+  max-height: 300px;
+  background-color: rgb(70, 70, 70);
+  color: white;
+  text-decoration: none;
+  text-align: center; /* Wyśrodkowanie tekstu w poziomie */
+  display: grid; /* Aktywacja Grid */
+  place-items: center;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  border: 3px solid white;
+  border-radius: 10px;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.character-rectangle-text {
+  flex-grow: 1;
+  margin-left: 15px;
+  font-size: 1.3rem;
+  color: white;
+  text-align: left;
+  background-color: rgb(30, 30, 30);
 }

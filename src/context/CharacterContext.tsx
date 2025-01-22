@@ -61,7 +61,7 @@ const defaultCharacterData: CharacterData = {
   skillsThief: defaultThievingAbilities,
   wizardSpells: [],
   clericSpells: [],
-  character: '',
+  aligment: '',
   subclasses: '',
   extraSpellSlotlv1: 0,
   extraSpellSlotlv2: 0,

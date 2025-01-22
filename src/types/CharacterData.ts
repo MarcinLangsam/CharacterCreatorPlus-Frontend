@@ -74,7 +74,7 @@ export interface CharacterData {
   race: string;
   classes: string;
   subclasses: string;
-  character: string;
+  aligment: string;
   attributes: CharacterAttributes;
   skills: WeaponProficiencys;
   skillsThief:  ThievingAbilities;

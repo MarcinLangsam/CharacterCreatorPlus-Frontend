@@ -3,17 +3,6 @@ import { useCharacterContext } from "../context/CharacterContext";
 import { useExportDataContext } from "../context/ExportDataContext";
 import Popup from "./popups/HelpPortraitPopup";
 
-interface PortraitNames {
-  id: number;
-  fileName: string;
-}
-
-interface PortraitData {
-  id: number;
-  name: string; // nazwa pliku
-  url: string;  // URL wygenerowany z danych blob
-}
-
 type Portrait = {
   id: number;
   fileName: string;
@@ -92,7 +81,7 @@ const Portrait: React.FC = () => {
         setImagePreview(fileUrl);
         setCharacterData((prev) => ({
             ...prev,
-            portrait: fileUrl,
+            portrait: baseName,
         }))
 
         setFileName(baseName);
@@ -113,7 +102,7 @@ const Portrait: React.FC = () => {
     setImagePreview(fileUrl);
     setCharacterData((prev) => ({
         ...prev,
-        portrait: fileUrl,
+        portrait: name,
     }))
 
     setFileName(name);
