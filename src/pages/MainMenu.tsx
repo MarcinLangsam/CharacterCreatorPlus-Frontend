@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import CreateNewCharacter from '../components/CreateNewCharacter';
-import CreatedCharacter from '../components/CreatedCharacter';
+import CreatedCharacterPanel from '../components/CreatedCharacter';
 
-interface CreatedCharacter {
+export interface CreatedCharacter {
   level: number;
   name: string;
   gender: string;
@@ -90,7 +90,7 @@ const MainMenu: React.FC = () => {
     <div className='d-flex flex-wrap'>
       {characterList && characterList.length > 0 ? (
         characterList.map((character, index) => (
-          <CreatedCharacter
+          <CreatedCharacterPanel
             key={index}
             name={character.name}
             race={character.race}
@@ -98,6 +98,7 @@ const MainMenu: React.FC = () => {
             subclasses={character.subclasses}
             portrait={character.portrait}
             gender={character.gender}
+            createdCharacter={character}
           />
         ))
       ) : (
