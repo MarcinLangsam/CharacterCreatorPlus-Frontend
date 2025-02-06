@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useCharacterContext } from "../context/CharacterContext";
 import { useExportDataContext } from "../context/ExportDataContext";
+import RaceHelpPopup from "./popups/RaceHelpPopup";
 
 const Race: React.FC = () => {
 
@@ -52,8 +53,8 @@ const Race: React.FC = () => {
 
     return(
     <>
-      <h2 className="secondary-text">Wybierz Rasę</h2>
       <div className="d-flex flex-row">
+        <div style={{ marginTop: "5px" }}><RaceHelpPopup/></div>
         <div className="d-flex flex-col creation-background">
             <button className="creation-button" onClick={() => handleRaceChange('Człowiek','','')}>Człowiek</button>
             <button className="creation-button" onClick={() => handleRaceChange('Elf','','')}>Elf</button>

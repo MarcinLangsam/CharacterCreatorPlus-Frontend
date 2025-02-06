@@ -20,6 +20,7 @@ const Thac0DescriptionPopup: React.FC  = () => {
                                 <span>
                                 Thac0 (pl. Trak0) - jest to akronim "To Hit Armor Class 0". 
                                 Jest miarą szansy na skutecznie trafienie podczas ataku. 
+                                Wartość przedstawiona w panelu statystyk to WARTOŚĆ BAZOWA - BONUS STATYSTYK - BONUS KLASOWY
                                 <b> Im mniejsza liczba tym lepiej.</b>
                                 <br/><br/>
                                 Za każdym razem kiedy jakieś stworzenie wyprowadza atak następuje rzut 20 ścienną kością.

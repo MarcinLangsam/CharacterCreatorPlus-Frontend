@@ -39,7 +39,7 @@ export interface ThievingAbilities {
 
 export interface CharacterAttributes {
   strength: number;
-  strenghtModifier: number; // only for warriors/hunters/paladins
+  strengthModifier: number; // only for warriors/hunters/paladins
   agility: number;
   constitution: number;
   intelligence: number;

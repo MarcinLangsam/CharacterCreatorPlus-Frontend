@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useExportDataContext } from "../context/ExportDataContext";
 import { useCharacterContext } from "../context/CharacterContext";
 import { WeaponProficiencys } from "../types/CharacterData";
+import ProficiencysHelpPopup from "./popups/ProficiencysHelpPopup";
 
 const ProficiencysMenu: React.FC = () => {
     const { characterData, setCharacterData } = useCharacterContext();
@@ -84,7 +85,7 @@ const ProficiencysMenu: React.FC = () => {
 
     return(
         <>
-          <h2 className="secondary-text">Wybierz Biegłości</h2>
+          <div style={{ marginTop: "5px" }}><ProficiencysHelpPopup/></div>
           <div className="creation-background">
               <span>Pozostałe punkty biegłości: {proficiencysPoints}</span>
                   {selectedSubclass ? (
@@ -103,7 +104,7 @@ const ProficiencysMenu: React.FC = () => {
                       ))}
                     </div>
                   ) : (
-                  <span>Wybierz podklasę, aby zobaczyć dostępne biegłości.</span>
+                  <span style={{ color: "red" }}>Wybierz podklasę, aby zobaczyć dostępne biegłości.</span>
                   )}
             </div>
         </>

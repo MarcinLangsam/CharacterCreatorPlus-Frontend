@@ -5,12 +5,20 @@ import { useExportDataContext } from '../context/ExportDataContext';
 const Name: React.FC = () => {
   const { characterData, setCharacterData } = useCharacterContext();
   const { exportData, setExportData } = useExportDataContext();
+  const [error, setError] = useState<string | null>(null);
   const [nameInput, setNameInput] = useState(characterData.name || '');
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNameInput(e.target.value);
   };
 
   const saveName = () => {
+
+    if (nameInput.length > 19) {
+      setError('Imię może zawierać maksymalnie 19 znaków');
+      return;
+    }
+
+    setError(null);
 
     const nameHex = Array.from(nameInput).map((char) =>
       char.charCodeAt(0).toString(16)
@@ -42,7 +50,13 @@ const Name: React.FC = () => {
         />
       </label>
       <button className="standard-button" onClick={saveName}>Zapisz imię</button>
-      <span>Aktualne imię: {characterData.name || '<Brak>'}</span>
+      <span>Aktualne imię: {characterData.name || '<Brak>'}</span><br/>
+      <span>Imię postaic może zawierać maksymalnie 19 znaków</span>
+      {error && (
+            <div style={{ marginTop: '10px', color: 'red' }}>
+              <strong>Uwaga:</strong> {error}
+            </div>
+      )}
     </div>
   );
 };

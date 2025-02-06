@@ -18,7 +18,7 @@ const alignmentOptions: { [key: string]: string[]} = {
     Władca_Zwierząt: ['Praworządny Dobry', 'Neytralny Dobry', 'Chotyczny Dobry'],
     //Paladin subclasses
     Paladyn: ['Praworządny Dobry'],
-    Kawalerzysta: ['Praworządny Dobry'],
+    Kawaler: ['Praworządny Dobry'],
     Inkwizytor: ['Praworządny Dobry'],
     Łowca_Nieumarłych: ['Praworządny Dobry'],
     Czarny_Strażnik: ['Praworządny Zły', 'Neutralny Zły', 'Chotyczny Zły'],
@@ -40,7 +40,7 @@ const alignmentOptions: { [key: string]: string[]} = {
     Mistrz_Przywołań: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
     Mistrz_Pozanania: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
     Mistrz_Zauroczeń: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Ilizjonista: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Iluzjonista: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
     Mistrz_Inwokacji: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
     Nekromanta: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
     Mistrz_Przemian: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
@@ -166,7 +166,6 @@ const CharacterAlignment: React.FC = () => {
     
     return(
     <>
-        <h2 className="secondary-text">Wybierz Charakter</h2>
         <div className="d-flex flex-row">
             <div className="d-flex flex-col creation-background">
                 {availableAlignments().map((alignment) => (
@@ -208,7 +207,7 @@ const CharacterAlignment: React.FC = () => {
                                 </div>
                             ))
                     ) : (
-                        <span>Wybierz charakter aby zobaczyć dostępne zaklęcia</span>
+                        <span style={{color: "red"}}>Wybierz charakter aby zobaczyć dostępne zaklęcia</span>
                     )}
                     </div>
                 </span>

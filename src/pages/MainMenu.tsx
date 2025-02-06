@@ -12,6 +12,7 @@ export interface CreatedCharacter {
   subclasses: string;
   aligment: string,
   strength: number;
+  strengthModifier: number;
   agility: number,
   constitution: number,
   intelligence: number,
@@ -73,7 +74,6 @@ const MainMenu: React.FC = () => {
         }
         const data = await response.json();
         setCharacterList(data)
-        console.log(data)
       }
     } catch (error) {
       console.error("Error fetching characters:", error);
@@ -102,7 +102,7 @@ const MainMenu: React.FC = () => {
           />
         ))
       ) : (
-        <p>{characterList === undefined ? 'Loading characters...' : 'No characters found.'}</p>
+        <p>{characterList === undefined ? 'Wczytywanie postaci...' : null }</p>
       )}
 
       <CreateNewCharacter/>

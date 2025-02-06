@@ -6,7 +6,7 @@ import Thac0DescriptionPopup from "../components/popups/Thac0DescriptionPopup";
 const InstructionPage: React.FC = () => {
     return(
         <>
-            <div style={{ margin: "20px" }}>
+            <div className="main-content" style={{ margin: "20px" }}>
                 <h1 className="primary-text" style={{ textAlign: "left" }}>1. Podstrony</h1>
                 <p style={{ fontSize: "1.4rem", margin: "20px" }}>
                     MENU POSTACI - z tego menu możesz zarządzać swoimi postaciami, wyświetla ona stworzone przez ciebie

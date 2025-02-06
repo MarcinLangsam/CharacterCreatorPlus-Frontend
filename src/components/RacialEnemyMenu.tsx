@@ -55,7 +55,6 @@ const RacialEnemeyMenu: React.FC = () => {
 
     return(
         <>
-          <h2 className="secondary-text">Wybierz wroga rasowego:</h2>
           <div className="d-flex flex-row" style={{backgroundColor: "rgb(30, 30, 30)"}}>
               <div className="creation-background">
                 {selectedSubclass ? (
@@ -65,7 +64,7 @@ const RacialEnemeyMenu: React.FC = () => {
                     ): null}
                     {Object.entries(racialEnemyData)
                     .map(([racialEnemy, value]) => (
-                      <div key={racialEnemy}>
+                      <div key={racialEnemy}  style={{backgroundColor: "rgb(30, 30, 30)"}}>
                         <button className="creation-button" onClick={() => setRacialEenemy(racialEnemy,value)}>{racialEnemy}</button>
                       </div>
                     ))}

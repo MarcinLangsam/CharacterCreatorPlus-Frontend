@@ -19,7 +19,8 @@ const AcDescriptionPopup: React.FC  = () => {
                             <div className='d-flex flex-row' style={{ backgroundColor: "rgb(30, 30, 30)"}}>
                                 <span>
                                 Klasa Pancerza, KP (ang. Armor Class, AC) - reprezetuje umiejętności unikania, blokowania oraz parowania fizycznych ataków przez postać. 
-                                Klasa Pancerza NIE redukuje otrzymanych obrażeń, sprawia, że postać jest trudniejsza do trafienia.<br/>
+                                Klasa Pancerza NIE redukuje otrzymanych obrażeń, sprawia, że postać jest trudniejsza do trafienia.
+                                Wartość przedstawiona w panelu statystyk to WARTOŚĆ BAZOWA - BONUS STATYSTYK - BONUS KLASOWY<br/>
                                 Wzór na skuteczne uniknięcie ciosu wygląda następująco:<br/>
                                 Klasa pancerza {"<"} Thaco0 - Rrzut Ataku
                                 <br/><br/>

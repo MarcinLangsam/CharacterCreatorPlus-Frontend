@@ -27,7 +27,6 @@ const Gender: React.FC = () => {
      
     return(
     <>
-        <h2 className="secondary-text">Wybierz Płeć</h2>
         <div className="d-flex flex-row">
             <div className="creation-background">
                 <button className="creation-button" onClick={() => handleGenderChange('Mężczyzna')}>Mężczyzna</button>

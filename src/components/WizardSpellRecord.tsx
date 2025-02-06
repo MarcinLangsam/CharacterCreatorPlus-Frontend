@@ -61,7 +61,6 @@ const WizardSpellRecord: React.FC<WizardSpellRecordProps>  = ({name, school, lev
       wizardSpell: [...prev.wizardSpell, spellHex]
     }))
 
-    
   };
 
   const handleRemoveWizardSpell = () => {
@@ -79,9 +78,10 @@ const WizardSpellRecord: React.FC<WizardSpellRecordProps>  = ({name, school, lev
               alt="Wizard Spell Icon"
               style={{maxWidth: "50px", maxHeight: "50px"}}    
           />
-            <span>Nazwa: {name}, Szkola: {school}, Poziom: {level}</span>
-            <button className="attributes-button" onClick={handleAddWizardSpell}>+</button>
-            <button className="attributes-button" onClick={handleRemoveWizardSpell}>-</button>
+          <span>Nazwa: {name}</span><br/>
+          <span> Szkola: {school}</span><br/>
+          <button className="attributes-button" onClick={handleAddWizardSpell}>+</button>
+          <button className="attributes-button" onClick={handleRemoveWizardSpell}>-</button>
       </div>
   )
 }

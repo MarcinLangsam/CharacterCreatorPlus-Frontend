@@ -50,7 +50,6 @@ const CharacterCreation: React.FC = () => {
 
   return (
   <div>
-    <h1 className="primary-text">Tworzenie Postaci</h1>
     <div className="button-group">
       <button className="category-button" onClick={() => setActiveSection("gender")}>Płeć</button>
       <button className="category-button" onClick={() => setActiveSection("portrait")}>Portret</button>

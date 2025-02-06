@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useCharacterContext } from "../context/CharacterContext";
 import SubclassSelector from "./SubclassSelector";
+import ClassHelpPopup from "./popups/ClassHelpPopup";
 
 const classesOptions: { [key: string]: string[] } = {
     Człowiek: ['Wojownik', 'Łowca', 'Paladyn', 'Kapłan', 'Druid', 'Mag', 'Złodziej', 'Bard', 'Czarownik', 'Mnich', 'Szaman'],
@@ -63,12 +64,6 @@ const classes: React.FC = () => {
   
 
     const handleClassesChange = (classes: string, subclasses: string) => {
-        let hpdice = 0
-        if(classes === "Wojownik" || classes === "Paladyn" || classes === "Łowca"){hpdice = 10}
-        if(classes === "Kapłan" || classes === "Druid" || classes === "Mnich" || classes === "Szaman"){hpdice = 8}
-        if(classes === "Złodziej" || classes === "Bard"){hpdice = 6}
-        if(classes === "Mag" || classes === "Czarownik"){hpdice = 4}
-
         const thac0 = baseThac0ForClasses[classes as keyof typeof baseThac0ForClasses] ?? 17;
         const level = baseLevelForClasses[classes as keyof typeof baseLevelForClasses] ?? 7;
 
@@ -77,9 +72,10 @@ const classes: React.FC = () => {
             ...prevData,
             classes: classes,
             subclasses: subclasses,
-            HPdice: hpdice,
             baseThac0: thac0,
             level: level,
+            wizardSpells: [],
+            clericSpells: [],
         }));
     };
 
@@ -96,28 +92,19 @@ const classes: React.FC = () => {
 
     return(
     <>
-    <div className="d-flex flex-row">
-      <h2 className="secondary-text">Wybierz Klasę</h2>
-      {characterData.classes != "noneClass" && (
-        <h2 className="secondary-text">{" =======> "}Wybierz Podklasę</h2>
-      )}
-    </div>
-    
       <div className="d-flex flex-row">
-          <div className="d-flex flex-col creation-background">
-              {availableClasses().map((classes) => (
-                  <button className="creation-button" onClick={() => handleClassesChange(classes,'')}>
-                    {classes}
-                  </button>
-              ))}
-              {characterData.classes != "noneClass" && (
-                <p className="chosen-creation-data">Wybrano: {characterData.classes}</p>
-              )}
-          </div>
-          <SubclassSelector />
-          <div className="creation-background">
-          <span style={{ whiteSpace: "pre-wrap" }}>{classDescription}</span>
-          </div>
+        <div style={{ marginTop: "5px" }}><ClassHelpPopup/></div>
+        <div className="d-flex flex-col creation-background">
+            {availableClasses().map((classes) => (
+                <button className="creation-button" onClick={() => handleClassesChange(classes,'')}>
+                  {classes}
+                </button>
+            ))}
+            {characterData.classes != "noneClass" && (
+              <p className="chosen-creation-data">Wybrano: {characterData.classes}</p>
+            )}
+        </div>
+        <SubclassSelector />
       </div>
     </>
     )

@@ -3,6 +3,7 @@ import { useExportDataContext } from "../context/ExportDataContext";
 import { useCharacterContext } from "../context/CharacterContext";
 import WizardSpellRecord from "./WizardSpellRecord";
 import RememberWizardSpellRecord from "./RememberWizardSpellRecod";
+import WizardSpellsHelpPopup from "./popups/WizardSpellsHelpPopup";
 
 interface WizardSpellBackend {
     id: number;
@@ -19,7 +20,7 @@ const spellRestriction = {
     Mistrz_Przywołań: "Poznanie",
     Mistrz_Pozanania: "Sprowadzanie",
     Mistrz_Zauroczeń: "Inwokacje",
-    Ilizjonista: "Nekromancja",
+    Iluzjonista: "Nekromancja",
     Mistrz_Inwokacji: "Zaczarowania",
     Nekromanta: "Iluzje",
     Mistrz_Przemian: "Odrzucanie",
@@ -30,7 +31,7 @@ const spellRequirement = {
     Mistrz_Przywołań: "Przywoływanie",
     Mistrz_Pozanania: "Poznanie",
     Mistrz_Zauroczeń: "Zaczarowania",
-    Ilizjonista: "Iluzje",
+    Iluzjonista: "Iluzje",
     Mistrz_Inwokacji: "Inwokacje",
     Nekromanta: "Nekromancja",
     Mistrz_Przemian: "Przemiany",
@@ -49,7 +50,6 @@ const WizardSpellsMenu: React.FC = () => {
         const fetchAndInitializeData = async () => {
             try {
             
-    
             const wizardRespone = await fetch("http://localhost:3000/wizardSpellData");
             if (!wizardRespone.ok) {
                 throw new Error(`HTTP error! status: ${wizardRespone.status}`);
@@ -65,6 +65,13 @@ const WizardSpellsMenu: React.FC = () => {
         
         fetchAndInitializeData();
     }, [selectedSubclass]);
+
+    const spellRememberLimits: Record<number, number> = {
+        1: 4,
+        2: 3,
+        3: 2,
+        4: 1,
+      };
 
     const spellLevelLimits: { [key: number]: number } = {
         1: 5,
@@ -98,14 +105,54 @@ const WizardSpellsMenu: React.FC = () => {
         });
     };
 
+    const setSpecialSkills = () => { 
+        const newSpell = { name: "Piruet Ofensywny", level: 0, school: "SPECJALNE", hex: "SPCL521", icon: "SPCL521.png", rememberCount: 1 };
+        const spellHex = [
+            ...Array.from(newSpell.hex).map((char) =>
+            `0x${char.charCodeAt(0).toString(16).padStart(2, "0")}`
+            ),
+            "0x00",
+            `0x${(newSpell.level - 1).toString(16).padStart(2, "0")}`,
+            "0x00",
+            "0x01",
+            "0x00",
+        ];
+
+        const newSpell2 = { name: "Piruet Defensywny", level: 0, school: "SPECJALNE", hex: "SPCL522", icon: "SPCL522.png", rememberCount: 1 };
+        const spellHex2 = [
+            ...Array.from(newSpell.hex).map((char) =>
+            `0x${char.charCodeAt(0).toString(16).padStart(2, "0")}`
+            ),
+            "0x00",
+            `0x${(newSpell.level - 1).toString(16).padStart(2, "0")}`,
+            "0x00",
+            "0x01",
+            "0x00",
+        ];
+    
+        setCharacterData((prev) => ({
+            ...prev,
+            wizardSpells: [...prev.wizardSpells, newSpell, newSpell2],
+        }));
+    
+        setExportData((prev) => ({
+            ...prev,
+            wizardSpell: [...prev.wizardSpell, spellHex, spellHex2]
+        }))
+    }
+
     useEffect(() => {
         hasRequiredSpell()
     }, [characterData.wizardSpells])
 
+    useEffect(() => {
+        if(characterData.subclasses === "Fechmistrz"){setSpecialSkills()}
+    }, [characterData.subclasses])
+
 
     return(
         <>
-            <h2 className="secondary-text">Wybierz Zaklęcia {"=========> "}Zapamiętaj Zaklęcia</h2>
+            <div style={{ marginTop: "5px" }}><WizardSpellsHelpPopup/></div>
             <div className="d-flex flex-row">
                 <div className="creation-background">
                     <div className="button-group" style={{ backgroundColor: "rgb(30, 30, 30)"}}>
@@ -159,6 +206,9 @@ const WizardSpellsMenu: React.FC = () => {
                 </div>
 
                 <div className="creation-background">
+                    <span>
+                        Możesz zapamiętać {spellRememberLimits[currentSpellLevel]} zaklęcia poziomu {currentSpellLevel}
+                    </span>
                     {characterData.wizardSpells
                         .filter((spell) => spell.level === currentSpellLevel)
                         .map((spell, index) => (

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ThievingAbilities } from "../types/CharacterData";
 import { useCharacterContext } from "../context/CharacterContext";
 import { useExportDataContext } from "../context/ExportDataContext";
+import ThievingHelpPopup from "./popups/ThievingHelpPopup";
 
 
 export const raseBonusThievingAbilities: Record<string, { skillsThief: Partial<ThievingAbilities>}> = {
@@ -216,10 +217,9 @@ const ThievingAbilitiesMenu: React.FC = () => {
 
     return(
         <>
-          <h2 className="secondary-text">Wybierz Umiejętności Złodziejskie</h2>
-          <div className="creation-background">
+          <div style={{ marginTop: "5px" }}><ThievingHelpPopup/></div>
+          <div className="creation-background" style={{ maxWidth: "100%"}}>
             <span>Pozostałe punkty umiejętności złodziejskich: {ThievingAbilitiesPoints}</span>
-            {selectedSubclass ? (
               <div  style={{ backgroundColor: "rgb(30, 30, 30)" }}>
                 {Object.entries(characterData.skillsThief)
                   .filter(([skillsThief, value]) => backednThievingAbilities[skillsThief] !== -1)
@@ -233,7 +233,7 @@ const ThievingAbilitiesMenu: React.FC = () => {
                       <div key={skillsThief} className="d-flex flex-row attributes-container" style={{ backgroundColor: "rgb(30, 30, 30)" }}>
                         <div className="attributes-buttons" style={{ backgroundColor: "rgb(30, 30, 30)" }}>
                           <span className='attributes-value'>{skillsThief}:</span>
-                          <span>{value} + {raceBonus} + {attributeBonus} = {value+raceBonus+attributeBonus}</span>
+                          <span>{value+raceBonus+attributeBonus} = {"wartość bazowa:"+value} + {"bonus rasowy:"+raceBonus} + {"bonus atrybutu:"+attributeBonus}</span>
                           <button className="attributes-button" onClick={() => increaseThievingSkills(skillsThief as keyof ThievingAbilities)}>+</button>
                           <button className="attributes-button" onClick={() => decreaseThievingSkills(skillsThief as keyof ThievingAbilities)}>-</button>
                         </div>
@@ -241,9 +241,6 @@ const ThievingAbilitiesMenu: React.FC = () => {
                     );
                   })}
               </div>
-            ) : (
-              <span>Wybierz podklasę, aby zobaczyć dostępne umiejętności złodziejskie.</span>
-            )}
           </div>
         </>
     )

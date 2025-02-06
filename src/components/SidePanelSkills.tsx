@@ -59,10 +59,12 @@ const SidePanelSkills: React.FC = () => {
                 {skill}: {value}
             </li>
             ))}
+            
         </ul>
         <p className="center-text">Zaklęcia:</p>
-        <div className="d-flex flex-row" style={{ backgroundColor: "rgb(30, 30, 30)", flexWrap: "wrap" }}>
-          {["Mag", "Czarownik"].includes(characterData.classes) ? (
+        {!["Mag", "Czarownik", "Bard", "Kapłan", "Szaman", "Druid"].includes(characterData.classes) && <span style={{ fontStyle: "italic", fontSize: "1.2rem", color: "red" }}>Ta klasa nie ma dostępu do zaklęć</span>}
+        <div className="d-flex flex-row" style={{ backgroundColor: "rgb(30, 30, 30)", flexWrap: "wrap"}}>
+          {["Mag", "Czarownik", "Bard"].includes(characterData.classes) ? (
               characterData.wizardSpells.map((spell, index) => (
                   <div key={index} style={{ border: "1px solid gray", margin: "1px", padding: "1px", backgroundColor: "rgb(30, 30, 30)" }}>
                       <WizardDescriptionPopup 
@@ -95,25 +97,26 @@ const SidePanelSkills: React.FC = () => {
         </div>
         <p className="center-text">Umiejętności Złodziejskie:</p>
         {["Łowca", "Bard", "Szaman", "Złodziej"].includes(characterData.classes) ? (
-            Object.entries(characterData.skillsThief).map(([skillsThief, value]) => {
+            Object.entries(characterData.skillsThief)
+            .filter(([_, value]) => value !== -1)
+            .map(([skillsThief, value]) => {
                 const race = characterData.race || "Człowiek";
                 const raceBonuses = getThievingSkillsForRace(race);
                 const raceBonus = raceBonuses[skillsThief as keyof ThievingAbilities] || 0;
                 const attributeBonus = getThievingAbilityBonus(skillsThief);
-
                 return (
                 <div key={skillsThief} style={{ backgroundColor: "rgb(30, 30, 30)" }}>
                     <span className="plainText">
-                    {skillsThief}: {value + raceBonus + attributeBonus} (
-                    {value}+{raceBonus}+{attributeBonus})
+                      {skillsThief}: {value + raceBonus + attributeBonus} 
                     </span>
                 </div>
                 );
             })
             ) : (
-            <span>Ta klasa nie ma dostępu do tych umiejętności</span>
+            <span style={{ fontStyle: "italic", fontSize: "1.2rem", color: "red" }}>Ta klasa nie ma dostępu do umiejętności złodziejskich</span>
             )}
         <p className="center-text">Wróg rasowy: {characterData.racialEnemy}</p>
+        {!["Łowca"].includes(characterData.classes) && <span style={{ fontStyle: "italic", fontSize: "1.2rem", color: "red" }}>Ta klasa nie ma dostępu do wroga rasowego</span>}
     </div>
   );
 };

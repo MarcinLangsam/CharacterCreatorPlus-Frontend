@@ -59,41 +59,64 @@ const Portrait: React.FC = () => {
     }
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-
+      //Handle portrait an frontend
       const fileNameParts = file.name.split('.');
       const extension = fileNameParts.pop(); // rozszerzenie pliku
       const baseName = fileNameParts.join('.');
         
-        if (baseName.length > 8) {
+      if (baseName.length > 8) {
         setError('Nazwa pliku nie może mieć więcej niż 8 znaków.');
         setImagePreview(undefined);
         setFileName(null);
         setHexValues([]);
         return;
+      }
+
+      setError(null);
+
+      const fileUrl = URL.createObjectURL(file);
+      setImagePreview(fileUrl);
+      setCharacterData((prev) => ({
+          ...prev,
+          portrait: baseName,
+      }))
+
+      setFileName(baseName);
+
+      const hexArray = Array.from(baseName).map((char) =>
+      char.charCodeAt(0).toString(16)
+      );
+      setHexValues(hexArray);
+      setExportData((prev) => ({
+          ...prev,
+          portrait: hexArray,
+      }))
+
+      //Send portarit to backend
+      const newFile = new File([file], file.name.replace(/\.[^/.]+$/, ".png"), { type: file.type });
+      const formData = new FormData();
+      formData.append("file", newFile);
+
+      
+  
+      try {
+        const response = await fetch("http://localhost:3000/uploadPortrait", {
+          method: "POST",
+          body: formData,
+        });
+  
+        if (response.ok) {
+          alert("Plik przesłany pomyślnie!");
+          fetchPortraitsName();
+        } else {
+          alert("Błąd podczas przesyłania pliku.");
         }
-
-        setError(null);
-
-        const fileUrl = URL.createObjectURL(file);
-        setImagePreview(fileUrl);
-        setCharacterData((prev) => ({
-            ...prev,
-            portrait: baseName,
-        }))
-
-        setFileName(baseName);
-
-        const hexArray = Array.from(baseName).map((char) =>
-        char.charCodeAt(0).toString(16)
-        );
-        setHexValues(hexArray);
-        setExportData((prev) => ({
-            ...prev,
-            portrait: hexArray,
-        }))
+      } catch (error) {
+        console.error("Błąd:", error);
+      }
     }
   };
 
@@ -137,9 +160,48 @@ const Portrait: React.FC = () => {
     fetchPortraitsName();
   }, []);
 
+    const [file, setFile] = useState<File | null>(null);
+  
+    const handleFileChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (event.target.files) {
+        setFile(event.target.files[0]);
+      }
+      
+    };
+  
+    const handleUpload = async () => {
+      if (!file) {
+        alert("Wybierz plik!");
+        return;
+      }
+
+      const newFile = new File([file], file.name.replace(/\.[^/.]+$/, ".png"), { type: file.type });
+
+      const formData = new FormData();
+      formData.append("file", newFile);
+
+      
+  
+      try {
+        const response = await fetch("http://localhost:3000/uploadPortrait", {
+          method: "POST",
+          body: formData,
+        });
+  
+        if (response.ok) {
+          alert("Plik przesłany pomyślnie!");
+          fetchPortraitsName();
+        } else {
+          alert("Błąd podczas przesyłania pliku.");
+        }
+      } catch (error) {
+        console.error("Błąd:", error);
+      }
+    };
+  
+
   return (
     <>
-      <h1 className="secondary-text">Wybierz Portret</h1>
       <div className="d-flex flex-row">
         <div>
           <label htmlFor="file-upload" className="standard-button">
@@ -154,26 +216,14 @@ const Portrait: React.FC = () => {
           />
         </div>
         <Popup/>
+        {error && (
+            <div style={{ marginTop: '10px', color: 'red' }}>
+              <strong>Uwaga:</strong> {error}
+            </div>
+        )}
       </div>
       <div className="d-flex flex-row">
-        <div className="creation-background">
-          {error && (
-            <div style={{ marginTop: '10px', color: 'red' }}>
-              <strong>Error:</strong> {error}
-            </div>
-          )}
-          <div
-            className="d-flex flex-row justify-content-center align-items-center" style={{ backgroundColor: "rgb(30, 30, 30)"}}>
-            <button className="arrow-left" onClick={handlePrev} disabled={currentPortraitIndex === 0}/>
-            <img
-              src={characterData.portrait === "" ? "http://localhost:3000/images/nonePortrait.png" : imagePreview}
-              alt=""
-              style={{ maxWidth: "300px", maxHeight: "300px", margin: "5px" }}
-            />
-            <button className="arrow-right" onClick={handleNext} disabled={currentPortraitIndex === portraitsData.length - 1}/>
-          </div>
-        </div>
-        <div style={{ display: "flex", flexWrap: "wrap", marginLeft: "15px", overflow: 'auto', width: '75%', height: '65vh' }}>
+        <div style={{ display: "flex", flexWrap: "wrap", marginLeft: "15px", overflow: 'auto', width: '90%', height: '65vh' }}>
           {portraitsData.map((portrait, index) => (
               <div
                 key={portrait.id}

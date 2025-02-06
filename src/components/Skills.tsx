@@ -8,6 +8,7 @@ import ThievingAbilitiesMenu from "./ThievingAbilitiesMenu";
 import RacialEnemyMenu from "./RacialEnemyMenu";
 import WizardSpellsMenu from "./WizardSpellsMenu";
 import ClericSpellsMenu from "./ClericSpellsMenu";
+import SrocererAndShamanSpellsMenu from "./SrocererAndShamanSpellsMenu";
 
 const racialEnemyData = {
   Obserwator: "0x123",
@@ -130,7 +131,7 @@ interface WizardSpell {
   hexData: string;
 }
 
-type Category = 'proficiencys' | 'thievingSKills' | 'racialEnemy' | 'wizardSpells' | 'clericSpells';
+type Category = 'proficiencys' | 'thievingSKills' | 'racialEnemy' | 'wizardSpells' | 'clericSpells' | 'srocererAndShamanSpells';
 
 const Skills: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<Category>('proficiencys');
@@ -234,6 +235,9 @@ const Skills: React.FC = () => {
         return <WizardSpellsMenu />;
       case 'clericSpells':
         return <ClericSpellsMenu />;
+      case 'srocererAndShamanSpells':
+        return <SrocererAndShamanSpellsMenu />;
+          
       default:
         return null;
     }
@@ -241,7 +245,6 @@ const Skills: React.FC = () => {
 
   return (
     <>
-      <h2 className="secondary-text">Wybierz Biegłości</h2>
       <div className="button-group">
         <button className="standard-button" onClick={() => setActiveCategory('proficiencys')}>
           Biegłości
@@ -257,19 +260,28 @@ const Skills: React.FC = () => {
 
         <button
           className="standard-button"
-          onClick={() => ['Mag', 'Czarownik', 'Bard'].includes(characterData.classes) && setActiveCategory('wizardSpells')}
-          disabled={!['Mag', 'Czarownik', 'Bard'].includes(characterData.classes)}
+          onClick={() => ['Mag', , 'Bard'].includes(characterData.classes) && setActiveCategory('wizardSpells')}
+          disabled={!['Mag', 'Bard'].includes(characterData.classes)}
         >
           Zaklęcia Maga
         </button>
 
         <button
           className="standard-button"
-          onClick={() => ['Kapłan', 'Druid', 'Szaman'].includes(characterData.classes) && setActiveCategory('clericSpells')}
-          disabled={!['Kapłan', 'Druid', 'Szaman'].includes(characterData.classes)}
+          onClick={() => ['Kapłan', 'Druid'].includes(characterData.classes) && setActiveCategory('clericSpells')}
+          disabled={!['Kapłan', 'Druid'].includes(characterData.classes)}
         >
-          Zaklęcia Kleryka
+          Zaklęcia Kapłana
         </button>
+
+        <button
+          className="standard-button"
+          onClick={() => ['Czarownik', 'Szaman'].includes(characterData.classes) && setActiveCategory('srocererAndShamanSpells')}
+          disabled={!['Czarownik', 'Szaman'].includes(characterData.classes)}
+        >
+          Zaklęcia Czarownika/Szamana
+        </button>
+
 
         <button
           className="standard-button"

@@ -22,19 +22,19 @@ const SidePanelStatistics: React.FC = () => {
             <p style={{ margin: "3px", fontSize: "1.5rem"}} className="center-text">Bonus zdrowia na poziom: {characterData.HPperLvBonus}</p>
         </div>
         <ul style={{ listStyleType: "none", paddingLeft: "5px" }}>
-            <li><Thac0DescriptionPopup/>(walka wręcz): {characterData.baseThac0+characterData.melleThac0+characterData.classBonusThac0} ({characterData.baseThac0}-{characterData.melleThac0}-{characterData.classBonusThac0})</li>
-            <li><Thac0DescriptionPopup/>(walka dystansowa): {characterData.baseThac0+characterData.rangedThac0+characterData.classBonusThac0} ({characterData.baseThac0}+{characterData.rangedThac0}+{characterData.classBonusThac0})</li>
+            <li><Thac0DescriptionPopup/> (walka wręcz): {characterData.baseThac0+characterData.melleThac0+characterData.classBonusThac0}</li>
+            <li><Thac0DescriptionPopup/> (walka dystansowa): {characterData.baseThac0+characterData.rangedThac0+characterData.classBonusThac0}</li>
             <li>Bonus zadawanych obrażeń: {characterData.dmgBonus}</li>
-            <li><AcDescriptionPopup/>: {characterData.baseAC+characterData.AC-characterData.classBonusAC} ({characterData.baseAC}-{characterData.AC}-{characterData.classBonusAC})</li>
+            <li><AcDescriptionPopup/>: {characterData.baseAC+characterData.AC-characterData.classBonusAC}</li>
         </ul>
 
         <ul style={{ listStyleType: "none", paddingLeft: "5px" }}>
-            <li>Kradzież Kieszonkowa Bonus: {characterData.Kradzież_KieszonkowaBonus}</li>
-            <li>Otwieranie Zamków Bonus: {characterData.Otwieranie_ZamkówBonus}</li>
-            <li>Znajdywanie Pułapek Bonus: {characterData.Znajdywanie_PułapekBonus}</li>
-            <li>Ciche Poruszanie Bonus: {characterData.Ciche_PoruszanieBonus}</li>
-            <li>Krycie w Cieniu Bonus: {characterData.Krycie_W_CieniuBonus}</li>
-            <li>Rozstawianie Pułapek Bonus: {characterData.Rozstawianie_PułapekBonus}</li>
+            <li>Kradzież Kieszonkowa BONUS: {characterData.Kradzież_KieszonkowaBonus}</li>
+            <li>Otwieranie Zamków BONUS: {characterData.Otwieranie_ZamkówBonus}</li>
+            <li>Znajdywanie Pułapek BONUS: {characterData.Znajdywanie_PułapekBonus}</li>
+            <li>Ciche Poruszanie BONUS: {characterData.Ciche_PoruszanieBonus}</li>
+            <li>Krycie w Cieniu BONUS: {characterData.Krycie_W_CieniuBonus}</li>
+            <li>Rozstawianie Pułapek BONUS: {characterData.Rozstawianie_PułapekBonus}</li>
         </ul>
 
         <ul style={{ listStyleType: "none", paddingLeft: "5px" }}>
@@ -46,6 +46,9 @@ const SidePanelStatistics: React.FC = () => {
             <li>Dodatkowe zaklęcią kleryka Poziom 3: {characterData.extraSpellSlotlv3}</li>
             <li>Dodatkowe zaklęcią kleryka Poziom 4: {characterData.extraSpellSlotlv4}</li>
             <li><LoreDescriptionPopup/>:{" "}{(characterData.WISlore) + (characterData.INTlore)}</li>
+        </ul>
+
+        <ul style={{ listStyleType: "none", paddingLeft: "5px" }}>
             <li><BashingDescriptionPopup/>: {characterData.bashing}</li>
             <li>Udźwig: {characterData.weight}</li>
             <li><IntoxicatedDescriptionPopup/>: {characterData.IntoxicationPerDrink}</li>

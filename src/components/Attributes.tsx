@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useCharacterContext } from '../context/CharacterContext';
 import StatControl from './AttributesControl';
 import { CharacterAttributes } from '../types/CharacterData';
+import AttributesHelpPopup from './popups/AttributesHelpPopup';
 
 
 const strengtDescription = "Opisuję siłę mieśni bohatera, jego wytrzymałość i wytrwałość. Jest podstawową cechą zbrojnych\n\nSiła wpływa na:\n\nTHAC0\nZadawane obrażenia\nUmiejętność wyważania zamków\nMaksymalny udźwig"
@@ -35,7 +36,7 @@ const classAttributeLimits: Record<string, Partial<Record<keyof CharacterAttribu
   Mistrz_Przywołań: {intelligence: 9, constitution: 15},
   Mistrz_Pozanania: {intelligence: 9, wisdom: 16},
   Mistrz_Zauroczeń: {intelligence: 9, charisma: 16},
-  Ilizjonista: {intelligence: 9, agility: 16},
+  Iluzjonista: {intelligence: 9, agility: 16},
   Mistrz_Inwokacji: {intelligence: 9, constitution: 16},
   Nekromanta: {intelligence: 9, wisdom: 16},
   Mistrz_Przemian: {intelligence: 9, agility: 15},
@@ -111,7 +112,10 @@ const Stats: React.FC = () => {
   const [wisdomData, setWisdomData] = useState<WisdomData[]>([]);
   const [charismaData, setCharismaData] = useState<CharismaData[]>([]);
   const [attributeDescription, setAttributeDescription] = useState<string>("Użyj przycisków +/- aby wyświetlić opis atrybuty");
-  
+  let meleeThaco0Exep = 0
+  let dmgBonusExep = 0
+  let bashingExep = 0
+  let weightExep = 0
 
   const isModifierApplicable = (): boolean => {
     const selectedClass = characterData.classes;
@@ -129,7 +133,7 @@ const Stats: React.FC = () => {
     const selectedClass = characterData.classes
     if (!selectedClass) return {};
 
-    const mageVariants = ["Mistrz_Odrzucania", "Mistrz_Przywołań", "Mistrz_Pozanania", "Mistrz_Zauroczeń", "Ilizjonista", "Mistrz_Inwokacji", "Nekromanta", "Mistrz_Przemian"];
+    const mageVariants = ["Mistrz_Odrzucania", "Mistrz_Przywołań", "Mistrz_Pozanania", "Mistrz_Zauroczeń", "Iluzjonista", "Mistrz_Inwokacji", "Nekromanta", "Mistrz_Przemian"];
     if (characterData.subclasses && mageVariants.includes(characterData.subclasses)) {
       return classAttributeLimits[characterData.subclasses] || {};
     }
@@ -138,7 +142,7 @@ const Stats: React.FC = () => {
 
   const getRandomValueInRange = (min: number, max: number) =>
     Math.floor(Math.random() * (max - min + 1)) + min;
-
+  
   const randomizeAttributes = () => {
     const raceLimits = getRaseLimit();
     const classLimits = getClassLimit();
@@ -158,25 +162,65 @@ const Stats: React.FC = () => {
       {} as CharacterAttributes
     );
 
-    const sumPoints = Object.values(newAttributes).reduce((sum, value) => sum + value, 0);
+    const sumPoints = newAttributes.agility + newAttributes.charisma + newAttributes.constitution + newAttributes.intelligence + newAttributes.strength + newAttributes.wisdom
 
     if (isModifierApplicable()) {
-      newAttributes.strenghtModifier = getRandomValueInRange(0, 100);
+      newAttributes.strengthModifier = getRandomValueInRange(0, 100);
     } else {
-      newAttributes.strenghtModifier = 0;
+      newAttributes.strengthModifier = 0;
     }
   
     const updatedCharacterData = { ...characterData, attributes: newAttributes };
   
     // Oblicz bonusy na podstawie nowych wartości atrybutów
+    
+    if(newAttributes.strengthModifier <= 50){
+      meleeThaco0Exep = 0
+      dmgBonusExep = 1
+      bashingExep = 5
+      weightExep = 20
+    }
+    if(newAttributes.strengthModifier > 50 && newAttributes.strengthModifier <= 75){
+      meleeThaco0Exep = -1
+      dmgBonusExep = 1
+      bashingExep = 10
+      weightExep = 50
+    }
+    if(newAttributes.strengthModifier > 75 && newAttributes.strengthModifier <= 90){
+      meleeThaco0Exep = 0
+      dmgBonusExep = 2
+      bashingExep = 15
+      weightExep = 80
+    }
+    if(newAttributes.strengthModifier > 90 && newAttributes.strengthModifier <= 99){
+      meleeThaco0Exep = -1
+      dmgBonusExep = 3
+      bashingExep = 20
+      weightExep = 120
+    }
+    if(newAttributes.strengthModifier === 100){
+      meleeThaco0Exep = -2
+      dmgBonusExep = 4
+      bashingExep = 25
+      weightExep = 200
+    }
+
     const strengthMatch = strengthData.find((item) => item.value === newAttributes.strength);
     if (strengthMatch) {
-      updatedCharacterData.melleThac0 = strengthMatch.meleeThac0;
-      updatedCharacterData.dmgBonus = strengthMatch.dmgBonus;
-      updatedCharacterData.bashing = strengthMatch.bashing;
-      updatedCharacterData.weight = strengthMatch.weight;
+      if(isModifierApplicable() && newAttributes.strength === 18) {
+        updatedCharacterData.melleThac0 = strengthMatch.meleeThac0 + meleeThaco0Exep
+        updatedCharacterData.dmgBonus = strengthMatch.dmgBonus + dmgBonusExep
+        updatedCharacterData.bashing = strengthMatch.bashing + bashingExep
+        updatedCharacterData.weight = strengthMatch.weight + weightExep
+      }
+      else{
+        updatedCharacterData.melleThac0 = strengthMatch.meleeThac0
+        updatedCharacterData.dmgBonus = strengthMatch.dmgBonus
+        updatedCharacterData.bashing = strengthMatch.bashing
+        updatedCharacterData.weight = strengthMatch.weight
+      }
     }
-  
+
     const agilityMatch = agilityData.find((item) => item.value === newAttributes.agility);
     if (agilityMatch) {
       updatedCharacterData.rangedThac0 = agilityMatch.rangedThac0;
@@ -316,10 +360,18 @@ const Stats: React.FC = () => {
   useEffect(() => {
     const strengthMatch = strengthData.find((item) => item.value === characterData.attributes.strength);
     if (strengthMatch) {
-      characterData.melleThac0 = strengthMatch.meleeThac0,
-      characterData.dmgBonus = strengthMatch.dmgBonus,
-      characterData.bashing = strengthMatch.bashing,
-      characterData.weight = strengthMatch.weight
+      if(isModifierApplicable() && characterData.attributes.strength === 18) {
+        characterData.melleThac0 = strengthMatch.meleeThac0 + meleeThaco0Exep
+        characterData.dmgBonus = strengthMatch.dmgBonus + dmgBonusExep
+        characterData.bashing = strengthMatch.bashing + bashingExep
+        characterData.weight = strengthMatch.weight + weightExep
+      }
+      else{
+        characterData.melleThac0 = strengthMatch.meleeThac0
+        characterData.dmgBonus = strengthMatch.dmgBonus
+        characterData.bashing = strengthMatch.bashing
+        characterData.weight = strengthMatch.weight
+      }
     }
     const agilityhMatch = agilityData.find((item) => item.value === characterData.attributes.agility);
     if (agilityhMatch) {
@@ -385,11 +437,11 @@ const Stats: React.FC = () => {
 
       const newValue = currentAttributeValue + delta;
 
-      if(delta > 0 && newValue < finalMax && availablePoints <= 0)
-      {
-        delta = 0;
-        return prevData
-      }
+       if(delta > 0 && newValue <= finalMax && availablePoints <= 0)
+       {
+         delta = 0;
+         return prevData
+       }
 
       if (newValue < finalMin || newValue > finalMax) {
         delta = 0;
@@ -438,10 +490,14 @@ const Stats: React.FC = () => {
     });
   };
 
+  useEffect(() => {
+    randomizeAttributes();
+  },[]);
+
   return (
     <>
-      <h2 className="secondary-text">Rozdaj Atrybuty</h2>
       <div className='d-flex flex-row'>
+        <div style={{ marginTop: "5px" }}><AttributesHelpPopup/></div>
         <div className="creation-background" style={{ backgroundColor: "rgb(30, 30, 30)" }}>
           <button onClick={randomizeAttributes} className="standard-button">
             Powtórz rzut
@@ -455,12 +511,12 @@ const Stats: React.FC = () => {
               <StatControl
                 statName={
                   characterData.attributes.strength === 18 && isModifierApplicable()
-                    ? `Siła ${characterData.attributes.strength}/${characterData.attributes.strenghtModifier}`
+                    ? `Siła ${characterData.attributes.strength}/${characterData.attributes.strengthModifier}`
                     : 'Siła'
                 }
                 statValue={characterData.attributes.strength}
-                onIncrement={() => updateAttribute('strength', 1)}
-                onDecrement={() => updateAttribute('strength', -1)}
+                onIncrement={() => {updateAttribute('strength', 1);}}
+                onDecrement={() => {updateAttribute('strength', -1);}}
               />
 
               <StatControl

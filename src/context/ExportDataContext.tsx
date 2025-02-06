@@ -48,7 +48,7 @@ const defaultProficiencys: WeaponProficiencys = {
   
   const defaultAttributes: CharacterAttributes = {
     strength: 0,
-    strenghtModifier : 0,
+    strengthModifier : 0,
     agility: 0,
     constitution: 0,
     intelligence: 0,

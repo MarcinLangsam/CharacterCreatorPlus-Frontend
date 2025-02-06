@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useCharacterContext } from '../context/CharacterContext';
 import { useExportDataContext } from '../context/ExportDataContext';
 import { SubclassesExport, ThievingAbilitiesExport, WeaponProficiencysExport } from '../types/ExportData';
+import { Link } from 'react-router-dom';
 
 const thievingAbilitiesExport: ThievingAbilitiesExport = {
   Otwieranie_Zamkow: 0xCB,
@@ -52,7 +53,7 @@ const subclassesExport: SubclassesExport = {
   Tropiciel: "Tro",
   Władca_Zwierząt: "Wla",
   Paladyn: "Pal",
-  Kawalerzysta: "Kaw",
+  Kawaler: "Kaw",
   Inkwizytor: "Ink",
   Łowca_Nieumarłych: "Low",
   Czarny_Strażnik: "Cza",
@@ -265,7 +266,7 @@ const Export: React.FC = () => {
   const setAttriutes = (data: Uint8Array): Uint8Array => {
     //ustawienie atubutów
     const hexStrength = characterData.attributes.strength.toString(16);
-    const hexStrengthModifier = characterData.attributes.strenghtModifier.toString(16);
+    const hexStrengthModifier = characterData.attributes.strengthModifier.toString(16);
     const hexAgility = characterData.attributes.agility.toString(16);
     const hexConstitution = characterData.attributes.constitution.toString(16);
     const hexInteligence = characterData.attributes.intelligence.toString(16);
@@ -823,8 +824,6 @@ const Export: React.FC = () => {
 
   const saveCharacterToServer = async () => {
 
-    console.log(characterData.skillsThief);
-
     const payload = {
       ...characterData,
       skills: characterData.skills,
@@ -849,10 +848,9 @@ const Export: React.FC = () => {
     
   return (
     <>
-      <h2 className="secondary-text">Eksport postaci</h2>
       <div className="creation-background">
         <input className="standard-button" type="submit" onClick={handelBackendFile} value="Pobierz plik postaci"/>
-        <button className="plainButton" onClick={saveCharacterToServer}>Zapisz postać w bazie</button>
+        <Link className="standard-button" onClick={saveCharacterToServer} to={'/'}>Zapisz postać w bazie</Link>
       </div>
     </>
     

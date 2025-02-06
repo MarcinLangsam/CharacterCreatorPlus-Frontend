@@ -50,7 +50,7 @@ export interface SubclassesExport {
   Tropiciel: string,
   Władca_Zwierząt: string,
   Paladyn: string,
-  Kawalerzysta: string,
+  Kawaler: string,
   Inkwizytor: string,
   Łowca_Nieumarłych: string,
   Czarny_Strażnik: string,

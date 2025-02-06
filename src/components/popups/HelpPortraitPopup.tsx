@@ -16,7 +16,7 @@ const PopupHelpPortrait: React.FC = () => {
         <div className="popup-overlay">
           <div className="popup-content">
             <h1 className='secondary-text'>Jak zainportować własny portret?</h1>
-            <p>
+            <span>
               Aby zainportować własny portret należy spełnić kilka wymagań co do pliku:
               <ol>
                 <li>Nazwa pliku nie może być dłuższa niż 8 znaków</li>
@@ -25,7 +25,8 @@ const PopupHelpPortrait: React.FC = () => {
                 <li>Rozdzielczość jest dowolna do 1024px ale najlepiej aby była minimum 169x266px, dodatkowo być w proporcjach wysokość:szerokość 1.5:1 aby nie był zniekształcony</li>
                 <li>Plik z portretem musi się znajdować w folderze gry w dokumentach z portretami (/Documents/Baldur's Gate - Enhanced Edition/Portraits)</li>
               </ol>
-            </p>
+              Nowy portert będzie dostępny zarówna dla postaci męskich jak i żeńskich
+            </span>
             <div className="popup-buttons" style={{ backgroundColor: "rgb(30, 30, 30)"}}>
               <button onClick={closePopup} className="standard-button">
                 OK
