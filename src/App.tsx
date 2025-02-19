@@ -6,7 +6,6 @@ import Navbar from './components/Navbar';
 import { CharacterProvider } from './context/CharacterContext';
 import { ExportDataProvider } from './context/ExportDataContext';
 import InstructionPage from './pages/Instruction';
-import MusicPlayer from './components/MusicPlayer';
 
 const App: React.FC = () => {
   return (

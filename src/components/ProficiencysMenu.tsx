@@ -34,8 +34,13 @@ const ProficiencysMenu: React.FC = () => {
                 if (key !== "skillPoints" && key !== "subclass" && key !== "id") {
                   const maxLevel = selectedProficiencys[key];
                   if (maxLevel !== -1) {
-                    updatedSkills[key as keyof WeaponProficiencys] = 0;
+                    if(characterData.classes === "Łowca" && key == "StylWalkiDwiemaBronmi"){
+                      updatedSkills[key as keyof WeaponProficiencys] = 2;
+                    }
+                    else
+                    {updatedSkills[key as keyof WeaponProficiencys] = 0;}
                   }
+                  
                 }
               });
             }

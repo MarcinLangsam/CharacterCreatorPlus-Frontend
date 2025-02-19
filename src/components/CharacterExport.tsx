@@ -112,8 +112,6 @@ const Export: React.FC = () => {
       const arrayBuffer = await respone.arrayBuffer();
       let data = new Uint8Array(arrayBuffer);
 
-      
-
       data = setGender(data)
       data = setRace(data)
       data = setPortrait(data)
@@ -254,6 +252,16 @@ const Export: React.FC = () => {
 
   const setAlignment = (data: Uint8Array): Uint8Array => {
     data[0x2DF] = parseInt(exportData.character, 16)
+    //seting reputation base of aligment
+    if(characterData.aligment === "Praworządny Dobry") {data[0xA8] = 0x78}
+    if(characterData.aligment === "Praworządny Neutralny") {data[0xA8] = 0x6E}
+    if(characterData.aligment === "Praworządny Zły") {data[0xA8] = 0x5A}
+    if(characterData.aligment === "Neutralny Dobry") {data[0xA8] = 0x6E}
+    if(characterData.aligment === "Neutralny") {data[0xA8] = 0x64}
+    if(characterData.aligment === "Neutralny Zły") {data[0xA8] = 0x5A}
+    if(characterData.aligment === "Chaotyczny Dobry") {data[0xA8] = 0x6E}
+    if(characterData.aligment === "Chaotyczny Neutralny") {data[0xA8] = 0x64}
+    if(characterData.aligment === "Chotyczny Zły") {data[0xA8] = 0x50}
     return data
   }
   
@@ -275,12 +283,13 @@ const Export: React.FC = () => {
 
     data[0x29C] = parseInt(hexStrength, 16)
 
-    if(isModifierApplicable() &&  parseInt(hexInteligence, 16) == 0x18){
-      data[0x29D] = parseInt(hexStrengthModifier) //wyjątkowa siła dla wojowników
+    console.log()
+    if(isModifierApplicable() && characterData.attributes.strength === 18){
+      data[0x29D] = parseInt(hexStrengthModifier, 16) //wyjątkowa siła dla wojowników
     }
     else
-    {
-      data[0x29D] = 0x0
+    { 
+      data[0x29D] = 0x00
     }
     
     data[0x29E] = parseInt(hexInteligence, 16)
@@ -802,7 +811,6 @@ const Export: React.FC = () => {
     return combinedData;
 
   }
-
   
   const saveFile = (data: Uint8Array, fileName: string) => {
     const blob = new Blob([data], { type: 'application/octet-stream' });

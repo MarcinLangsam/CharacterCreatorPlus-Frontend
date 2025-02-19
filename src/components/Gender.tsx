@@ -1,7 +1,6 @@
 import React from "react"
 import { useCharacterContext } from '../context/CharacterContext';
 import { useExportDataContext } from "../context/ExportDataContext";
-import oranteBorder from "../images/ornate-border.png"
 
 const Gender: React.FC = () => {
     const {characterData, setCharacterData} = useCharacterContext();

@@ -83,7 +83,6 @@ const MusicPlayer: React.FC = () => {
     return(
         <div className="music-player">
             <div className="track-info">
-                <h2>{tracks[currentTrackIndex]?.title || "Brak utworu"}</h2>
                 <div className="controls">
                     <button onClick={playPreviousTrack}>{"<"}</button>
                     <button onClick={togglePlayPause}>
@@ -91,6 +90,7 @@ const MusicPlayer: React.FC = () => {
                     </button>
                     <button onClick={playNextTrack}>{">"}</button>
                 </div>
+                <h2>{tracks[currentTrackIndex]?.title || "Brak utworu"}</h2>
             </div>
 
             <audio ref={audioRef}>
