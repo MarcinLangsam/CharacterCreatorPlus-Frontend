@@ -5,60 +5,60 @@ import SpellDescriptionPopup from "./popups/BhaalDescriptionPopup";
 
 const alignmentOptions: { [key: string]: string[]} = {
     //Warriors subclasses
-    Wojownik: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Berserker: ['Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Zabójca_Magów: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Wojownik: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
+    Berserker: ['Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
+    Zabójca_Magów: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
     Kensai: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły'],
-    Krasnoludzki_Obrońca: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Barbarzyńca: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Krasnoludzki_Obrońca: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
+    Barbarzyńca: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
     //Hunter subclasses
-    Łowca: ['Praworządny Dobry', 'Neytralny Dobry', 'Chotyczny Dobry'],
-    Łucznik: ['Praworządny Dobry', 'Neytralny Dobry', 'Chotyczny Dobry'],
-    Tropiciel: ['Praworządny Dobry', 'Neytralny Dobry', 'Chotyczny Dobry'],
-    Władca_Zwierząt: ['Praworządny Dobry', 'Neytralny Dobry', 'Chotyczny Dobry'],
+    Łowca: ['Praworządny Dobry', 'Neutralny Dobry', 'Chaotyczny Dobry'],
+    Łucznik: ['Praworządny Dobry', 'Neutralny Dobry', 'Chaotyczny Dobry'],
+    Tropiciel: ['Praworządny Dobry', 'Neutralny Dobry', 'Chaotyczny Dobry'],
+    Władca_Zwierząt: ['Praworządny Dobry', 'Neutralny Dobry', 'Chaotyczny Dobry'],
     //Paladin subclasses
     Paladyn: ['Praworządny Dobry'],
     Kawaler: ['Praworządny Dobry'],
     Inkwizytor: ['Praworządny Dobry'],
     Łowca_Nieumarłych: ['Praworządny Dobry'],
-    Czarny_Strażnik: ['Praworządny Zły', 'Neutralny Zły', 'Chotyczny Zły'],
+    Czarny_Strażnik: ['Praworządny Zły', 'Neutralny Zły', 'Chaotyczny Zły'],
     //Cleric subclasses
-    Kapłan: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Kapłan_Talosa: ['Chotyczny Neutralny', 'Praworządny Zły', 'Neutralny Zły', 'Chaotyczny Zły'],
-    Kapłan_Helma: ['Praworządny Dobry', 'Praworządny Neutralny', 'Neutralny', 'Chotyczny Nautralny', 'Praworządny Zły'],
-    Kapłan_Lathandera: ['Praworządny Dobry', 'Neutralny Dobry', 'Chotyczny Dobry', 'Neutralny'],
+    Kapłan: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
+    Kapłan_Talosa: ['Chaotyczny Neutralny', 'Praworządny Zły', 'Neutralny Zły', 'Chaotyczny Zły'],
+    Kapłan_Helma: ['Praworządny Dobry', 'Praworządny Neutralny', 'Neutralny', 'Chaotyczny Nautralny', 'Praworządny Zły'],
+    Kapłan_Lathandera: ['Praworządny Dobry', 'Neutralny Dobry', 'Chaotyczny Dobry', 'Neutralny'],
     Kapłan_Tyra: ['Praworządny Dobry', 'Neutralny Dobry', 'Praworządny Neutralny'],
-    Kapłan_Tempusa: ['Chaotyczny Dobry', 'Neutralny', 'Chotyczny Neutralny', 'Chotyczny Zły'],
+    Kapłan_Tempusa: ['Chaotyczny Dobry', 'Neutralny', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
     //Druid subclasses
     Druid: ['Neutralny'],
     Totemiczny_Druid: ['Neutralny'],
     Zmiennokształtny: ['Neutralny'],
     Mściciel: ['Neutralny'],
     //Mage subclasses
-    Mag: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Mistrz_Odrzucania: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Mistrz_Przywołań: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Mistrz_Pozanania: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Mistrz_Zauroczeń: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Iluzjonista: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Mistrz_Inwokacji: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Nekromanta: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Mistrz_Przemian: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Dziki_Mag: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Mag: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
+    Mistrz_Odrzucania: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
+    Mistrz_Przywołań: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
+    Mistrz_Pozanania: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
+    Mistrz_Zauroczeń: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
+    Iluzjonista: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
+    Mistrz_Inwokacji: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
+    Nekromanta: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
+    Mistrz_Przemian: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
+    Dziki_Mag: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
     //Thief subclasses
-    Złodziej: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Zabójca: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Łowca_Nagród: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Zawadiaka: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Tancerz_Cieni: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Złodziej: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
+    Zabójca: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
+    Łowca_Nagród: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
+    Zawadiaka: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
+    Tancerz_Cieni: ['Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
     //Bard subclasses
     Bard: ['Neutralny Dobry','Praworządny Neutralny', 'Neutralny', 'Chaotyczny Neutralny', 'Neutralny Zły'],
     Fechmistrz: ['Neutralny Dobry','Praworządny Neutralny', 'Neutralny', 'Chaotyczny Neutralny', 'Neutralny Zły'],
     Błazen: ['Neutralny Dobry','Praworządny Neutralny', 'Neutralny', 'Chaotyczny Neutralny', 'Neutralny Zły'],
     Skald: ['Neutralny Dobry','Praworządny Neutralny', 'Neutralny', 'Chaotyczny Neutralny', 'Neutralny Zły'],
     //Sorcerer subclasses
-    Czarownik: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
-    Uczeń_Smoka: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    Czarownik: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
+    Uczeń_Smoka: ['Praworządny Dobry','Praworządny Neutralny','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
     //Monk subclasses
     Mnich: ['Praworządny Dobry','Prawożądny Nautralny','Prawożądny Zły'],
     Mnich_Ciemnego_Księżyca: ['Praworządny Zły'],
@@ -72,11 +72,11 @@ const BhaalspawnAbilitiesByAligment: { [key: string]: string[]} = {
     "Praworządny Neutralny": ['Leczenie Lekkich Ran', 'Spowlonienie Trucizny', 'Przywołanie Boskiej Mocy', 'Pomniejsze drążnie Larlocha', 'Wampiryczne dotknięcie', 'Groza'],
     "Praworządny Zły": ['Pomniejsze drążnie Larlocha', 'Pomniejsze drążnie Larlocha', 'Wampiryczne dotknięcie', 'Wampiryczne dotknięcie', 'Groza', 'Groza'],
     "Neutralny Dobry": ['Leczenie Lekkich Ran','Leczenie Lekkich Ran','Przywołanie Boskiej Mocy', 'Przywołanie Boskiej Mocy', 'Groza', 'Groza'],
-    "Neutralny": ['Leczenie Lekkich Ran','Leczenie Lekkich Ran','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chotyczny Zły'],
+    "Neutralny": ['Leczenie Lekkich Ran','Leczenie Lekkich Ran','Praworządny Zły','Neutralny Dobry', 'Neutralny', 'Neutralny Zły', 'Chaotyczny Dobry', 'Chaotyczny Neutralny', 'Chaotyczny Zły'],
     "Neutralny Zły": ['Pomniejsze drążnie Larlocha', 'Pomniejsze drążnie Larlocha', 'Wampiryczne dotknięcie', 'Wampiryczne dotknięcie', 'Groza', 'Groza'],
     "Chaotyczny Dobry": ['Leczenie Lekkich Ran','Leczenie Lekkich Ran','Spowlonienie Trucizny','Spowlonienie Trucizny', 'Przywołanie Boskiej Mocy', 'Przywołanie Boskiej Mocy'],
     "Chaotyczny Neutralny": ['Spowlonienie Trucizny','Spowlonienie Trucizny', 'Pomniejsze drążnie Larlocha', 'Pomniejsze drążnie Larlocha', 'Wampiryczne dotknięcie', 'Wampiryczne dotknięcie'],
-    "Chotyczny Zły": ['Pomniejsze drążnie Larlocha', 'Pomniejsze drążnie Larlocha', 'Wampiryczne dotknięcie', 'Wampiryczne dotknięcie', 'Groza', 'Groza'],
+    "Chaotyczny Zły": ['Pomniejsze drążnie Larlocha', 'Pomniejsze drążnie Larlocha', 'Wampiryczne dotknięcie', 'Wampiryczne dotknięcie', 'Groza', 'Groza'],
 }
 
 interface BhaalspawnAbilitiesBackend {
@@ -149,7 +149,7 @@ const CharacterAlignment: React.FC = () => {
         if(character == "Neutralny Zły") {characterHex = "23"}
         if(character == "Chaotyczny Dobry") {characterHex = "31"}
         if(character == "Chaotyczny Neutralny") {characterHex = "32"}
-        if(character == "Chotyczny Zły") {characterHex = "33"}
+        if(character == "Chaotyczny Zły") {characterHex = "33"}
 
         setExportData((prev) => ({
             ...prev,

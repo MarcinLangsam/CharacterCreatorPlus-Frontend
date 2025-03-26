@@ -144,7 +144,7 @@ const Export: React.FC = () => {
     if(characterData.race == "Człowiek") {characterAnimation += "0"}
     if(characterData.race == "Elf" || characterData.race == "Pół_Elf") {characterAnimation += "1"}
     if(characterData.race == "Krasnolud") {characterAnimation += "2"}
-    if(characterData.race == "Nizołek") {characterAnimation += "3"}
+    if(characterData.race == "Niziołek") {characterAnimation += "3"}
     if(characterData.race == "Gnom") {characterAnimation += "4"}
     if(characterData.race == "Pół_Ork") {characterAnimation += "5"}
 
