@@ -3,7 +3,7 @@ APLIKACJA INTERNETOWA
 
 Jest to projekt wykonany jako integralna część mojej pracy inżynierskiej (2025 rok). Aplikacja jest odwzorowanie kreatora postaci z gry Baldur's Gate 2 wraz z poszerzeniem go o dodatkowe funkcjonalności bazując na moim doświadczeniu, oraz głosów graczy zbieranych przez lata. Gra oferuje zapisywanie postaci do specjalnych plików, aplikacja wykorzystuje tą 
 możliwość i tworzy bądź modyfikuje pliki w takim samym formacie i plik stworzony za pomocą tej aplikacji można wykorzystać w grze. Aplikacja została stworzona tak, aby rozszerzać możliwości oryginalnego kreatora i być bardziej przystępnym na nowych graczy, a jednocześnie dostarczać szczegółowych informacji tym bardziej doświadczonym.
-To repozytorium zawiera część frontendową projektu.
+To repozytorium zawiera część frontedową projektu.
 
 Podstawowa funkcjonalność:
 - odwzorowanie funkcjonalno±ci kreatora postaci z gry,
@@ -14,8 +14,13 @@ Podstawowa funkcjonalność:
 - dostępność aplikacji w przeglądarce, co pozwoli użytkownikom na planowanie i modyfikacje postaci bez konieczno±ci uruchamiania gry
 
 Wykorzystane technologie:
+FRONTED:
 - React
 - Bootstrap
+BACKEND:
+- NestJS
+- Prisma
+BAZA DANYCH: MySQL
 
 Wygląd aplikacji:
 
