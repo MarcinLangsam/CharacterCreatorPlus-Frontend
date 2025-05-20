@@ -15,11 +15,14 @@ Podstawowa funkcjonalność:
 
 Wykorzystane technologie:
 FRONTED:
+
 - React
 - Bootstrap
+ 
 BACKEND:
 - NestJS
 - Prisma
+
 BAZA DANYCH: MySQL
 
 Wygląd aplikacji:
